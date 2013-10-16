@@ -1,0 +1,11 @@
+{
+  "name": "Shace",
+  "description": "Shace web applicatiion",
+  "devDependencies": {
+        "phantomjs" : "*",
+        "karma" : "*",
+        "karma-junit-reporter" : "*",    
+        "karma-jasmine" : "*",
+        "karma-ng-scenario" : "*"
+    }
+}
