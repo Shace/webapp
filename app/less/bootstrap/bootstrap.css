@@ -5906,10 +5906,3 @@ td.visible-print {
     display: none !important;
   }
 }
-body {
-  padding-top: 50px;
-}
-.home-title {
-  text-align: center;
-  padding: 40px 15px;
-}
