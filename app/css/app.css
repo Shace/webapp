@@ -5907,9 +5907,48 @@ td.visible-print {
   }
 }
 body {
-  padding-top: 50px;
+  background: #f3f3f3;
 }
-.home-title {
+a {
+  cursor: pointer;
+}
+a:hover {
+  text-decoration: none;
+}
+.home .user-account {
+  color: #8d8d8d;
+  font-size: 18px;
+  float: right;
+  margin-top: 20px;
+}
+.home .main-logo {
+  width: 100%;
+  max-width: 510px;
+  display: block;
+  margin: 100px auto 0 auto;
+}
+.home .token-input {
+  width: 100%;
+  max-width: 490px;
+  display: block;
+  margin: 35px auto 0px auto;
+  font-size: 18px;
   text-align: center;
-  padding: 40px 15px;
+  padding: 8px 10px 6px 10px;
+  border-radius: 3px;
+  border: none;
+  box-shadow: inset 2px 2px 3px rgba(0, 0, 0, 0.2), 1px 1px 0px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.5s;
+}
+.home .token-input:focus,
+.home .token-input:active {
+  outline: none;
+  border: 1px solid rgba(188, 232, 103, 0.5);
+  margin-top: 34px;
+  /* Compensate border */
+
+  box-shadow: inset 2px 2px 3px rgba(0, 0, 0, 0.2), 1px 1px 0px rgba(0, 0, 0, 0.1), 0 0 40px rgba(188, 232, 103, 0.3);
+}
+.login-form {
+  margin-top: 20px;
 }

@@ -11,8 +11,8 @@ angular.module('myApp', [
 ]).
 config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/', {templateUrl: 'partials/home.html', controller: 'HomeController'});
-  $routeProvider.when('/about', {templateUrl: 'partials/about.html', controller: 'AboutController'});
-  $routeProvider.when('/contact', {templateUrl: 'partials/contact.html', controller: 'ContactController'});
+  $routeProvider.when('/login', {templateUrl: 'partials/login.html', controller: 'LoginController'});
+  $routeProvider.when('/event/new', {templateUrl: 'partials/event/new.html', controller: 'EventNewController'});
   $routeProvider.otherwise({redirectTo: '/'});
 }]).
 run(function($rootScope, $location) {
