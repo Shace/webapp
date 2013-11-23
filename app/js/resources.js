@@ -34,7 +34,7 @@ angular.module('shace.resources', []).
    */
   factory('Users', ['$resource', 'config', function ($resource, config) {
   
-  var Users = $resource(config.apiAccessPoint+'/users', {
+  var Users = $resource(config.apiAccessPoint+'/users/:email', {
       /* Default params */
     }, {
       /* Custom actions */
@@ -44,13 +44,25 @@ angular.module('shace.resources', []).
        */
       me: {
         url: config.apiAccessPoint+'/users/me',
-        method: 'GET',
-        params: {
-          access_token: false
-        }
+        method: 'GET'
       }
     });    
             
     return Users;
+  }]).
+  
+  /*
+   * Events
+   */
+  factory('Events', ['$resource', 'config', function ($resource, config) {
+  
+  var Events = $resource(config.apiAccessPoint+'/events/:token', {
+      /* Default params */
+    }, {
+      /* Custom actions */
+      '$save': {method: 'PUT'}
+    });
+            
+    return Events;
   }])
 ;

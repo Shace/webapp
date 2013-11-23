@@ -16,7 +16,8 @@ config(['$routeProvider', '$httpProvider', function($routeProvider, $httpProvide
   $routeProvider.when('/', {templateUrl: 'partials/home.html', controller: 'HomeController'});
   $routeProvider.when('/login', {templateUrl: 'partials/login.html', controller: 'LoginController'});
   $routeProvider.when('/logout', {templateUrl: 'partials/home.html', controller: 'LogoutController'});
-  $routeProvider.when('/event/new', {templateUrl: 'partials/event/new.html', controller: 'EventNewController'});
+  $routeProvider.when('/events/new', {templateUrl: 'partials/events/new.html', controller: 'EventsNewController'});
+  $routeProvider.when('/events/:token', {templateUrl: 'partials/events/event.html', controller: 'EventController'});
   $routeProvider.otherwise({redirectTo: '/'});
   
   // HTTP interceptor
@@ -24,10 +25,15 @@ config(['$routeProvider', '$httpProvider', function($routeProvider, $httpProvide
     return {
       'request': function(config) {
         // Auto inject access token if available
-        if (config.params
-          && angular.isDefined(config.params.access_token)
-          && config.params.access_token === false
+        if (
+          (!config.params
+            || (config.params
+            && angular.isUndefined(config.params.access_token)
+          ))
           && $rootScope.shace.accessToken) {
+          if (!config.params) {
+            config.params = {};
+          }            
           config.params.access_token = $rootScope.shace.accessToken.token;
         }        
         $rootScope.showLoadingIndicator = true;

@@ -26,7 +26,25 @@ angular.module('shace.controllers', []).
     $location.path('/');
     
   }]).
-  controller('EventNewController', [function () {
+  controller('EventsNewController', ['$scope', '$location', 'Events', function ($scope, $location, Events) {
+    $scope.event = {
+      token: '',
+      privacy: 'private'
+    };
     
+    $scope.createEvent = function () {
+      Events.save({}, $scope.event, function (event) {
+        $location.path('/events/'+event.token);
+      });
+    };
+  }]).  
+  controller('EventController', ['$scope', '$route', 'Events', function ($scope, $route, Events) {  
+    $scope.event = Events.get({token: $route.current.params.token});
+    
+    $scope.saveEvent = function () {
+      $scope.event.$save({token: $scope.event.token}, function () {
+        console.log('event saved !');
+      });
+    };
   }])
 ;

@@ -5908,6 +5908,7 @@ td.visible-print {
 }
 body {
   background: #f3f3f3;
+  padding-top: 20px;
 }
 a {
   cursor: pointer;
@@ -5939,7 +5940,6 @@ a:hover {
   color: #8d8d8d;
   font-size: 18px;
   float: right;
-  margin-top: 20px;
 }
 .home .main-logo {
   width: 100%;
@@ -5968,7 +5968,4 @@ a:hover {
   /* Compensate border */
 
   box-shadow: inset 2px 2px 3px rgba(0, 0, 0, 0.2), 1px 1px 0px rgba(0, 0, 0, 0.1), 0 0 40px rgba(188, 232, 103, 0.3);
-}
-.login-form {
-  margin-top: 20px;
 }
