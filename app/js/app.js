@@ -15,6 +15,7 @@ angular.module('shace', [
 config(['$routeProvider', '$httpProvider', function($routeProvider, $httpProvider) {
   $routeProvider.when('/', {templateUrl: 'partials/home.html', controller: 'HomeController'});
   $routeProvider.when('/login', {templateUrl: 'partials/login.html', controller: 'LoginController'});
+  $routeProvider.when('/logout', {templateUrl: 'partials/home.html', controller: 'LogoutController'});
   $routeProvider.when('/event/new', {templateUrl: 'partials/event/new.html', controller: 'EventNewController'});
   $routeProvider.otherwise({redirectTo: '/'});
   
@@ -22,6 +23,13 @@ config(['$routeProvider', '$httpProvider', function($routeProvider, $httpProvide
   $httpProvider.interceptors.push(['$q', '$rootScope', function($q, $rootScope) {
     return {
       'request': function(config) {
+        // Auto inject access token if available
+        if (config.params
+          && angular.isDefined(config.params.access_token)
+          && config.params.access_token === false
+          && $rootScope.shace.accessToken) {
+          config.params.access_token = $rootScope.shace.accessToken.token;
+        }        
         $rootScope.showLoadingIndicator = true;
         return config || $q.when(config);
       },
@@ -37,7 +45,10 @@ config(['$routeProvider', '$httpProvider', function($routeProvider, $httpProvide
   }]);
 }]).
 run(function($rootScope, $location, shace) {
-  $rootScope.location = $location;
+  /* Expose some global application data to root scope */
+  $rootScope.location = $location;  
+  $rootScope.shace = shace;
   $rootScope.showLoadingIndicator = false;
+
   shace.init();
 });

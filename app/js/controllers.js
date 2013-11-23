@@ -12,10 +12,18 @@ angular.module('shace.controllers', []).
       if ($scope.email && $scope.password) {        
         shace.requestAccessToken($scope.email, $scope.password).then(function () {
           // User is logged, redirect to home
-          $location.path('/');
+          shace.retrieveUserInfos().finally(function () {;
+            $location.path('/');
+          });
         });
       }
     };
+    
+  }]).
+  controller('LogoutController', ['$scope', '$location', 'shace', function ($scope, $location, shace) {
+    
+    shace.logout();    
+    $location.path('/');
     
   }]).
   controller('EventNewController', [function () {
