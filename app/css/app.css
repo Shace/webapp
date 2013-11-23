@@ -5915,6 +5915,26 @@ a {
 a:hover {
   text-decoration: none;
 }
+.loading-indicator {
+  width: 150px;
+  background: rgba(0, 0, 0, 0.8);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin: -75px 0px 0px -75px;
+  border-radius: 10px;
+  text-align: center;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 30px;
+  color: #fff;
+  font-size: 18px;
+}
+.loading-indicator-icon {
+  font-size: 60px;
+  margin-bottom: 16px;
+}
 .home .user-account {
   color: #8d8d8d;
   font-size: 18px;
