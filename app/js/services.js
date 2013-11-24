@@ -60,8 +60,14 @@ angular.module('shace.services', []).
         return deferred.promise;
       }()).then(function () {
         
-        // If user is logged in, retrieve its infos        
-        shace.retrieveUserInfos();
+        // If user is logged in, retrieve its infos
+        shace.retrieveUserInfos().catch(function (response) {
+          // If infos are not retrieved, token must be invalid.
+          // Request a new one and retry
+          shace.requestAccessToken().then(function () {
+            shace.retrieveUserInfos();
+          });
+        });
         
       });
       
@@ -111,21 +117,39 @@ angular.module('shace.services', []).
        shace.requestAccessToken();
      };
      
+    /*
+     * Registers a new user and login
+     */  
+    shace.signup = function (email, password) {
+      var deferred = $q.defer();
+      
+      Users.save({}, {
+        email: email,
+        password: password
+      }, function (user) {
+        deferred.resolve(user);
+      }, function (response) {
+        deferred.reject();
+      });
+      
+      return deferred.promise;
+    };
+     
      /*
       * Requests user infos and populate shace object
       */
      shace.retrieveUserInfos = function () {
        var deferred = $q.defer();
-       
+
         if (shace.accessToken.type == 'user') {
            Users.me({}, function (user) {
              shace.user = user;
              deferred.resolve(user);
+           }, function (response) {
+             deferred.reject(response);
            });
         } else {
-          $timeout(function () {
-            deferred.resolve();
-          });
+          deferred.reject();
         }        
         
         return deferred.promise;

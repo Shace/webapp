@@ -16,6 +16,7 @@ config(['$routeProvider', '$httpProvider', function($routeProvider, $httpProvide
   $routeProvider.when('/', {templateUrl: 'partials/home.html', controller: 'HomeController'});
   $routeProvider.when('/login', {templateUrl: 'partials/login.html', controller: 'LoginController'});
   $routeProvider.when('/logout', {templateUrl: 'partials/home.html', controller: 'LogoutController'});
+  $routeProvider.when('/me', {templateUrl: 'partials/users/me.html', controller: 'MeController'});
   $routeProvider.when('/events/new', {templateUrl: 'partials/events/new.html', controller: 'EventsNewController'});
   $routeProvider.when('/events/:token', {templateUrl: 'partials/events/event.html', controller: 'EventController'});
   $routeProvider.otherwise({redirectTo: '/'});
