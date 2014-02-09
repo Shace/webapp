@@ -1,71 +1,100 @@
 @import 'bootstrap/bootstrap.less';
 
 body {
-  background: #f3f3f3;
-  padding-top: 20px;
+    background: #f3f3f3;
+    padding-top: 20px;
 }
 
 a {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 a:hover {
-  text-decoration: none;
+    text-decoration: none;
+}
+
+img {
+    max-width: 100%;
+    max-height: 100%;
 }
 
 .loading-indicator {
-  width: 150px;
-  background: rgba(0, 0, 0, 0.8);
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  margin: -75px 0px 0px -75px;
-  border-radius: 10px;
-  text-align: center;
-  .box-sizing(border-box);
-  padding: 30px;
-  color: #fff;
-  font-size: 18px;
+    width: 150px;
+    background: rgba(0, 0, 0, 0.8);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin: -75px 0px 0px -75px;
+    border-radius: 10px;
+    text-align: center;
+    .box-sizing(border-box);
+    padding: 30px;
+    color: #fff;
+    font-size: 18px;
 }
 
 .loading-indicator-icon {
-  font-size: 60px;
-  margin-bottom: 16px;
+    font-size: 60px;
+    margin-bottom: 16px;
+}
+
+.header {
+    font-size: 18px;
+    
+    .home-link {
+        .pull-left;
+        color: #8d8d8d;
+    }
+
+    .user-account {
+        color: #8d8d8d;
+        float: right;
+    }
 }
 
 .home {
 
-  .user-account {
-    color: #8d8d8d;
-    font-size: 18px;
-    float: right;
-  }
-
-  .main-logo {
-    width: 100%;
-    max-width: 510px;
-    display: block;
-    margin: 100px auto 0 auto;
-  }
-
-  .token-input {
-    width: 100%;
-    max-width: 490px;
-    display: block;
-    margin: 35px auto 0px auto;
-    font-size: 18px;
-    text-align: center;
-    padding: 8px 10px 6px 10px;
-    border-radius: 3px;
-    border: none;
-    box-shadow: inset 2px 2px 3px rgba(0, 0, 0, 0.2), 1px 1px 0px rgba(0, 0, 0, 0.1);
-    transition: box-shadow 0.5s;
-    
-    &:focus, &:active {
-      outline: none;    
-      border: 1px solid rgba(188, 232, 103, 0.5);
-      margin-top: 34px; /* Compensate border */
-      box-shadow: inset 2px 2px 3px rgba(0, 0, 0, 0.2), 1px 1px 0px rgba(0, 0, 0, 0.1), 0 0 40px rgba(188, 232, 103, 0.3);
+    .main-logo {
+        width: 100%;
+        max-width: 510px;
+        display: block;
+        margin: 100px auto 0 auto;
     }
-  }
+
+    .token-input {
+        width: 100%;
+        max-width: 490px;
+        display: block;
+        margin: 35px auto 0px auto;
+        font-size: 18px;
+        text-align: center;
+        padding: 8px 10px 6px 10px;
+        border-radius: 3px;
+        border: none;
+        box-shadow: inset 2px 2px 3px rgba(0, 0, 0, 0.2), 1px 1px 0px rgba(0, 0, 0, 0.1);
+        transition: box-shadow 0.5s;
+        
+        &:focus, &:active {
+            outline: none;        
+            border: 1px solid rgba(188, 232, 103, 0.5);
+            margin-top: 34px; /* Compensate border */
+            box-shadow: inset 2px 2px 3px rgba(0, 0, 0, 0.2), 1px 1px 0px rgba(0, 0, 0, 0.1), 0 0 40px rgba(188, 232, 103, 0.3);
+        }
+    }
+}
+
+.event {
+    
+    margin-bottom: 20px;
+    
+    .media {
+        margin-top: 10px;
+        text-align: center;
+    }
+    
+    .media-thumbnail {
+        border: 3px solid #fff;
+        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+        margin: 3px 0px;
+    }
 }

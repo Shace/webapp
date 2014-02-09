@@ -1,42 +1,60 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="shace">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Shace</title>
+        <title>Shace</title>
 
-    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-    <link href="css/app.css" rel="stylesheet">    
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+        <link href="css/app.css" rel="stylesheet">        
 
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="lib/shims/html5shiv.js"></script>
-      <script src="lib/shims/respond.min.js"></script>
-    <![endif]-->
-  </head>
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="lib/shims/html5shiv.js"></script>
+            <script src="lib/shims/respond.min.js"></script>
+        <![endif]-->
+    </head>
 
-  <body>
+    <body ng-controller="MainController">
     
-    <div ng-view></div>
-    
-    <div ng-show="showLoadingIndicator" class="loading-indicator">
-      <i class="loading-indicator-icon fa fa-spinner fa-spin"></i>
-      Loading...
-    </div>
+        <header class="header">
+            <div class="container">
+                <a class="home-link" href="#/" ng-hide="isHome">
+                    <i class="fa fa-home"></i>
+                    Home
+                </a>
+                <a ng-if="shace.user" class="user-account" href="#/me">
+                    <i class="fa fa-user"></i>
+                    {{shace.user.email}}
+                </a>
+                <a ng-if="!shace.user" class="user-account" href="#/login">
+                    <i class="fa fa-user"></i>
+                    Login
+                </a>
+            </div>
+        </header>    
+        
+        <div ng-view></div>
+        
+        <div ng-show="showLoadingIndicator" class="loading-indicator">
+            <i class="loading-indicator-icon fa fa-spinner fa-spin"></i>
+            Loading...
+        </div>
 
-    <!-- In production use:
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
-    -->
-    <script src="lib/angular/angular.js"></script>
-    <script src="lib/angular/angular-route.js"></script>
-    <script src="lib/angular/angular-cookies.js"></script>
-    <script src="lib/angular/angular-resource.js"></script>
-    <script src="js/app.js"></script>
-    <script src="js/services.js"></script>
-    <script src="js/resources.js"></script>
-    <script src="js/controllers.js"></script>
-    <script src="js/filters.js"></script>
-    <script src="js/directives.js"></script>
-  </body>
+        <!-- In production use:
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+        -->
+        <script src="lib/jquery/jquery-2.1.0.js"></script>
+        <script src="lib/angular/angular.js"></script>
+        <script src="lib/angular/angular-route.js"></script>
+        <script src="lib/angular/angular-cookies.js"></script>
+        <script src="lib/angular/angular-resource.js"></script>
+        <script src="js/app.js"></script>
+        <script src="js/services.js"></script>
+        <script src="js/resources.js"></script>
+        <script src="js/controllers.js"></script>
+        <script src="js/filters.js"></script>
+        <script src="js/directives.js"></script>
+    </body>
 </html>

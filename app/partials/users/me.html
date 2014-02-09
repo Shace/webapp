@@ -1,26 +1,26 @@
 <div class="container">
-  <div class="row">
-    <div class="col-md-6 col-md-offset-3">
-      <form class="login-form">
-        <div class="form-group">
-          <h2>{{shace.user.email}}</h2>
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <form class="login-form">
+                <div class="form-group">
+                    <h2>{{shace.user.email}}</h2>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input ng-model="password" type="password" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Firstname</label>
+                    <input ng-model="shace.user.first_name" type="text" class="form-control">
+                    <label>Lastname</label>
+                    <input ng-model="shace.user.last_name" type="text" class="form-control">
+                </div>
+                 <div class="form-group">
+                    <label>Birth date</label>
+                    <input ng-model="birth_date" type="date" class="form-control">
+                 </div>
+                <button ng-click="saveUser()" type="submit" class="btn btn-default">Save</button>
+            </form>        
         </div>
-        <div class="form-group">
-          <label>Password</label>
-          <input ng-model="password" type="password" class="form-control">
-        </div>
-        <div class="form-group">
-          <label>Firstname</label>
-          <input ng-model="shace.user.first_name" type="text" class="form-control">
-          <label>Lastname</label>
-          <input ng-model="shace.user.last_name" type="text" class="form-control">
-        </div>
-         <div class="form-group">
-          <label>Birth date</label>
-          <input ng-model="birth_date" type="date" class="form-control">
-         </div>
-        <button ng-click="saveUser()" type="submit" class="btn btn-default">Save</button>
-      </form>    
     </div>
-  </div>
 </div>

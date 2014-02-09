@@ -1,13 +1,6 @@
-<div class="container home">
-  <a ng-if="shace.user" class="user-account" href="#/me">
-    <i class="fa fa-user"></i>
-    {{shace.user.email}}
-  </a>
-  <a ng-if="!shace.user" class="user-account" href="#/login">
-    <i class="fa fa-user"></i>
-    Login
-  </a>
-  
-  <img class="main-logo" src="img/shace.svg">
-  <input class="token-input" type="text" placeholder="Type in your :token and let the magic happen...">
+<div class="container home">    
+    <img class="main-logo" src="img/shace.svg">
+    <form role="form" ng-submit="openEvent()">
+        <input ng-model="token" class="token-input" type="text" placeholder="Type in your :token and let the magic happen...">
+    </form>
 </div><!-- /.container -->

@@ -1,20 +1,20 @@
 <div class="container">
-  <div class="row">
-    <div class="col-md-6 col-md-offset-3">
-      <form role="form" class="event-form" ng-submit="createEvent()">
-        <div class="form-group">
-          <label>Event token</label>
-          <input ng-model="event.token" type="text" class="form-control" placeholder="Enter event token" required>
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <form role="form" class="event-form" ng-submit="createEvent()">
+                <div class="form-group">
+                    <label>Event token</label>
+                    <input ng-model="event.token" type="text" class="form-control" placeholder="Enter event token" required>
+                </div>
+                <div class="form-group">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default" ng-class="{active:event.privacy == 'public'}" ng-click="event.privacy = 'public'">Public</button>
+                        <button type="button" class="btn btn-default" ng-class="{active:event.privacy == 'protected'}" ng-click="event.privacy = 'protected'">Protected</button>
+                        <button type="button" class="btn btn-default" ng-class="{active:event.privacy == 'private'}" ng-click="event.privacy = 'private'">Private</button>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-default">Create event</button>
+            </form>        
         </div>
-        <div class="form-group">
-          <div class="btn-group">
-            <button type="button" class="btn btn-default" ng-class="{active:event.privacy == 'public'}" ng-click="event.privacy = 'public'">Public</button>
-            <button type="button" class="btn btn-default" ng-class="{active:event.privacy == 'protected'}" ng-click="event.privacy = 'protected'">Protected</button>
-            <button type="button" class="btn btn-default" ng-class="{active:event.privacy == 'private'}" ng-click="event.privacy = 'private'">Private</button>
-          </div>
-        </div>
-        <button type="submit" class="btn btn-default">Create event</button>
-      </form>    
     </div>
-  </div>
 </div>

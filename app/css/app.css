@@ -5916,6 +5916,10 @@ a {
 a:hover {
   text-decoration: none;
 }
+img {
+  max-width: 100%;
+  max-height: 100%;
+}
 .loading-indicator {
   width: 150px;
   background: rgba(0, 0, 0, 0.8);
@@ -5936,9 +5940,15 @@ a:hover {
   font-size: 60px;
   margin-bottom: 16px;
 }
-.home .user-account {
-  color: #8d8d8d;
+.header {
   font-size: 18px;
+}
+.header .home-link {
+  float: left !important;
+  color: #8d8d8d;
+}
+.header .user-account {
+  color: #8d8d8d;
   float: right;
 }
 .home .main-logo {
@@ -5968,4 +5978,16 @@ a:hover {
   /* Compensate border */
 
   box-shadow: inset 2px 2px 3px rgba(0, 0, 0, 0.2), 1px 1px 0px rgba(0, 0, 0, 0.1), 0 0 40px rgba(188, 232, 103, 0.3);
+}
+.event {
+  margin-bottom: 20px;
+}
+.event .media {
+  margin-top: 10px;
+  text-align: center;
+}
+.event .media-thumbnail {
+  border: 3px solid #fff;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+  margin: 3px 0px;
 }
