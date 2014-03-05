@@ -6,18 +6,24 @@
 
         <title>Shace</title>
 
-        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-        <link href="css/app.css" rel="stylesheet">        
 
-        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!--[if lt IE 9]>
-            <script src="lib/shims/html5shiv.js"></script>
-            <script src="lib/shims/respond.min.js"></script>
-        <![endif]-->
+        <!-- build:css styles/vendor.css -->
+
+          <!-- bower:css -->
+          <link rel="stylesheet" href="bower_components/normalize-css/normalize.css" />
+          <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+          <link rel="stylesheet" href="bower_components/components-font-awesome/css/font-awesome.css" />
+          <!-- endbower -->
+
+        <!-- endbuild -->
+
+        <!-- build:css({.tmp,app}) -->
+        <link href="css/app.css" rel="stylesheet">
+        <!-- endbuild -->
     </head>
 
     <body ng-controller="MainController">
-    
+
         <header class="header">
             <div class="container">
                 <a class="home-link" href="#/" ng-hide="isHome">
@@ -33,28 +39,42 @@
                     Login
                 </a>
             </div>
-        </header>    
-        
+        </header>
+
         <div ng-view></div>
-        
+
         <div ng-show="showLoadingIndicator" class="loading-indicator">
             <i class="loading-indicator-icon fa fa-spinner fa-spin"></i>
             Loading...
         </div>
 
-        <!-- In production use:
-        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
-        -->
-        <script src="lib/jquery/jquery-2.1.0.js"></script>
-        <script src="lib/angular/angular.js"></script>
-        <script src="lib/angular/angular-route.js"></script>
-        <script src="lib/angular/angular-cookies.js"></script>
-        <script src="lib/angular/angular-resource.js"></script>
+        <!--[if lt IE 9]>
+            <script src="bower_components/respondJS/dest/respond.src.js"></script>
+            <script src="bower_components/html5shiv/dist/html5shiv.js"></script>
+            <script src="bower_components/html5shiv/dist/html5shiv-printshiv.js"></script>
+            <script src="bower_components/es5-shim/es5-shim.js"></script>
+            <script src="bower_components/json3/lib/json3.min.js"></script>
+        <![endif]-->
+
+        <!-- build:js scripts/vendor.js -->
+        <!-- bower:js -->
+        <script src="bower_components/jquery/dist/jquery.js"></script>
+        <script src="bower_components/angular/angular.js"></script>
+        <script src="bower_components/angular-resource/angular-resource.js"></script>
+        <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+        <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+        <script src="bower_components/angular-route/angular-route.js"></script>
+        <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+        <!-- endbower -->
+        <!-- endbuild -->
+
+        <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="js/app.js"></script>
         <script src="js/services.js"></script>
         <script src="js/resources.js"></script>
         <script src="js/controllers.js"></script>
         <script src="js/filters.js"></script>
         <script src="js/directives.js"></script>
+        <!-- endbuild -->
     </body>
 </html>

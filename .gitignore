@@ -1,6 +1,6 @@
-*.class
-
-# Package Files #
-*.jar
-*.war
-*.ear
+node_modules
+.directory
+.tmp
+app/bower_components
+dist
+*.sublime-*
