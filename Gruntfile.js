@@ -41,6 +41,14 @@ module.exports = function (grunt) {
             }
         },
 
+        coveralls: {
+            options: {
+                debug: true,
+                coverage_dir: 'coverage',
+                force: true
+            }
+        },
+
         connect: {
             options: {
                 port: 8000,
@@ -285,12 +293,17 @@ module.exports = function (grunt) {
         },
 
         karma: {
-            unit: {
+            default: {
                 configFile: 'config/karma.conf.js',
                 singleRun: true
             },
             travis: {
                 configFile: 'config/karma.conf.js',
+                singleRun: true,
+                browsers: ['PhantomJS']
+            },
+            coverall: {
+                configFile: 'config/karma.coveralls.conf.js',
                 singleRun: true,
                 browsers: ['PhantomJS']
             }
@@ -312,6 +325,14 @@ module.exports = function (grunt) {
             'watch'
         ]);
     });
+
+    grunt.registerTask('cover', [
+        'clean:server',
+        'concurrent:test',
+        'autoprefixer',
+        'connect:test',
+        'karma:coverall'
+    ]);
 
     grunt.registerTask('test', [
         'clean:server',

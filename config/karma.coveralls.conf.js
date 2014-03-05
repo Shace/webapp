@@ -25,7 +25,18 @@ module.exports = function(config){
             'karma-firefox-launcher',
             'karma-phantomjs-launcher',
             'karma-jasmine',
+            'karma-coverage'
         ],
+
+        reporters: ['coverage'],
+        preprocessors: {
+            'app/js/*': ['coverage']
+        },
+
+        coverageReporter: {
+            type: 'lcov',
+            dir: 'coverage/'
+        },
 
         junitReporter : {
             outputFile: 'test_out/unit.xml',
