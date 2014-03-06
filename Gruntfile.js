@@ -18,10 +18,6 @@ module.exports = function (grunt) {
                     livereload: true
                 }
             },
-            jsTest: {
-                files: ['test/spec/{,*/}*.js'],
-                tasks: ['newer:jshint:test', 'karma']
-            },
             recess: {
                 files: ['<%= project.app %>/less/{,*/}*.less'],
                 tasks: ['recess:dist']
@@ -326,20 +322,28 @@ module.exports = function (grunt) {
         ]);
     });
 
+    grunt.registerTask('test', [
+        'clean:server',
+        'concurrent:test',
+        'autoprefixer',
+        'connect:test',
+        'karma:default'
+    ]);
+
+    grunt.registerTask('test-travis', [
+        'clean:server',
+        'concurrent:test',
+        'autoprefixer',
+        'connect:test',
+        'karma:travis'
+    ]);
+
     grunt.registerTask('cover', [
         'clean:server',
         'concurrent:test',
         'autoprefixer',
         'connect:test',
         'karma:coverall'
-    ]);
-
-    grunt.registerTask('test', [
-        'clean:server',
-        'concurrent:test',
-        'autoprefixer',
-        'connect:test',
-        'karma:travis'
     ]);
 
     grunt.registerTask('build', [
@@ -359,10 +363,16 @@ module.exports = function (grunt) {
         'htmlmin'
     ]);
 
+    grunt.registerTask('travis', [
+        //'newer:jshint',
+        'test-travis',
+        'karma:coverall',
+        'build'
+    ]);
+
     grunt.registerTask('default', [
         //'newer:jshint',
         'test',
-        'cover',
         'build'
     ]);
 };
