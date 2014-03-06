@@ -141,10 +141,10 @@ module.exports = function (grunt) {
         },
 
         // Automatically inject Bower components into the app
-        'bower-install': {
-            app: {
-                html: '<%= project.app %>/index.html',
-                ignorePath: '<%= project.app %>/'
+        bowerInstall: {
+            target: {
+                src: ['<%= project.app %>/index.html' ],
+                exclude: ['<%= project.app %>/']
             }
         },
 
@@ -330,7 +330,7 @@ module.exports = function (grunt) {
         'karma:default'
     ]);
 
-    grunt.registerTask('test-travis', [
+    grunt.registerTask('testTravis', [
         'clean:server',
         'concurrent:test',
         'autoprefixer',
@@ -348,7 +348,7 @@ module.exports = function (grunt) {
 
     grunt.registerTask('build', [
         'clean:dist',
-        'bower-install',
+        'bowerInstall',
         'useminPrepare',
         'concurrent:dist',
         'autoprefixer',
@@ -365,7 +365,7 @@ module.exports = function (grunt) {
 
     grunt.registerTask('travis', [
         //'newer:jshint',
-        'test-travis',
+        'testTravis',
         'karma:coverall',
         'build'
     ]);

@@ -46,7 +46,7 @@ Make sure your editor is compatible, or configure it to follow our standard
 Install a package using bower:
 ````
 bower install -S package
-grunt bower-install # to automatically add the package in the index.html file
+grunt bowerInstall # to automatically add the package in the index.html file
 ````
 
 Install a package using npm:
