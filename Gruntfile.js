@@ -18,9 +18,9 @@ module.exports = function (grunt) {
                     livereload: true
                 }
             },
-            recess: {
+            less: {
                 files: ['<%= project.app %>/less/{,*/}*.less'],
-                tasks: ['recess:dist']
+                tasks: ['less:dist']
             },
             gruntfile: {
                 files: ['Gruntfile.js']
@@ -94,15 +94,17 @@ module.exports = function (grunt) {
             }
         },
 
-        recess: {
-            options: {
-                compile: true,
-                compress: true
-            },
+        less: {
             dist: {
+                options: {
+                    path: '<%= project.app %>/less/{,*/}*.less',
+                    compile: true,
+                    cleancss: true,
+                },
+
                 files: [{
                     expand: true,
-                    cwd: '<%= project.app %>/styles',
+                    cwd: '<%= project.app %>/less',
                     src: '{,*/}*.less',
                     dest: '.tmp/styles/',
                     ext: '.css'
@@ -144,7 +146,6 @@ module.exports = function (grunt) {
         bowerInstall: {
             target: {
                 src: ['<%= project.app %>/index.html' ],
-                exclude: ['<%= project.app %>/']
             }
         },
 
@@ -267,7 +268,7 @@ module.exports = function (grunt) {
             },
             styles: {
                 expand: true,
-                cwd: '<%= project.app %>/styles',
+                cwd: '<%= project.app %>/less',
                 dest: '.tmp/styles/',
                 src: '{,*/}*.css'
             }
@@ -276,13 +277,13 @@ module.exports = function (grunt) {
         // Run some tasks in parallel to speed up the build process
         concurrent: {
             server: [
-                'recess'
+                'less'
             ],
             test: [
-                'recess'
+                'less'
             ],
             dist: [
-                'recess',
+                'less',
                 'imagemin',
                 'svgmin'
             ]
@@ -314,7 +315,7 @@ module.exports = function (grunt) {
 
         grunt.task.run([
             'clean:server',
-            'bower-install',
+            'bowerInstall',
             'concurrent:server',
             'autoprefixer',
             'connect:livereload',
