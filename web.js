@@ -1,8 +1,9 @@
 'use strict';
 
 var connect = require('connect');
+var port = process.env.PORT || 3000;
 
 connect.createServer(
     connect.static('app'),
     connect.static('.tmp')
-).listen(8080);
+).listen(port);
