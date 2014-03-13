@@ -1,1 +1,1 @@
-web: grunt build ; node web.js
+web: node web.js
