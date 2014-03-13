@@ -364,6 +364,11 @@ module.exports = function (grunt) {
         'htmlmin'
     ]);
 
+    grunt.registerTask('heroku:production', [
+        'build',
+        'serve'
+    ]);
+
     grunt.registerTask('travis', [
         //'newer:jshint',
         'testTravis',
