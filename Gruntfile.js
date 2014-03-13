@@ -365,8 +365,7 @@ module.exports = function (grunt) {
     ]);
 
     grunt.registerTask('heroku:production', [
-        'build',
-        'serve'
+        'build'
     ]);
 
     grunt.registerTask('travis', [
