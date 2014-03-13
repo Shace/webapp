@@ -22,7 +22,9 @@ bower install
 ## Start the application
 
 ````
-grunt serve
+grunt serve # For devel — original files used
+grunt serve:dist # For production — dist used (Minified filed) 
+node heroku-server.js # For heroku
 ````
 
 The application should be live at http://localhost:8000
