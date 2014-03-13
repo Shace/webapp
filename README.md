@@ -56,3 +56,10 @@ Install a package using npm:
 npm install --save-dep package # For a devDependency
 npm install --save package # For a dependency
 ````
+
+Use heroku:
+````
+heroku login
+git remote add heroku git@heroku.com:shace.git
+git push heroku master
+````
