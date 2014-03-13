@@ -6,6 +6,8 @@
     "url": "https://github.com/ShaceEvent/webapp.git"
   },
   "dependencies": {
+    "gzippo": "^0.2.0",
+    "express": "^3.4.8"
   },
   "devDependencies": {
     "grunt-autoprefixer": "~0.7.2",
