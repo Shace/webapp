@@ -8,14 +8,14 @@ angular.module('shace.services', []).
     * The application version
     */
     value('version', '0.1').
-  
+
     /*
     * Main website configuration
     */
     value('config', {
-        apiAccessPoint: '//192.168.1.69:9000'
+        apiAccessPoint: '//localhost:9000'
     }).
-  
+
     /*
     * Shace service
     * Encapsulate communications with Shace API
@@ -23,12 +23,12 @@ angular.module('shace.services', []).
     factory('shace',
         ['$q', '$cookieStore', 'AccessToken', 'Users',
         function ($q, $cookieStore, AccessToken, Users) {
-    
+
         var shace = {
             accessToken: false,
             user: false
         };
-    
+
         /*
          * Init the application
          */
@@ -42,7 +42,7 @@ angular.module('shace.services', []).
              */
             (function () {
                 var deferred = $q.defer();
-            
+
                 if (shace.accessToken === false) {
                     if (!retrieveStoredAccessToken()) {
                         shace.requestAccessToken().then(function () {
@@ -52,14 +52,14 @@ angular.module('shace.services', []).
                         deferred.resolve();
                     }
                 } else if (shace.accessToken.expiration < now) {
-                    // TODO: handle expired token                    
+                    // TODO: handle expired token
                 } else {
                     deferred.resolve();
                 }
-            
+
                 return deferred.promise;
             }()).then(function () {
-            
+
                 // If user is logged in, retrieve its infos
                 shace.retrieveUserInfos().catch(function (response) {
                     // If infos are not retrieved, token must be invalid.
@@ -68,14 +68,14 @@ angular.module('shace.services', []).
                         shace.retrieveUserInfos();
                     });
                 });
-            
-            });            
+
+            });
         };
-      
+
         /*
          * Requests a new access token
          * If no email/password is given, a guest token is retrieved
-         */  
+         */
         shace.requestAccessToken = function (email, password) {
             var
                 deferred = $q.defer(),
@@ -106,7 +106,7 @@ angular.module('shace.services', []).
 
             return deferred.promise;
         };
-    
+
         /*
          * Logout the user (delete access token and request a new guest one)
          */
@@ -115,7 +115,7 @@ angular.module('shace.services', []).
             shace.user = false;
             shace.requestAccessToken();
         };
-     
+
         /*
          * Registers a new user and login
          */
@@ -133,7 +133,7 @@ angular.module('shace.services', []).
 
             return deferred.promise;
         };
-     
+
         /*
          * Requests user infos and populate shace object
          */
@@ -150,7 +150,7 @@ angular.module('shace.services', []).
             } else {
                 deferred.reject();
             }
-        
+
             return deferred.promise;
         };
 
@@ -168,17 +168,17 @@ angular.module('shace.services', []).
             }
             return false;
         }
-    
+
         /*
          * Store the user access token in a persistant store (cookies)
          */
         function storeAccessToken () {
             $cookieStore.put('shace_access_token', shace.accessToken);
         }
-    
+
         return shace;
     }]).
-  
+
     /*
      * Media upload service
      */
@@ -189,7 +189,7 @@ angular.module('shace.services', []).
                 queue: [],
                 maxSimultaneousUpload: 3
             };
-      
+
         /*
          * Add files to the upload queue
          */
@@ -197,7 +197,7 @@ angular.module('shace.services', []).
             uploader.queue = uploader.queue.concat(files);
             queueChanged();
         };
-      
+
         /*
          * Called when elements are added or removed from the upload queue
          */
@@ -231,13 +231,13 @@ angular.module('shace.services', []).
             } else {
                 return;
             }
-            
+
             file.isUploading = true;
-            
+
             if (shace.accessToken) {
                 url += '?access_token='+shace.accessToken.token;
             }
-            
+
             // Request event handlers
             xhr.addEventListener('progress', function (event) {
                 $rootScope.$apply(function() {
@@ -250,31 +250,31 @@ angular.module('shace.services', []).
                     uploadDone(file, event);
                 });
             }, false);
-            
+
             // Open connection
             xhr.open('POST', url);
             formData.append('file', file);
             // Execute request
             xhr.send(formData);
         }
-        
+
         /*
          * Called when a file has been uploaded
          */
         function uploadDone(file, event) {
             var index = uploader.queue.indexOf(file);
-            
+
             file.isUploading = false;
             file.done = true;
             if (index != -1) {
                 uploader.queue.splice(index, 1);
             }
-            
+
             (file.callback || angular.identity)();
-            
+
             queueChanged();
         }
-      
+
         return uploader;
     }])
 ;
