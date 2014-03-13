@@ -21,7 +21,7 @@ config(['$routeProvider', '$httpProvider', function($routeProvider, $httpProvide
     $routeProvider.when('/events/:token', {templateUrl: 'partials/events/event.html', controller: 'EventController'});
     $routeProvider.when('/events/:eventToken/medias/:id', {templateUrl: 'partials/medias/media.html', controller: 'MediaController'});
     $routeProvider.otherwise({redirectTo: '/'});
-    
+
     // HTTP interceptor
     $httpProvider.interceptors.push(['$q', '$rootScope', function($q, $rootScope) {
         return {
@@ -45,7 +45,7 @@ config(['$routeProvider', '$httpProvider', function($routeProvider, $httpProvide
             'response': function(response) {
                 $rootScope.showLoadingIndicator = false;
                 return response || $q.when(response);
-            },            
+            },
             'responseError': function(rejection) {
                 $rootScope.showLoadingIndicator = false;
                 return $q.reject(rejection);
@@ -53,10 +53,10 @@ config(['$routeProvider', '$httpProvider', function($routeProvider, $httpProvide
         };
     }]);
 }]).
-run(function($rootScope, shace) {
+run(['$rootScope', 'shace', function($rootScope, shace) {
     /* Expose some global application data to root scope */
     $rootScope.shace = shace;
     $rootScope.showLoadingIndicator = false;
 
     shace.init();
-});
+}]);
