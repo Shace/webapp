@@ -2,14 +2,13 @@
   "name": "Shace",
   "version": "0.0.0",
   "dependencies": {
-    "angular": "1.2.6",
+    "angular": "~1.2.6",
     "json3": "~3.2.6",
     "es5-shim": "~2.1.0",
-    "angular-resource": "1.2.6",
-    "angular-cookies": "1.2.6",
-    "angular-sanitize": "1.2.6",
-    "angular-route": "1.2.6",
-    "semantic-ui": "0.13.0",
+    "angular-resource": "~1.2.6",
+    "angular-cookies": "~1.2.6",
+    "angular-sanitize": "~1.2.6",
+    "angular-route": "~1.2.6",
     "normalize-css": "~3.0.0",
     "respondJS": "~1.4.2",
     "html5shiv": "~3.7.0",
@@ -17,7 +16,7 @@
     "components-font-awesome": "~4.0.3"
   },
   "devDependencies": {
-    "angular-mocks": "1.2.6",
-    "angular-scenario": "1.2.6"
+    "angular-mocks": "~1.2.6",
+    "angular-scenario": "~1.2.6"
   }
 }
