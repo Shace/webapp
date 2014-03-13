@@ -156,7 +156,7 @@ module.exports = function (grunt) {
                     src: [
                         '<%= project.dist %>/scripts/{,*/}*.js',
                         '<%= project.dist %>/styles/{,*/}*.css',
-                        '<%= project.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
+                        '<%= project.dist %>/img/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
                         '<%= project.dist %>/styles/fonts/*'
                     ]
                 }
@@ -187,9 +187,9 @@ module.exports = function (grunt) {
             dist: {
                 files: [{
                     expand: true,
-                    cwd: '<%= project.app %>/images',
+                    cwd: '<%= project.app %>/img',
                     src: '{,*/}*.{png,jpg,jpeg,gif}',
-                    dest: '<%= project.dist %>/images'
+                    dest: '<%= project.dist %>/img'
                 }]
             }
         },
@@ -198,9 +198,9 @@ module.exports = function (grunt) {
             dist: {
                 files: [{
                     expand: true,
-                    cwd: '<%= project.app %>/images',
+                    cwd: '<%= project.app %>/img',
                     src: '{,*/}*.svg',
-                    dest: '<%= project.dist %>/images'
+                    dest: '<%= project.dist %>/img'
                 }]
             }
         },
@@ -216,7 +216,7 @@ module.exports = function (grunt) {
                 files: [{
                     expand: true,
                     cwd: '<%= project.dist %>',
-                    src: ['*.html', 'views/{,*/}*.html'],
+                    src: ['*.html', 'partials/{,*/}*.html'],
                     dest: '<%= project.dist %>'
                 }]
             }
@@ -254,15 +254,15 @@ module.exports = function (grunt) {
                         '*.{ico,png,txt}',
                         '.htaccess',
                         '*.html',
-                        'views/{,*/}*.html',
+                        'partials/{,*/}*.html',
                         'bower_components/**/*',
-                        'images/{,*/}*.{webp}',
+                        'img/{,*/}*.{webp}',
                         'fonts/*'
                     ]
                 }, {
                     expand: true,
-                    cwd: '.tmp/images',
-                    dest: '<%= project.dist %>/images',
+                    cwd: '.tmp/img',
+                    dest: '<%= project.dist %>/img',
                     src: ['generated/*']
                 }]
             },
