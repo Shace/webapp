@@ -1,10 +1,10 @@
 Shace web app
 ======
-[![Build Status](https://travis-ci.org/ShaceEvent/webapp.png?branch=master)](https://travis-ci.org/ShaceEvent/webapp)
-[![Coverage Status](https://coveralls.io/repos/ShaceEvent/webapp/badge.png)](https://coveralls.io/r/ShaceEvent/webapp)
-[![Stories in Ready](https://badge.waffle.io/ShaceEvent/webapp.png?label=ready&title=Ready)](https://waffle.io/ShaceEvent/webapp)
-[![Dependency Status](https://david-dm.org/ShaceEvent/webapp.png?theme=shields.io)](https://david-dm.org/ShaceEvent/webapp)
-[![devDependency Status](https://david-dm.org/ShaceEvent/webapp/dev-status.png?theme=shields.io)](https://david-dm.org/ShaceEvent/webapp#info=devDependencies)
+[![Build Status](https://travis-ci.org/Shace/webapp.png?branch=master)](https://travis-ci.org/Shace/webapp)
+[![Coverage Status](https://coveralls.io/repos/Shace/webapp/badge.png)](https://coveralls.io/r/Shace/webapp)
+[![Stories in Ready](https://badge.waffle.io/Shace/webapp.png?label=ready&title=Ready)](https://waffle.io/Shace/webapp)
+[![Dependency Status](https://david-dm.org/Shace/webapp.png?theme=shields.io)](https://david-dm.org/Shace/webapp)
+[![devDependency Status](https://david-dm.org/Shace/webapp/dev-status.png?theme=shields.io)](https://david-dm.org/Shace/webapp#info=devDependencies)
 
 
 ## Installation
@@ -12,7 +12,7 @@ Shace web app
 Requires [node.js](http://nodejs.org/).
 
 ````
-git clone git@github.com:ShaceEvent/webapp.git
+git clone git@github.com:Shace/webapp.git
 cd webapp
 npm install -g bower grunt-cli
 npm install
