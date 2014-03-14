@@ -1,6 +1,6 @@
 'use strict';
 
-var apiAccessPoint = process.env.API_URL || 'localhost:9000'
+var apiAccessPoint = process.env.API_URL || 'localhost:9000';
 
 /* Services */
 
