@@ -1,7 +1,5 @@
 'use strict';
 
-var apiAccessPoint = process.env.API_URL || 'localhost:9000';
-
 /* Services */
 
 angular.module('shace.services', []).
@@ -15,7 +13,7 @@ angular.module('shace.services', []).
     * Main website configuration
     */
     value('config', {
-        apiAccessPoint: '//' + apiAccessPoint
+        apiAccessPoint: '//localhost:9000'
     }).
 
     /*
