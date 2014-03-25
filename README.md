@@ -1,10 +1,11 @@
 Shace web app
 ======
-[![Build Status](https://travis-ci.org/ShaceEvent/webapp.png?branch=master)](https://travis-ci.org/ShaceEvent/webapp)
+[![Build Status](https://travis-ci.org/Shace/webapp.png?branch=master)](https://travis-ci.org/ShaceEvent/webapp)
+[![Code Climate](https://codeclimate.com/github/Shace/webapp.png)](https://codeclimate.com/github/Shace/webapp)
 [![Coverage Status](https://coveralls.io/repos/ShaceEvent/webapp/badge.png)](https://coveralls.io/r/ShaceEvent/webapp)
-[![Stories in Ready](https://badge.waffle.io/ShaceEvent/webapp.png?label=ready&title=Ready)](https://waffle.io/ShaceEvent/webapp)
-[![Dependency Status](https://david-dm.org/ShaceEvent/webapp.png?theme=shields.io)](https://david-dm.org/ShaceEvent/webapp)
-[![devDependency Status](https://david-dm.org/ShaceEvent/webapp/dev-status.png?theme=shields.io)](https://david-dm.org/ShaceEvent/webapp#info=devDependencies)
+[![Stories in Ready](https://badge.waffle.io/Shace/webapp.png?label=ready&title=Ready)](https://waffle.io/ShaceEvent/webapp)
+[![Dependency Status](https://david-dm.org/Shace/webapp.png?theme=shields.io)](https://david-dm.org/ShaceEvent/webapp)
+[![devDependency Status](https://david-dm.org/Shace/webapp/dev-status.png?theme=shields.io)](https://david-dm.org/ShaceEvent/webapp#info=devDependencies)
 
 
 ## Installation
