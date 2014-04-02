@@ -18,7 +18,7 @@ angular.module('shace.directives', []).
                     if (attrs.select) {
                         scope.$apply(function() {
                             scope.$eval(attrs.select, {files: files});
-                        });                        
+                        });
                     }
                 });
             }

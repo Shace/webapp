@@ -4,7 +4,7 @@
 
 angular.module('shace.controllers', []).
 
-    controller('MainController', ['$scope', '$route', function ($scope, $route) {
+    controller('MainController', ['$scope', function ($scope) {
         $scope.isHome = true;
         
         $scope.$on('$routeChangeSuccess', function (event, route) {
@@ -14,23 +14,23 @@ angular.module('shace.controllers', []).
 
     controller('HomeController', ['$scope', '$location', 'Events', function ($scope, $location, Events) {
     
-            $scope.openEvent = function () {
-                if ($scope.token) {
-                    Events.get({token: $scope.token},
-                    // Success handler
-                    function(reponse) {
-                        $location.path('/events/'+$scope.token);
-                    },
-                    // Error handler
-                    function (response) {
-                        // Event doesn't exists, redirect to create event page
-                        if (response.status == 404) {
-                            $location.path('/events/new/'+$scope.token);
-                        }
-                    });
-                }
+        $scope.openEvent = function () {
+            if ($scope.token) {
+                Events.get({token: $scope.token},
+                // Success handler
+                function(response) {
+                    $location.path('/events/'+$scope.token);
+                },
+                // Error handler
+                function (response) {
+                    // Event doesn't exists, redirect to create event page
+                    if (response.status === 404) {
+                        $location.path('/events/new/'+$scope.token);
+                    }
+                });
             }
-            
+        };
+
     }]).
     controller('LoginController', ['$scope', '$location', 'shace', function ($scope, $location, shace) {
         
@@ -56,9 +56,9 @@ angular.module('shace.controllers', []).
     }]).
     controller('LogoutController', ['$scope', '$location', 'shace', function ($scope, $location, shace) {
         
-        shace.logout();        
+        shace.logout();
         $location.path('/');
-        
+
     }]).
     controller('MeController', ['$scope', '$location', '$filter', 'shace', function ($scope, $location, $filter, shace) {
         var birth_date;
@@ -66,7 +66,7 @@ angular.module('shace.controllers', []).
         $scope.$watch('shace.user', function (newValue) {
             if (newValue.birth_date) {
                 $scope.birth_date = $filter('date')(newValue.birth_date, 'yyyy-MM-dd');
-            }            
+            }
         });
         
         $scope.saveUser = function () {
@@ -92,7 +92,7 @@ angular.module('shace.controllers', []).
                 $location.path('/events/'+event.token);
             });
         };
-    }]).    
+    }]).
     controller('EventController',
     ['$scope', '$route', '$rootScope', 'shace', 'uploader', 'Events', 'Medias',
     function ($scope, $route, $rootScope, shace, uploader, Events, Medias) {
@@ -106,9 +106,9 @@ angular.module('shace.controllers', []).
             var i, l, file, medias = [];
             
             // Create an empty media for each file
-            for (i = 0, l = files.length; i < l; i += 1) {                
+            for (i = 0, l = files.length; i < l; i += 1) {
                 medias.push({});
-            };
+            }
             Medias.save({
                 eventToken: $scope.event.token
             }, {
@@ -127,7 +127,7 @@ angular.module('shace.controllers', []).
                     uploader.queueFiles(files);
                 }
                 $rootScope.showLoadingIndicator = true;
-            });            
+            });
             
             function uploadDone() {
                 var i, l, done = true;
@@ -141,10 +141,10 @@ angular.module('shace.controllers', []).
                 if (done) {
                     $rootScope.showLoadingIndicator = false;
                     $scope.event = Events.get({token: $route.current.params.token});
-                }                
+                }
             }
         };
-    }]).    
+    }]).
     controller('MediaController', ['$scope', '$route', 'Medias', function ($scope, $route, Medias) {
 
         $scope.media = Medias.get({

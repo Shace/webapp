@@ -24,7 +24,7 @@ angular.module('shace.resources', []).
                     auto_renew: false
                 }
             }
-        });        
+        });
                         
         return AccessToken;
     }]).
@@ -34,21 +34,21 @@ angular.module('shace.resources', []).
      */
     factory('Users', ['$resource', 'config', function ($resource, config) {
     
-    var Users = $resource(config.apiAccessPoint+'/users/:id', {
+        var Users = $resource(config.apiAccessPoint+'/users/:id', {
             /* Default params */
-            id: '@id'
-        }, {
-            /* Custom actions */
-            
-            /*
-             * Requests a new access token
-             */
-            me: {
-                url: config.apiAccessPoint+'/users/me',
-                method: 'GET'
-            },
-            update: {method: 'PUT'}
-        });        
+                id: '@id'
+            }, {
+                /* Custom actions */
+                
+                /*
+                 * Requests a new access token
+                 */
+                me: {
+                    url: config.apiAccessPoint+'/users/me',
+                    method: 'GET'
+                },
+                update: {method: 'PUT'}
+            });
                         
         return Users;
     }]).
@@ -58,7 +58,7 @@ angular.module('shace.resources', []).
      */
     factory('Events', ['$resource', 'config', function ($resource, config) {
     
-    var Events = $resource(config.apiAccessPoint+'/events/:token', {
+        var Events = $resource(config.apiAccessPoint+'/events/:token', {
             /* Default params */
         }, {
             /* Custom actions */
@@ -72,8 +72,8 @@ angular.module('shace.resources', []).
      * Medias
      */
     factory('Medias', ['$resource', 'config', function ($resource, config) {
-    
-    var Medias = $resource(config.apiAccessPoint+'/events/:eventToken/medias/:id', {
+
+        var Medias = $resource(config.apiAccessPoint+'/events/:eventToken/medias/:id', {
             /* Default params */
         }, {
             /* Custom actions */

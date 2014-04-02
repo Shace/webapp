@@ -28,12 +28,10 @@ config(['$routeProvider', '$httpProvider', function($routeProvider, $httpProvide
             'request': function(config) {
                 // Auto inject access token if available
                 if ($rootScope.shace.accessToken &&
-                    (!config.params
-                        || (
-                            config.params
-                            && angular.isUndefined(config.params.access_token)
-                        )
-                    )) {
+                    (!config.params || (
+                        config.params &&
+                        angular.isUndefined(config.params.access_token)
+                    ))) {
                     if (!config.params) {
                         config.params = {};
                     }

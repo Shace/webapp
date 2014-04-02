@@ -140,7 +140,7 @@ angular.module('shace.services', []).
         shace.retrieveUserInfos = function () {
             var deferred = $q.defer();
 
-            if (shace.accessToken.type == 'user') {
+            if (shace.accessToken.type === 'user') {
                 Users.me({}, function (user) {
                     shace.user = user;
                     deferred.resolve(user);
@@ -185,10 +185,11 @@ angular.module('shace.services', []).
     factory('uploader',
         ['$q', '$rootScope', 'shace', 'config', 'Medias',
         function ($q, $rootScope, shace, config, Medias) {
-            var uploader = {
-                queue: [],
-                maxSimultaneousUpload: 3
-            };
+
+        var uploader = {
+            queue: [],
+            maxSimultaneousUpload: 3
+        };
 
         /*
          * Add files to the upload queue
@@ -239,12 +240,12 @@ angular.module('shace.services', []).
             }
 
             // Request event handlers
-            xhr.addEventListener('progress', function (event) {
+            xhr.upload.addEventListener('progress', function (event) {
                 $rootScope.$apply(function() {
                     console.log('upload progress', event);
                 });
             }, false);
-            xhr.addEventListener('load', function (event) {
+            xhr.upload.addEventListener('load', function (event) {
                 $rootScope.$apply(function() {
                     console.log('upload load', event);
                     uploadDone(file, event);
@@ -266,7 +267,7 @@ angular.module('shace.services', []).
 
             file.isUploading = false;
             file.done = true;
-            if (index != -1) {
+            if (index !== -1) {
                 uploader.queue.splice(index, 1);
             }
 
