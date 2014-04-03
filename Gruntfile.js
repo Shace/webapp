@@ -37,6 +37,17 @@ module.exports = function (grunt) {
             }
         },
 
+        replace: {
+            default: {
+                src: ['<%= project.dist %>/scripts/*.js'],
+                overwrite: true,
+                replacements: [{
+                    from: "localhost:9000",
+                    to: grunt.option('api') || 'api.shace.io'
+                }]
+            },
+        },
+
         coveralls: {
             options: {
                 debug: true,
@@ -361,6 +372,7 @@ module.exports = function (grunt) {
         'uglify',
         'rev',
         'usemin',
+        'replace',
         'htmlmin'
     ]);
 
