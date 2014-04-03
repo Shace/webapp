@@ -8,12 +8,13 @@
     "angular-resource": "~1.2.6",
     "angular-cookies": "~1.2.6",
     "angular-sanitize": "~1.2.6",
-    "angular-route": "~1.2.6",
+    "angular-ui-router": "~0.2.10",
     "normalize-css": "~3.0.0",
     "respondJS": "~1.4.2",
     "html5shiv": "~3.7.0",
     "bootstrap": "~3.1.1",
-    "components-font-awesome": "~4.0.3"
+    "components-font-awesome": "~4.0.3",
+    "angular-bootstrap": "~0.10.0"
   },
   "devDependencies": {
     "angular-mocks": "~1.2.6",

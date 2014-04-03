@@ -2,16 +2,30 @@
 
 // Declare app level module which depends on filters, and services
 angular.module('shace', [
-    'ngRoute',
     'ngCookies',
     'ngResource',
+    'ui.router',
+    'ui.bootstrap',
     'shace.filters',
     'shace.resources',
     'shace.services',
     'shace.directives',
     'shace.controllers'
 ]).
-config(['$routeProvider', '$httpProvider', function($routeProvider, $httpProvider) {
+config(['$stateProvider', '$urlRouterProvider', '$httpProvider', function($stateProvider, $urlRouterProvider, $httpProvider) {
+    $urlRouterProvider.otherwise('/');
+    
+    $stateProvider
+        .state('home', { url: '/', templateUrl: 'partials/home.html', controller: 'HomeController'})
+        .state('login', { url: '/login', templateUrl: 'partials/login.html', controller: 'LoginController'})
+        .state('logout', { url: '/logout', templateUrl: 'partials/home.html', controller: 'LogoutController'})
+        .state('me', { url: '/me', templateUrl: 'partials/users/me.html', controller: 'MeController'})
+        .state('eventNew', { url: '/events/new', templateUrl: 'partials/events/new.html', controller: 'EventsNewController'})
+        .state('event', { url: '/events/:token', templateUrl: 'partials/events/event.html', controller: 'EventController'})
+        .state('media', { url: '/events/:eventToken/medias/:id', templateUrl: 'partials/medias/media.html', controller: 'MediaController'})
+    ;
+
+/*
     $routeProvider.when('/', {templateUrl: 'partials/home.html', controller: 'HomeController'});
     $routeProvider.when('/login', {templateUrl: 'partials/login.html', controller: 'LoginController'});
     $routeProvider.when('/logout', {templateUrl: 'partials/home.html', controller: 'LogoutController'});
@@ -21,6 +35,7 @@ config(['$routeProvider', '$httpProvider', function($routeProvider, $httpProvide
     $routeProvider.when('/events/:token', {templateUrl: 'partials/events/event.html', controller: 'EventController'});
     $routeProvider.when('/events/:eventToken/medias/:id', {templateUrl: 'partials/medias/media.html', controller: 'MediaController'});
     $routeProvider.otherwise({redirectTo: '/'});
+*/
 
     // HTTP interceptor
     $httpProvider.interceptors.push(['$q', '$rootScope', function($q, $rootScope) {

@@ -7,7 +7,7 @@ angular.module('shace.controllers', []).
     controller('MainController', ['$scope', function ($scope) {
         $scope.isHome = true;
         
-        $scope.$on('$routeChangeSuccess', function (event, route) {
+        $scope.$on('$stateChangeSuccess', function (event, route) {
             $scope.isHome = (route.controller === 'HomeController');
         });
     }]).
@@ -25,7 +25,7 @@ angular.module('shace.controllers', []).
                 function (response) {
                     // Event doesn't exists, redirect to create event page
                     if (response.status === 404) {
-                        $location.path('/events/new/'+$scope.token);
+                        $location.path('/events/new');
                     }
                 });
             }
@@ -81,9 +81,9 @@ angular.module('shace.controllers', []).
             shace.user.$update();
         };
     }]).
-    controller('EventsNewController', ['$scope', '$route', '$location', 'Events', function ($scope, $route, $location, Events) {
+    controller('EventsNewController', ['$scope', '$state', '$location', 'Events', function ($scope, $state, $location, Events) {
         $scope.event = {
-            token: $route.current.params.token || '',
+            token: '',
             privacy: 'public'
         };
         
@@ -94,9 +94,10 @@ angular.module('shace.controllers', []).
         };
     }]).
     controller('EventController',
-    ['$scope', '$route', '$rootScope', 'shace', 'uploader', 'Events', 'Medias',
-    function ($scope, $route, $rootScope, shace, uploader, Events, Medias) {
-        $scope.event = Events.get({token: $route.current.params.token});
+    ['$scope', '$state', '$rootScope', 'shace', 'uploader', 'Events', 'Medias',
+    function ($scope, $state, $rootScope, shace, uploader, Events, Medias) {
+    
+        $scope.event = Events.get({token: $state.params.token});
         
         $scope.saveEvent = function () {
             $scope.event.$update({token: $scope.event.token});
@@ -140,16 +141,16 @@ angular.module('shace.controllers', []).
                 }
                 if (done) {
                     $rootScope.showLoadingIndicator = false;
-                    $scope.event = Events.get({token: $route.current.params.token});
+                    $scope.event = Events.get({token: $state.params.token});
                 }
             }
         };
     }]).
-    controller('MediaController', ['$scope', '$route', 'Medias', function ($scope, $route, Medias) {
+    controller('MediaController', ['$scope', '$state', 'Medias', function ($scope, $state, Medias) {
 
         $scope.media = Medias.get({
-            eventToken: $route.current.params.eventToken,
-            id: $route.current.params.id
+            eventToken: $state.params.eventToken,
+            id: $state.params.id
         });
 
     }])

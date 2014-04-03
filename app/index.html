@@ -21,26 +21,32 @@
         <!-- endbuild -->
     </head>
 
-    <body ng-controller="MainController">
-
+    <body ng-controller="MainController" ng-class="{home: isHome}">
         <header class="header">
             <div class="container">
                 <a class="home-link" href="#/" ng-hide="isHome">
-                    <i class="fa fa-home"></i>
-                    Home
+                    <img class="icon" src="img/shace-icon.svg">
                 </a>
-                <a ng-if="shace.user" class="user-account" href="#/me">
-                    <i class="fa fa-user"></i>
-                    {{shace.user.email}}
-                </a>
-                <a ng-if="!shace.user" class="user-account" href="#/login">
-                    <i class="fa fa-user"></i>
-                    Login
-                </a>
+                <div ng-show="shace.user" class="dropdown user-account">
+                    <a dropdown-toggle>
+                        <i class="fa fa-user"></i>
+                        {{shace.user.email}}
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#/me">Account</a></li>
+                        <li><a href="#/logout">Logout</a></li>
+                    </ul>
+                </div>
+                <div class="user-account">
+                    <a ng-hide="shace.user" href="#/login">
+                        <i class="fa fa-user"></i>
+                        Login
+                    </a>
+                </div>
             </div>
         </header>
 
-        <div ng-view></div>
+        <div class="content" ui-view></div>
 
         <div ng-show="showLoadingIndicator" class="loading-indicator">
             <i class="loading-indicator-icon fa fa-spinner fa-spin"></i>
@@ -62,8 +68,9 @@
         <script src="bower_components/angular-resource/angular-resource.js"></script>
         <script src="bower_components/angular-cookies/angular-cookies.js"></script>
         <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
-        <script src="bower_components/angular-route/angular-route.js"></script>
+        <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
         <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
         <!-- endbower -->
         <!-- endbuild -->
 

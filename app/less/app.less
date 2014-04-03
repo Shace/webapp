@@ -1,19 +1,28 @@
 
-@import (once) '../bower_components/bootstrap/less/mixins.less';
-@import (once) '../bower_components/bootstrap/less/utilities.less';
+@import (once) '../bower_components/bootstrap/less/bootstrap.less';
+
+html, body {
+    height: 100%;
+}
 
 body {
     background: #f3f3f3;
-    padding-top: 20px;
+}
+
+body.home {
+    background: #fff;
 }
 
 a {
+    color: #6FA818;
     cursor: pointer;
+    
+    &:hover {
+        text-decoration: none;
+        color: #4D790B;
+    }
 }
 
-a:hover {
-    text-decoration: none;
-}
 
 img {
     max-width: 100%;
@@ -41,26 +50,54 @@ img {
 }
 
 .header {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    line-height: 50px;
+    padding: 0px 5px;
     font-size: 18px;
+    background: #fff;
+    border: 1px solid #D8D8D8;
 
     .home-link {
         .pull-left;
-        color: #8d8d8d;
+        
+        .icon {
+            height: 40px;
+        }
+    }
+    
+    .user-account {
+        .pull-right;
     }
 
-    .user-account {
-        color: #8d8d8d;
-        float: right;
+    .user-account a {
+        color: #4d4d4d;
     }
 }
 
-.home {
+body.home header {
+    border: none;
+}
 
+.content {
+    position: relative;
+    height: 100%;
+    padding-top: 45px;
+}
+
+.home-container {
+
+    position: relative;
+    top: 10%;
+    margin: auto;
+    max-width: 510px;
+    max-height: 500px;
+    padding: 0 10px 10px 10px;
+        
     .main-logo {
         width: 100%;
-        max-width: 510px;
-        display: block;
-        margin: 100px auto 0 auto;
+        max-height: none;
     }
 
     .token-input {
@@ -69,19 +106,22 @@ img {
         display: block;
         margin: 35px auto 0px auto;
         font-size: 18px;
-        text-align: center;
+        text-align: left;
         padding: 8px 10px 6px 10px;
         border-radius: 3px;
-        border: none;
-        box-shadow: inset 2px 2px 3px rgba(0, 0, 0, 0.2), 1px 1px 0px rgba(0, 0, 0, 0.1);
+        border: 1px solid #9AC73B;
         transition: box-shadow 0.5s;
 
         &:focus, &:active {
             outline: none;
-            border: 1px solid rgba(188, 232, 103, 0.5);
-            margin-top: 34px; /* Compensate border */
-            box-shadow: inset 2px 2px 3px rgba(0, 0, 0, 0.2), 1px 1px 0px rgba(0, 0, 0, 0.1), 0 0 40px rgba(188, 232, 103, 0.3);
+            box-shadow: 0 0 40px rgba(188, 232, 103, 0.3);
         }
+    }
+    
+    .private-event-link {
+        text-align: center;
+        margin-top: 15px;
+        font-size: 18px;
     }
 }
 
@@ -99,4 +139,65 @@ img {
         box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
         margin: 3px 0px;
     }
+}
+
+.login {
+    position: relative;
+    top: 10%;
+    max-width: 450px;
+    padding: 25px;
+    margin: 0 auto;
+    background: #fff;
+    border: 1px solid #D8D8D8;
+    border-radius: 4px;
+    
+    .login-or {
+        position: relative;
+        font-size: 18px;
+        color: #aaa;
+        margin-top: 10px;
+                margin-bottom: 10px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    
+    .span-or {
+        display: block;
+        position: absolute;
+        left: 50%;
+        top: -2px;
+        margin-left: -25px;
+        background-color: #fff;
+        width: 50px;
+        text-align: center;
+    }
+    
+    .hr-or {
+        background-color: #cdcdcd;
+        height: 1px;
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+    
+    .forgot-password, .remember-me {
+        .pull-right;
+    }
+        
+    .login-btn, .signup-btn {
+         .btn;
+         .pull-left;
+         width: 80px;
+         background: #6FA818;
+         color: #fff;
+         
+         &:hover {
+             color: #fff;
+             background: #4D790B;
+         }
+    }
+    
+    .signup-btn {
+        margin-left: 10px;
+    }
+    
 }
