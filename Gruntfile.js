@@ -30,7 +30,7 @@ module.exports = function (grunt) {
                     livereload: '<%= connect.options.livereload %>'
                 },
                 files: [
-                    '<%= project.app %>/{,*/}*.html',
+                    '<%= project.app %>/{,partials/}{,*/}*.html',
                     '.tmp/styles/{,*/}*.css',
                     '<%= project.app %>/img/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
                 ]
@@ -156,7 +156,7 @@ module.exports = function (grunt) {
         // Automatically inject Bower components into the app
         bowerInstall: {
             target: {
-                src: ['<%= project.app %>/index.html' ],
+                src: ['*.html', 'partials/{,*/}*.html'],
             }
         },
 
@@ -178,7 +178,7 @@ module.exports = function (grunt) {
         // concat, minify and revision files. Creates configurations in memory so
         // additional tasks can operate on them
         useminPrepare: {
-            html: '<%= project.app %>/index.html',
+            html: '<%= project.app %>/{,partials/}{,*/}*.html',
             options: {
                 dest: '<%= project.dist %>'
             }
@@ -186,7 +186,7 @@ module.exports = function (grunt) {
 
         // Performs rewrites based on rev and the useminPrepare configuration
         usemin: {
-            html: ['<%= project.dist %>/{,*/}*.html'],
+            html: ['<%= project.dist %>/{,partials/}{,*/}*.html'],
             css: ['<%= project.dist %>/styles/{,*/}*.css'],
             options: {
                 assetsDirs: ['<%= project.dist %>']
