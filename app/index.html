@@ -21,29 +21,8 @@
     </head>
 
     <body ng-controller="MainController" ng-class="{home: isHome}">
-        <header class="header">
-            <div class="container">
-                <a class="home-link" href="#/" ng-hide="isHome">
-                    <img class="icon" src="img/shace-icon.svg">
-                </a>
-                <div ng-show="shace.user" class="dropdown user-account">
-                    <a dropdown-toggle>
-                        <i class="fa fa-user"></i>
-                        {{shace.user.email}}
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#/me">Account</a></li>
-                        <li><a href="#/logout">Logout</a></li>
-                    </ul>
-                </div>
-                <div class="user-account">
-                    <a ng-hide="shace.user" href="#/login">
-                        <i class="fa fa-user"></i>
-                        Login
-                    </a>
-                </div>
-            </div>
-        </header>
+
+        <ng-include src="'partials/layout/header.html'"></ng-include>
 
         <div class="content" ui-view></div>
 
