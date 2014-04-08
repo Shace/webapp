@@ -42,7 +42,7 @@ module.exports = function (grunt) {
                 src: ['<%= project.dist %>/scripts/*.js'],
                 overwrite: true,
                 replacements: [{
-                    from: "localhost:9000",
+                    from: 'localhost:9000',
                     to: grunt.option('api') || 'api.shace.io'
                 }]
             },

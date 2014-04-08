@@ -99,15 +99,31 @@ body.home header {
         width: 100%;
         max-height: none;
     }
+    
+    .token-input-container {
+        position: relative;
+        width: 100%;
+        max-width: 490px;
+        margin: 35px auto 0px auto;
+    }
+    
+    .token-input-loading-indicator {
+        position: absolute;
+        right: 0px;
+        
+        .loading-indicator-icon {
+            font-size: 26px;
+            line-height: 42px;
+            margin-right: 8px;
+        }
+    }
 
     .token-input {
         width: 100%;
-        max-width: 490px;
-        display: block;
-        margin: 35px auto 0px auto;
+        display: block;        
         font-size: 18px;
         text-align: left;
-        padding: 8px 10px 6px 10px;
+        padding: 8px 38px 6px 10px;
         border-radius: 3px;
         border: 1px solid #9AC73B;
         transition: box-shadow 0.5s;
@@ -115,6 +131,17 @@ body.home header {
         &:focus, &:active {
             outline: none;
             box-shadow: 0 0 40px rgba(188, 232, 103, 0.3);
+        }
+    }
+    
+    .token-input + .dropdown-menu {
+        position: static;
+        width: 100%;
+        max-width: 490px;
+        
+        &> .active a {
+            background-color: #D4E9A7;
+            color: #333;
         }
     }
     

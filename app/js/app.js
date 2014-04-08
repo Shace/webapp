@@ -16,11 +16,10 @@ config(['$stateProvider', '$urlRouterProvider', '$httpProvider', function($state
     $urlRouterProvider.otherwise('/');
     
     $stateProvider
-        .state('home', { url: '/', templateUrl: 'partials/home.html', controller: 'HomeController'})
+        .state('home', { url: '/', templateUrl: 'partials/home/home.html', controller: 'HomeController'})
         .state('login', { url: '/login', templateUrl: 'partials/login.html', controller: 'LoginController'})
         .state('logout', { url: '/logout', templateUrl: 'partials/home.html', controller: 'LogoutController'})
         .state('me', { url: '/me', templateUrl: 'partials/users/me.html', controller: 'MeController'})
-        .state('eventNew', { url: '/events/new', templateUrl: 'partials/events/new.html', controller: 'EventsNewController'})
         .state('event', { url: '/events/:token', templateUrl: 'partials/events/event.html', controller: 'EventController'})
         .state('media', { url: '/events/:eventToken/medias/:id', templateUrl: 'partials/medias/media.html', controller: 'MediaController'})
     ;
@@ -42,7 +41,8 @@ config(['$stateProvider', '$urlRouterProvider', '$httpProvider', function($state
         return {
             'request': function(config) {
                 // Auto inject access token if available
-                if ($rootScope.shace.accessToken &&
+                if (config.url.indexOf('.html') === -1 && // Don't inject access token in template requests
+                    $rootScope.shace.accessToken &&
                     (!config.params || (
                         config.params &&
                         angular.isUndefined(config.params.access_token)

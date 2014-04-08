@@ -1,0 +1,13 @@
+<a class="input-token-action">
+    <div ng-switch on="match.model.type">
+        <div ng-switch-when="create">
+            Create a new event with token <strong>{{match.model.token}}</strong>
+        </div>
+        <div ng-switch-when="create-private">
+            Token <strong>{{match.model.token}}</strong> is already used. Create a private event
+        </div>
+        <div ng-switch-when="access">
+            Access event <strong>{{match.model.event.name}}</strong>
+        </div>
+    </div>
+</a>

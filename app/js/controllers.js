@@ -12,23 +12,91 @@ angular.module('shace.controllers', []).
         });
     }]).
 
-    controller('HomeController', ['$scope', '$location', 'Events', function ($scope, $location, Events) {
+    controller('HomeController', ['$scope', '$q', '$location', 'Events', function ($scope, $q, $location, Events) {
     
-        $scope.openEvent = function () {
-            if ($scope.token) {
-                Events.get({token: $scope.token},
+        /*
+         * Return auto-completed actions for input token
+         */
+        $scope.getInputTokenActions = function(inputToken) {
+            var
+                deferred = $q.defer(),
+                actions = [],
+                createAction, createPrivateAction
+            ;
+            
+            // Add create actions
+            createAction = {
+                type: 'create',
+                token: inputToken
+            };
+            createPrivateAction = {
+                type: 'create-private',
+                token: inputToken
+            };
+            
+            // Check if an event with the given token exists
+            Events.get({token:inputToken},
+            // Success handler
+            function(response) {
+                createAction.enabled = false;
+                actions.push({
+                    type: 'access',
+                    token: response.token,
+                    event: response
+                });
+                actions.push(createPrivateAction);
+                deferred.resolve(actions);
+            },
+            // Error handler
+            function(response) {
+                actions.push(createAction);
+                deferred.resolve(actions);
+            });
+            return deferred.promise;
+        };
+        
+        /*
+         * Handler of input token select event
+         */
+        $scope.inputTokenActionSelected = function () {
+            var action = $scope.inputToken;
+            
+            if (!action) {
+                return ;
+            }
+            if (action.type === 'create') {
+                $scope.createEvent('public', action.token);
+            } else if (action.type === 'create-private') {
+                $scope.createEvent('private', action.token);
+            } else if (action.type === 'access') {
+                $scope.accessEvent(action.token);
+            }
+        };
+    
+        /*
+         * Access an event with a given token
+         */
+        $scope.accessEvent = function (token) {
+            if (token) {
+                Events.get({token: token},
                 // Success handler
                 function(response) {
-                    $location.path('/events/'+$scope.token);
+                    $location.path('/events/'+token);
                 },
                 // Error handler
                 function (response) {
-                    // Event doesn't exists, redirect to create event page
-                    if (response.status === 404) {
-                        $location.path('/events/new');
-                    }
+                    // TODO
                 });
             }
+        };
+        
+        /*
+         * Create an event and redirect to the event page
+         */
+        $scope.createEvent = function(privacy, token) {
+            Events.save({}, {token: token, privacy: privacy}, function (event) {
+                $location.path('/events/'+event.token);
+            });
         };
 
     }]).
