@@ -138,7 +138,7 @@ angular.module('shace.controllers', []).
         };
 
     }]).
-    controller('LoginController', ['$scope', '$location', 'Notifications', 'shace', function ($scope, $location, Notifications, shace) {
+    controller('LoginController', ['$scope', '$location', '$timeout', 'Notifications', 'shace', function ($scope, $location, $timeout, Notifications, shace) {
         
         $scope.login = function (email, password) {
             if (email && password) {
@@ -204,8 +204,8 @@ angular.module('shace.controllers', []).
         };
     }]).
     controller('EventController',
-    ['$scope', '$state', '$rootScope', 'shace', 'uploader', 'Events', 'Medias',
-    function ($scope, $state, $rootScope, shace, uploader, Events, Medias) {
+    ['$scope', '$state', '$rootScope', 'shace', 'Notifications', 'uploader', 'Events', 'Medias',
+    function ($scope, $state, $rootScope, shace, Notifications, uploader, Events, Medias) {
     
         $scope.event = Events.get({token: $state.params.token});
         
@@ -214,7 +214,9 @@ angular.module('shace.controllers', []).
         };
 
         $scope.saveInfos = function () {
-            return $scope.event.$update({token: $scope.event.token});
+            $scope.event.$update({token: $scope.event.token}).then(function(){}, function (response) {
+                Notifications.notifyError(response.data);
+            });
         };
         
         $scope.uploadMedias = function (files) {

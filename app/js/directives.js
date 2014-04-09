@@ -127,10 +127,12 @@ angular.module('shace.directives', []).
             require: 'ngModel',
             link: function(scope, elem, attrs, ngModel) {
                 var origVal = elem.val();
+                // Set timeout to handle auto-filled value
+                // on page load
                 $timeout(function () {
                     var newVal = elem.val();
+                    
                     if(ngModel.$pristine && origVal !== newVal) {
-                        //console.log(newVal);
                         ngModel.$setViewValue(newVal);
                     }
                 }, 500);
