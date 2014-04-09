@@ -4,6 +4,7 @@
 angular.module('shace', [
     'ngCookies',
     'ngResource',
+    'ngAnimate',
     'ui.router',
     'ui.bootstrap',
     'shace.filters',

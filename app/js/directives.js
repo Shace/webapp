@@ -26,6 +26,97 @@ angular.module('shace.directives', []).
     }]).
     
     /*
+     * In-place editable content
+     */
+    directive('editable', ['$timeout', function($timeout) {
+        return {
+            restrict: 'E',
+            templateUrl: 'partials/components/editable.html',
+            transclude: true,
+            scope: {
+                model: '=',
+                placeholder: '@',
+                onEdit: '&',
+                enabled: '&'
+            },
+            link: function (scope, element, attrs) {
+                var enabled = scope.enabled();
+                
+                if (angular.isUndefined(enabled)) {
+                    enabled = true;
+                }
+                
+                if (!enabled) {
+                    return;
+                }
+                
+                element.find('.editable-content').addClass('enabled');
+                
+                scope.edit = function () {
+                    if (scope.editing) {
+                        return;
+                    }
+                    
+                    scope.editing = true;
+                    scope.editedContent = scope.model;
+                };
+                
+                scope.save = function () {
+                    if (!scope.editedContent) {
+                        return ;
+                    }
+                    
+                    scope.model = scope.editedContent;
+                    $timeout(function() {
+                        var promise = scope.onEdit();
+                        
+                        // If callback return a promise, update the ui
+                        // after promise is resolved
+                        if (promise && promise.then) {
+                            promise.then(function() {
+                                scope.editing = false;
+                            });
+                        } else {
+                            scope.editing = false;
+                        }
+                    });
+                };
+                
+                scope.cancel = function () {
+                    $timeout(function() {
+                        scope.editing = false;
+                    });
+                };
+                
+                scope.keydown = function (event) {
+                    if (event.keyCode === 27) { // Echap key
+                        scope.cancel();
+                    }
+                };
+            }
+        };
+    }]).
+    
+    /*
+     * Set focus on an element when a given expression
+     * evaluates to true
+     */
+    directive('focusOn', ['$timeout', function ($timeout) {
+        return {
+            restrict: 'A',
+            link: function (scope, elem, attrs) {
+                scope.$watch(attrs.focusOn, function (newValue) {
+                    if (newValue) {
+                        $timeout(function() {
+                            elem.focus();
+                        });
+                    }
+                });
+            }
+        };
+    }]).
+    
+    /*
      * Synchronise auto-filled form with their model.
      * 
      * Useful when some form elements are likely

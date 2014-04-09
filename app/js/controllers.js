@@ -209,8 +209,12 @@ angular.module('shace.controllers', []).
     
         $scope.event = Events.get({token: $state.params.token});
         
-        $scope.saveEvent = function () {
-            $scope.event.$update({token: $scope.event.token});
+        $scope.canEditInfos = function () {
+            return true;
+        };
+
+        $scope.saveInfos = function () {
+            return $scope.event.$update({token: $scope.event.token});
         };
         
         $scope.uploadMedias = function (files) {

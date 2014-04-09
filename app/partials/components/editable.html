@@ -1,0 +1,22 @@
+<div class="editable-content" ng-class="{'editing': editing}" ng-click="edit()" ng-keydown="keydown($event)">
+    <span class="editable-content-value" ng-hide="editing">{{model}}</span>
+    <span class="editable-content-placeholder" ng-show="!editing && model == ''">
+        {{placeholder}}
+    </span>
+    <div class="editable-content-input" ng-show="editing">
+        <form name="form" class="input-group" ng-submit="save()">
+            <input type="text" ng-model="editedContent" class="form-control" placeholder="{{placeholder}}" required focus-on="editing">
+            <span class="input-group-btn">
+                <a class="btn editable-content-cancel-button" ng-click="cancel()">
+                    <i class="fa fa-times"></i>
+                </a>
+                <button type="submit" class="btn editable-content-validate-button">
+                    <i class="fa fa-check"></i>
+                </button>
+            </span>
+        </form>
+    </div>
+    <span class="editable-content-edit-button" ng-click="edit()">
+        <i class="fa fa-edit"></i>
+    </span>
+</div>

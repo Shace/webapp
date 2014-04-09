@@ -6,7 +6,7 @@ html, body {
 }
 
 body {
-    background: #f3f3f3;
+    background: #EBEBEB;
 }
 
 body.home {
@@ -49,6 +49,40 @@ img {
     margin-bottom: 16px;
 }
 
+
+/*
+ * Editable element
+ */
+ 
+.editable-content {
+    position: relative;
+}
+
+.editable-content-edit-button {
+    display: none;
+    margin-left: 10px;
+}
+
+.editable-content.enabled {
+    cursor: pointer;
+    
+    &:hover .editable-content-edit-button {
+        display: inline-block;
+    }
+}
+
+.editable-content.editing:hover .editable-content-edit-button {
+    display: none;
+}
+
+.editable-content-cancel-button {
+    .btn-default;
+}
+
+.editable-content-validate-button {
+    .btn-primary;
+}
+
 .header {
     position: absolute;
     z-index: 1;
@@ -57,7 +91,7 @@ img {
     padding: 0px 5px;
     font-size: 18px;
     background: #fff;
-    border: 1px solid #D8D8D8;
+    border-bottom: 1px solid #D8D8D8;
 
     .home-link {
         .pull-left;
@@ -83,7 +117,7 @@ body.home header {
 .content {
     position: relative;
     height: 100%;
-    padding-top: 45px;
+    padding-top: 51px;
 }
 
 .notifications-container {
@@ -164,22 +198,6 @@ body.home header {
     }
 }
 
-.event {
-
-    margin-bottom: 20px;
-
-    .media {
-        margin-top: 10px;
-        text-align: center;
-    }
-
-    .media-thumbnail {
-        border: 3px solid #fff;
-        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
-        margin: 3px 0px;
-    }
-}
-
 .login {
     position: relative;
     top: 10%;
@@ -239,4 +257,65 @@ body.home header {
         margin-left: 10px;
     }
     
+}
+
+
+/*
+ * Event page
+ */
+ 
+.event-header {
+    width: 100%;
+    background: #FCFCFC;
+    border-bottom: 1px solid #D8D8D8;
+    
+    .event-infos {
+        .make-md-column(6);
+    }
+    
+    .event-name {
+        font-size: 22px;
+        margin-top: 8px;
+        margin-bottom: 2px;
+        line-height: 40px;
+    }
+    
+    .event-description {
+        min-height: 34px;
+    }
+    
+    .event-actions {
+        .make-md-column(6);
+        padding-top: 2px;
+        
+        .event-action {
+            .clearfix;
+            margin: 10px 0;
+        }
+        
+        .privacy-button, .share-button {
+            .btn;
+            display: block;
+            float: right;
+        }
+        
+        .privacy-button {
+            .btn-primary;
+        }
+        
+        .share-button {
+            .btn-default;
+        }
+    }
+}
+
+.media {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.media-thumbnail {
+    border: 3px solid #fff;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+    margin: 3px 0px;
 }

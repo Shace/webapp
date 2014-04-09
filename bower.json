@@ -14,7 +14,8 @@
     "html5shiv": "~3.7.0",
     "bootstrap": "~3.1.1",
     "components-font-awesome": "~4.0.3",
-    "angular-bootstrap": "~0.10.0"
+    "angular-bootstrap": "~0.10.0",
+    "angular-animate": "~1.2.16"
   },
   "devDependencies": {
     "angular-mocks": "~1.2.6",
