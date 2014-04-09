@@ -23,5 +23,27 @@ angular.module('shace.directives', []).
                 });
             }
         };
-    }])
+    }]).
+    
+    /*
+     * Synchronise auto-filled form with their model.
+     * 
+     * Useful when some form elements are likely
+     * to be auto-filled by the browser (login, ...)
+     */
+    directive('autoFillSync', function($timeout) {
+        return {
+            require: 'ngModel',
+            link: function(scope, elem, attrs, ngModel) {
+                var origVal = elem.val();
+                $timeout(function () {
+                    var newVal = elem.val();
+                    if(ngModel.$pristine && origVal !== newVal) {
+                        //console.log(newVal);
+                        ngModel.$setViewValue(newVal);
+                    }
+                }, 500);
+            }
+        };
+    })
 ;
