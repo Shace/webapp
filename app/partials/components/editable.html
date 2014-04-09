@@ -1,6 +1,6 @@
 <div class="editable-content" ng-class="{'editing': editing}" ng-click="edit()" ng-keydown="keydown($event)">
     <span class="editable-content-value" ng-hide="editing">{{model}}</span>
-    <span class="editable-content-placeholder" ng-show="!editing && model == ''">
+    <span class="editable-content-placeholder" ng-show="!editing && !model">
         {{placeholder}}
     </span>
     <div class="editable-content-input" ng-show="editing">
