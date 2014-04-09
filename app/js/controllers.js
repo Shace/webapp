@@ -11,8 +11,44 @@ angular.module('shace.controllers', []).
             $scope.isHome = (route.controller === 'HomeController');
         });
     }]).
+    
+    controller('NotificationsController', ['$scope', '$timeout', 'Notifications', function ($scope, $timeout, Notifications) {
+        $scope.notifications = [];
+        
+        $scope.closeNotification = function (notification) {
+            var i, l;
+            
+            if (angular.isNumber(notification)) {
+                $scope.notifications.splice(notification, 1);
+            } else {
+                for (i = 0, l = $scope.notifications.length; i < l; i += 1) {
+                    if (angular.equals($scope.notifications[i], notification)) {
+                        $scope.notifications.splice(i, 1);
+                        return;
+                    }
+                }
+            }
+        };
+        
+        Notifications.registerNotifier({
+            notify: function (notification) {
+                var
+                    duration = angular.isDefined(notification.duration) ? notification.duration : 5
+                ;
+                
+                $scope.notifications.push(notification);
+                if (duration > 0) {
+                    $timeout(function () {
+                        $scope.closeNotification(notification);
+                    }, duration*1000);
+                }
+            }
+        });
+    }]).
 
-    controller('HomeController', ['$scope', '$q', '$location', 'Events', function ($scope, $q, $location, Events) {
+    controller('HomeController',
+        ['$scope', '$q', '$location', 'Notifications', 'Events',
+        function ($scope, $q, $location, Notifications, Events) {
     
         /*
          * Return auto-completed actions for input token
@@ -85,7 +121,7 @@ angular.module('shace.controllers', []).
                 },
                 // Error handler
                 function (response) {
-                    // TODO
+                    Notifications.notifyError(response.data);
                 });
             }
         };
@@ -96,11 +132,13 @@ angular.module('shace.controllers', []).
         $scope.createEvent = function(privacy, token) {
             Events.save({}, {token: token, privacy: privacy}, function (event) {
                 $location.path('/events/'+event.token);
+            }, function (response) {
+                Notifications.notifyError(response.data);
             });
         };
 
     }]).
-    controller('LoginController', ['$scope', '$location', 'shace', function ($scope, $location, shace) {
+    controller('LoginController', ['$scope', '$location', 'Notifications', 'shace', function ($scope, $location, Notifications, shace) {
         
         $scope.login = function (email, password) {
             if (email && password) {
@@ -109,6 +147,8 @@ angular.module('shace.controllers', []).
                     shace.retrieveUserInfos().finally(function () {
                         $location.path('/');
                     });
+                }, function (response) {
+                    Notifications.notifyError(response.data);
                 });
             }
         };
@@ -117,6 +157,8 @@ angular.module('shace.controllers', []).
             if (email && password) {
                 shace.signup(email, password).then(function () {
                     $scope.login(email, password);
+                }, function (response) {
+                    Notifications.notifyError(response.data);
                 });
             }
         };

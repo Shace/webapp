@@ -22,9 +22,14 @@
 
     <body ng-controller="MainController" ng-class="{home: isHome}">
 
+        <!-- Header -->
         <ng-include src="'partials/layout/header.html'"></ng-include>
 
+        <!-- Page content -->
         <div class="content" ui-view></div>
+        
+        <!-- Global notifications -->
+        <ng-include src="'partials/layout/notifications.html'"></ng-include>
 
         <!--[if lt IE 9]>
             <script src="bower_components/respondJS/dest/respond.src.js"></script>

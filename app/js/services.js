@@ -101,7 +101,7 @@ angular.module('shace.services', []).
                 storeAccessToken();
                 deferred.resolve();
             }, function (response) {
-                deferred.reject();
+                deferred.reject(response);
             });
 
             return deferred.promise;
@@ -128,7 +128,7 @@ angular.module('shace.services', []).
             }, function (user) {
                 deferred.resolve(user);
             }, function (response) {
-                deferred.reject();
+                deferred.reject(response);
             });
 
             return deferred.promise;
@@ -277,5 +277,52 @@ angular.module('shace.services', []).
         }
 
         return uploader;
+    }]).
+    
+    /*
+    * Notifications service
+    */
+    factory('Notifications',
+        ['$timeout', function ($timeout) {
+        
+        var Notifications = {
+            notifier: undefined
+        };
+        
+        /*
+         * Registers a notifier object to present notifications
+         */
+        Notifications.registerNotifier = function (notifier) {
+            Notifications.notifier = notifier;
+        };
+        
+        /*
+         * Present a given notification
+         * using the registered notifier
+         */
+        Notifications.notify = function (notification) {
+            // Report creation of the notification to ensure
+            // notifier has already been registered
+            $timeout(function() {
+                if (!Notifications.notifier) {
+                    // TODO: Queue notifications until a notifier become available ?
+                    return;
+                }
+                Notifications.notifier.notify(notification);
+            });
+        };
+        
+        /*
+         * Helper function to notify an error
+         */
+        Notifications.notifyError = function (message, duration) {
+            Notifications.notify({
+                type: 'danger',
+                message: message,
+                duration: duration
+            });
+        };
+        
+        return Notifications;
     }])
 ;

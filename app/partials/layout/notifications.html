@@ -1,0 +1,9 @@
+<div class="notifications-container" ng-controller="NotificationsController">
+    <alert
+        ng-repeat="notification in notifications"
+        type="notification.type"
+        close="closeNotification($index)"
+    >
+        {{notification.message}}
+    </alert>
+</div>
