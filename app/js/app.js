@@ -17,8 +17,8 @@ config(['$stateProvider', '$urlRouterProvider', '$httpProvider', function($state
     
     $stateProvider
         .state('home', { url: '/', templateUrl: 'partials/home/home.html', controller: 'HomeController'})
-        .state('login', { url: '/login', templateUrl: 'partials/login.html', controller: 'LoginController'})
-        .state('logout', { url: '/logout', templateUrl: 'partials/home.html', controller: 'LogoutController'})
+        .state('login', { url: '/login', templateUrl: 'partials/login/login.html', controller: 'LoginController'})
+        .state('logout', { url: '/logout', controller: 'LogoutController'})
         .state('me', { url: '/me', templateUrl: 'partials/users/me.html', controller: 'MeController'})
         .state('event', { url: '/events/:token', templateUrl: 'partials/events/event.html', controller: 'EventController'})
         .state('media', { url: '/events/:eventToken/medias/:id', templateUrl: 'partials/medias/media.html', controller: 'MediaController'})
