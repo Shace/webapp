@@ -122,7 +122,7 @@ angular.module('shace.directives', []).
      * Useful when some form elements are likely
      * to be auto-filled by the browser (login, ...)
      */
-    directive('autoFillSync', function($timeout) {
+    directive('autoFillSync', ['$timeout', function($timeout) {
         return {
             require: 'ngModel',
             link: function(scope, elem, attrs, ngModel) {
@@ -138,5 +138,5 @@ angular.module('shace.directives', []).
                 }, 500);
             }
         };
-    })
+    }])
 ;
