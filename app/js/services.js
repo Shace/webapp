@@ -182,11 +182,11 @@ angular.module('shace.services', []).
     /*
      * Media upload service
      */
-    factory('uploader',
+    factory('Uploader',
         ['$q', '$rootScope', 'shace', 'config', 'Medias',
         function ($q, $rootScope, shace, config, Medias) {
 
-        var uploader = {
+        var Uploader = {
             queue: [],
             maxSimultaneousUpload: 3
         };
@@ -194,8 +194,8 @@ angular.module('shace.services', []).
         /*
          * Add files to the upload queue
          */
-        uploader.queueFiles = function (files) {
-            uploader.queue = uploader.queue.concat(files);
+        Uploader.queueFiles = function (files) {
+            Uploader.queue = Uploader.queue.concat(files);
             queueChanged();
         };
 
@@ -206,11 +206,11 @@ angular.module('shace.services', []).
             var i, l, uploading = 0, file;
 
             // Check if there are files to upload (and limit is not reached)
-            for (i = 0, l = uploader.queue.length; i < l; i += 1) {
-                file = uploader.queue[i];
+            for (i = 0, l = Uploader.queue.length; i < l; i += 1) {
+                file = Uploader.queue[i];
                 if (file.isUploading) {
                     uploading += 1;
-                } else if (uploading < uploader.maxSimultaneousUpload) {
+                } else if (!file.done && uploading < Uploader.maxSimultaneousUpload) {
                     uploadFile(file);
                 }
             }
@@ -241,13 +241,11 @@ angular.module('shace.services', []).
 
             // Request event handlers
             xhr.upload.addEventListener('progress', function (event) {
-                $rootScope.$apply(function() {
-                    console.log('upload progress', event);
-                });
+                $rootScope.$emit('FileUploadProgress', file, event);
             }, false);
             xhr.upload.addEventListener('load', function (event) {
+                $rootScope.$emit('FileUploadDone', file, event);
                 $rootScope.$apply(function() {
-                    console.log('upload load', event);
                     uploadDone(file, event);
                 });
             }, false);
@@ -263,20 +261,15 @@ angular.module('shace.services', []).
          * Called when a file has been uploaded
          */
         function uploadDone(file, event) {
-            var index = uploader.queue.indexOf(file);
-
             file.isUploading = false;
             file.done = true;
-            if (index !== -1) {
-                uploader.queue.splice(index, 1);
-            }
 
-            (file.callback || angular.identity)();
+            (file.callback || angular.noop)();
 
             queueChanged();
         }
 
-        return uploader;
+        return Uploader;
     }]).
     
     /*

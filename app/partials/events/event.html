@@ -20,17 +20,4 @@
         </div>
     </div>
 </div>
-<div class="container">
-    <div class="row">
-        <h2>Add medias</h2>
-        <file-select select="uploadMedias(files)"></file-select>
-    </div>
-    <div class="row">
-        <h2>Medias</h2>
-        <div class="col-md-3 media" ng-repeat="media in event.medias">
-            <a ng-href="#/events/{{event.token}}/medias/{{media.id}}">
-                <img class="media-thumbnail" ng-src="{{media.image.small}}" />
-            </a>
-        </div>    
-    </div>
-</div>
+<div ui-view></div>

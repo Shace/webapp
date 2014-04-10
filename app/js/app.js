@@ -13,7 +13,11 @@ angular.module('shace', [
     'shace.directives',
     'shace.controllers'
 ]).
-config(['$stateProvider', '$urlRouterProvider', '$httpProvider', function($stateProvider, $urlRouterProvider, $httpProvider) {
+config(
+    ['$stateProvider', '$urlRouterProvider', '$httpProvider', '$compileProvider',
+    function($stateProvider, $urlRouterProvider, $httpProvider, $compileProvider) {
+    
+    // Config app states (routes)
     $urlRouterProvider.otherwise('/');
     
     $stateProvider
@@ -21,21 +25,14 @@ config(['$stateProvider', '$urlRouterProvider', '$httpProvider', function($state
         .state('login', { url: '/login', templateUrl: 'partials/login/login.html', controller: 'LoginController'})
         .state('logout', { url: '/logout', controller: 'LogoutController'})
         .state('me', { url: '/me', templateUrl: 'partials/users/me.html', controller: 'MeController'})
-        .state('event', { url: '/events/:token', templateUrl: 'partials/events/event.html', controller: 'EventController'})
+        .state('event', { abstract:true, url: '/events/:token', templateUrl: 'partials/events/event.html', controller: 'EventController'})
+        .state('event.medias', { url: '', templateUrl: 'partials/events/medias.html', controller: 'EventMediasController'})
+        .state('event.upload', { url: '/upload', templateUrl: 'partials/events/upload.html', controller: 'EventUploadController'})
         .state('media', { url: '/events/:eventToken/medias/:id', templateUrl: 'partials/medias/media.html', controller: 'MediaController'})
     ;
-
-/*
-    $routeProvider.when('/', {templateUrl: 'partials/home.html', controller: 'HomeController'});
-    $routeProvider.when('/login', {templateUrl: 'partials/login.html', controller: 'LoginController'});
-    $routeProvider.when('/logout', {templateUrl: 'partials/home.html', controller: 'LogoutController'});
-    $routeProvider.when('/me', {templateUrl: 'partials/users/me.html', controller: 'MeController'});
-    $routeProvider.when('/events/new/:token', {templateUrl: 'partials/events/new.html', controller: 'EventsNewController'});
-    $routeProvider.when('/events/new', {templateUrl: 'partials/events/new.html', controller: 'EventsNewController'});
-    $routeProvider.when('/events/:token', {templateUrl: 'partials/events/event.html', controller: 'EventController'});
-    $routeProvider.when('/events/:eventToken/medias/:id', {templateUrl: 'partials/medias/media.html', controller: 'MediaController'});
-    $routeProvider.otherwise({redirectTo: '/'});
-*/
+    
+    // Config compile service to allow for blob urls
+    $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|file|blob):|data:image\//);
 
     // HTTP interceptor
     $httpProvider.interceptors.push(['$q', '$rootScope', function($q, $rootScope) {

@@ -204,8 +204,8 @@ angular.module('shace.controllers', []).
         };
     }]).
     controller('EventController',
-    ['$scope', '$state', '$rootScope', 'shace', 'Notifications', 'uploader', 'Events', 'Medias',
-    function ($scope, $state, $rootScope, shace, Notifications, uploader, Events, Medias) {
+    ['$scope', '$state', '$rootScope', 'shace', 'Notifications', 'Uploader', 'Events', 'Medias',
+    function ($scope, $state, $rootScope, shace, Notifications, Uploader, Events, Medias) {
     
         $scope.event = Events.get({token: $state.params.token});
         
@@ -218,13 +218,22 @@ angular.module('shace.controllers', []).
                 Notifications.notifyError(response.data);
             });
         };
-        
+    }]).
+    controller('EventMediasController',
+        ['$scope', '$state', '$rootScope', 'shace', 'Notifications', 'Uploader', 'Events', 'Medias',
+        function ($scope, $state, $rootScope, shace, Notifications, Uploader, Events, Medias) {
         $scope.uploadMedias = function (files) {
             var i, l, file, medias = [];
             
-            // Create an empty media for each file
+            // Create an empty media for each file and pre-process files
             for (i = 0, l = files.length; i < l; i += 1) {
+                file = files[i];
+                
                 medias.push({});
+                
+                // Add file infos
+                file.previewUrl = window.URL.createObjectURL(file);
+                file.progress = 0;
             }
             Medias.save({
                 eventToken: $scope.event.token
@@ -237,30 +246,32 @@ angular.module('shace.controllers', []).
                     // Assign a media to each file to upload
                     for (i = 0, l = response.medias.length; i < l; i += 1) {
                         files[i].media = response.medias[i];
-                        files[i].callback = uploadDone;
                     }
                     
                     // Upload the files
-                    uploader.queueFiles(files);
+                    Uploader.queueFiles(files);
+                    
+                    // Go to upload page
+                    $state.go('event.upload');
                 }
-                $rootScope.showLoadingIndicator = true;
+            }, function (response) {
+                Notifications.notifyError(response.data);
             });
-            
-            function uploadDone() {
-                var i, l, done = true;
-                
-                for (i = 0, l = uploader.queue.length; i < l; i += 1) {
-                    if (!uploader.queue[i].done) {
-                        done = false;
-                        break;
-                    }
-                }
-                if (done) {
-                    $rootScope.showLoadingIndicator = false;
-                    $scope.event = Events.get({token: $state.params.token});
-                }
-            }
         };
+    }]).
+    controller('EventUploadController',
+    ['$scope', '$rootScope', 'Uploader', function ($scope, $rootScope, Uploader) {
+        $scope.queue = Uploader.queue;
+    
+        $rootScope.$on('FileUploadProgress', function (event, file, progress) {
+            $scope.queue = Uploader.queue;
+            file.progress = (progress.loaded / progress.total)*100;
+        });
+        
+        $rootScope.$on('FileUploadDone', function (event, file, progress) {
+            $scope.queue = Uploader.queue;
+            file.progress = (progress.loaded / progress.total)*100;
+        });
     }]).
     controller('MediaController', ['$scope', '$state', 'Medias', function ($scope, $state, Medias) {
 
