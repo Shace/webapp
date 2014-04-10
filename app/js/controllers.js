@@ -22,7 +22,7 @@ angular.module('shace.controllers', []).
                 $scope.notifications.splice(notification, 1);
             } else {
                 for (i = 0, l = $scope.notifications.length; i < l; i += 1) {
-                    if (angular.equals($scope.notifications[i], notification)) {
+                    if ($scope.notifications[i] === notification) {
                         $scope.notifications.splice(i, 1);
                         return;
                     }

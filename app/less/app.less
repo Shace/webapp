@@ -129,6 +129,17 @@ body.home header {
     .alert {
         width: 320px;
         margin: 10px;
+        transition:all linear 0.2s;
+    }
+    
+    .alert.ng-leave.ng-leave-active,
+    .alert.ng-enter {
+        opacity: 0;
+    }
+    
+    .alert.ng-enter.ng-enter-active,
+    .alert.ng-leave {
+        opacity: 1;
     }
 }
 
