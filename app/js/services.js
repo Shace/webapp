@@ -76,17 +76,21 @@ angular.module('shace.services', []).
          * Requests a new access token
          * If no email/password is given, a guest token is retrieved
          */
-        shace.requestAccessToken = function (email, password) {
+        shace.requestAccessToken = function (email, password, autoRenew) {
             var
                 deferred = $q.defer(),
                 params = {}
             ;
+            
+            if (angular.isUndefined(autoRenew)) {
+                autoRenew = true;
+            }
 
             if (email && password) {
                 params = {
                     email: email,
                     password: password,
-                    auto_renew: true
+                    auto_renew: autoRenew
                 };
             }
 
@@ -188,7 +192,7 @@ angular.module('shace.services', []).
 
         var Uploader = {
             queue: [],
-            maxSimultaneousUpload: 1
+            maxSimultaneousUpload: 10
         };
 
         /*
@@ -281,6 +285,16 @@ angular.module('shace.services', []).
                 });
             }, false);
             xhr.upload.addEventListener('load', function (event) {
+                $rootScope.$apply(function() {
+                    uploadDone(file, event);
+                });
+            }, false);
+            xhr.upload.addEventListener('error', function (event) {
+                $rootScope.$apply(function() {
+                    uploadDone(file, event);
+                });
+            }, false);
+            xhr.upload.addEventListener('abort', function (event) {
                 $rootScope.$apply(function() {
                     uploadDone(file, event);
                 });

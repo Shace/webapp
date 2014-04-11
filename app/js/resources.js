@@ -16,14 +16,7 @@ angular.module('shace.resources', []).
             /*
              * Requests a new access token
              */
-            request: {
-                method: 'POST',
-                params: {
-                    email: false,
-                    password: false,
-                    auto_renew: false
-                }
-            }
+            request: { method: 'POST' }
         });
                         
         return AccessToken;

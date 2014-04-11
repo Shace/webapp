@@ -6,9 +6,11 @@ angular.module('shace.controllers', []).
 
     controller('MainController', ['$scope', function ($scope) {
         $scope.isHome = true;
+        $scope.currentState = undefined;
         
-        $scope.$on('$stateChangeSuccess', function (event, route) {
-            $scope.isHome = (route.controller === 'HomeController');
+        $scope.$on('$stateChangeSuccess', function (event, state) {
+            $scope.isHome = (state.controller === 'HomeController');
+            $scope.currentState = state;
         });
     }]).
     
@@ -141,10 +143,18 @@ angular.module('shace.controllers', []).
 
     }]).
     controller('LoginController', ['$scope', '$location', '$timeout', 'Notifications', 'shace', function ($scope, $location, $timeout, Notifications, shace) {
+    
+        $scope.rememberMe = true;
         
-        $scope.login = function (email, password) {
+        $scope.login = function () {
+            var
+                email = $scope.email,
+                password = $scope.password,
+                autoRenew = $scope.rememberMe
+            ;
+            
             if (email && password) {
-                shace.requestAccessToken(email, password).then(function () {
+                shace.requestAccessToken(email, password, autoRenew).then(function () {
                     // User is logged, redirect to home
                     shace.retrieveUserInfos().finally(function () {
                         $location.path('/');
@@ -155,10 +165,15 @@ angular.module('shace.controllers', []).
             }
         };
         
-        $scope.signup = function (email, password) {
+        $scope.signup = function () {
+            var
+                email = $scope.email,
+                password = $scope.password
+            ;
+            
             if (email && password) {
                 shace.signup(email, password).then(function () {
-                    $scope.login(email, password);
+                    $scope.login();
                 }, function (response) {
                     Notifications.notifyError(response.data);
                 });
