@@ -5,10 +5,21 @@
     </div>
     <div class="row">
         <h2>Medias</h2>
-        <div class="col-md-3 media" ng-repeat="media in event.medias">
-            <a ng-href="#/events/{{event.token}}/medias/{{media.id}}">
-                <img class="media-thumbnail" ng-src="{{media.image.small}}" />
-            </a>
+    </div>
+</div>
+<div class="event-bucket" ng-repeat="bucket in event.bucket.children">
+    <div class="bucket-header">
+        <div class="container">
+            <h3 class="bucket-name">{{bucket.first | date:'longDate'}} - {{bucket.last | date:'longDate'}}</h3>
+        </div>
+    </div>
+    <div class="container bucket-medias" ng-init="bucketRows = (bucket.medias | splitArray:4)">
+        <div class="bucket-row" ng-repeat="row in bucketRows">
+            <div class="bucket-media" ng-repeat="media in row">
+                <a ng-href="#/events/{{event.token}}/medias/{{media.id}}">
+                    <img class="media-thumbnail" ng-src="{{media.image.small}}" />
+                </a>
+            </div>
         </div>
     </div>
 </div>

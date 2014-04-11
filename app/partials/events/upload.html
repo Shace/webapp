@@ -8,7 +8,7 @@
     </div>
     <div class="row">
         <div class="col-md-3 media" ng-repeat="file in queue">
-            <img class="media-thumbnail" ng-src="{{file.previewUrl}}">
+            <!-- <img class="media-thumbnail" ng-src="{{file.previewUrl}}"> -->
             <progressbar class="progress-striped" value="file.progress" ng-class="{active: file.progress < 100}"></progressbar>
         </div>
     </div>
