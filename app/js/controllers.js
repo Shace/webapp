@@ -130,7 +130,9 @@ angular.module('shace.controllers', []).
          * Create an event and redirect to the event page
          */
         $scope.createEvent = function(privacy, token) {
-            Events.save({}, {token: token, privacy: privacy}, function (event) {
+            var name = 'Untitled event';
+            
+            Events.save({}, {token: token, privacy: privacy, name:name}, function (event) {
                 $location.path('/events/'+event.token);
             }, function (response) {
                 Notifications.notifyError(response.data);
@@ -206,8 +208,9 @@ angular.module('shace.controllers', []).
     controller('EventController',
     ['$scope', '$state', '$rootScope', 'shace', 'Notifications', 'Uploader', 'Events', 'Medias',
     function ($scope, $state, $rootScope, shace, Notifications, Uploader, Events, Medias) {
-    
-        $scope.event = Events.get({token: $state.params.token});
+        $scope.loadEvent = function () {
+            $scope.event = Events.get({token: $state.params.token});
+        };
         
         $scope.canEditInfos = function () {
             return true;
@@ -218,10 +221,18 @@ angular.module('shace.controllers', []).
                 Notifications.notifyError(response.data);
             });
         };
+        
+        $scope.loadEvent();
     }]).
     controller('EventMediasController',
         ['$scope', '$state', '$rootScope', 'shace', 'Notifications', 'Uploader', 'Events', 'Medias',
         function ($scope, $state, $rootScope, shace, Notifications, Uploader, Events, Medias) {
+        
+        // Reload medias if necessary
+        if ($scope.event.needReload) {
+            $scope.loadEvent();
+        }
+        
         $scope.uploadMedias = function (files) {
             var i, l, file, medias = [];
             
@@ -263,13 +274,16 @@ angular.module('shace.controllers', []).
     }]).
     controller('EventUploadController',
     ['$scope', '$rootScope', 'Uploader', function ($scope, $rootScope, Uploader) {
+        // Event will need to be reloaded after leaving upload page
+        $scope.event.needReload = true;
+    
         $scope.queue = Uploader.queue;
         $scope.uploadDone = false;
     
         $rootScope.$on('FileUploadDone', function (event, file, progress) {
             if (Uploader.getPendingFilesCount() === 0) {
                 $scope.uploadDone = true;
-            }            
+            }
         });
     }]).
     controller('MediaController', ['$scope', '$state', 'Medias', function ($scope, $state, Medias) {
