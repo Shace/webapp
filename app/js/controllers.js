@@ -225,6 +225,9 @@ angular.module('shace.controllers', []).
         $scope.uploadMedias = function (files) {
             var i, l, file, medias = [];
             
+            // Empty current uploader queue
+            Uploader.queue = [];
+            
             // Create an empty media for each file and pre-process files
             for (i = 0, l = files.length; i < l; i += 1) {
                 file = files[i];
@@ -233,7 +236,6 @@ angular.module('shace.controllers', []).
                 
                 // Add file infos
                 file.previewUrl = window.URL.createObjectURL(file);
-                file.progress = 0;
             }
             Medias.save({
                 eventToken: $scope.event.token
@@ -262,15 +264,12 @@ angular.module('shace.controllers', []).
     controller('EventUploadController',
     ['$scope', '$rootScope', 'Uploader', function ($scope, $rootScope, Uploader) {
         $scope.queue = Uploader.queue;
+        $scope.uploadDone = false;
     
-        $rootScope.$on('FileUploadProgress', function (event, file, progress) {
-            $scope.queue = Uploader.queue;
-            file.progress = (progress.loaded / progress.total)*100;
-        });
-        
         $rootScope.$on('FileUploadDone', function (event, file, progress) {
-            $scope.queue = Uploader.queue;
-            file.progress = (progress.loaded / progress.total)*100;
+            if (Uploader.getPendingFilesCount() === 0) {
+                $scope.uploadDone = true;
+            }            
         });
     }]).
     controller('MediaController', ['$scope', '$state', 'Medias', function ($scope, $state, Medias) {

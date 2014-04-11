@@ -1,6 +1,10 @@
 <div class="container">
     <div class="row">
         <h2>Upload</h2>
+        <p ng-hide="uploadDone">Upload in progress, please do not leave page...</p>
+        <p ng-show="uploadDone">
+            Upload done, <a ui-sref="event.medias">click here</a> to go back to event page.
+        </p>
     </div>
     <div class="row">
         <div class="col-md-3 media" ng-repeat="file in queue">
