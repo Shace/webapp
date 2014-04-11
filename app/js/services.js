@@ -13,7 +13,14 @@ angular.module('shace.services', []).
     * Main website configuration
     */
     value('config', {
-        apiAccessPoint: '//localhost:9000'
+        apiAccessPoint: '//localhost:9000',
+        permissionsLevels: {
+            'none'          : 0,
+            'read'          : 1,
+            'write'         : 2,
+            'administrate'  : 3,
+            'root'          : 4
+        }
     }).
 
     /*
@@ -21,12 +28,13 @@ angular.module('shace.services', []).
     * Encapsulate communications with Shace API
     */
     factory('shace',
-        ['$q', '$cookieStore', 'AccessToken', 'Users',
-        function ($q, $cookieStore, AccessToken, Users) {
+        ['$q', '$cookieStore', 'config', 'AccessToken', 'Users',
+        function ($q, $cookieStore, config, AccessToken, Users) {
 
         var shace = {
             accessToken: false,
-            user: false
+            user: false,
+            access: {}
         };
 
         /*
@@ -156,6 +164,13 @@ angular.module('shace.services', []).
             }
 
             return deferred.promise;
+        };
+        
+        /*
+         * Get permissions on an event for the current user
+         */
+        shace.access.getPermissionOnEvent = function (event, permission) {
+            return config.permissionsLevels[event.permission.toLowerCase()] >= config.permissionsLevels[permission.toLowerCase()];
         };
 
         // Private methods

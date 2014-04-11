@@ -40,29 +40,37 @@ angular.module('shace.directives', []).
                 enabled: '&'
             },
             link: function (scope, element, attrs) {
-                var enabled = scope.enabled();
+            
+                // Private functions
                 
-                if (angular.isUndefined(enabled)) {
-                    enabled = true;
+                function setEnabled(enabled) {
+                    if (enabled) {
+                        element.find('.editable-content').addClass('enabled');
+                    } else {
+                        scope.cancel();
+                        element.find('.editable-content').removeClass('enabled');
+                    }
                 }
                 
-                if (!enabled) {
-                    return;
+                function isEnabled() {
+                    var enabled = scope.enabled();
+                    if (angular.isUndefined(enabled)) {
+                        enabled = true;
+                    }
+                    return enabled;
                 }
-                
-                element.find('.editable-content').addClass('enabled');
                 
                 scope.edit = function () {
-                    if (scope.editing) {
+                    if (scope.editing || !isEnabled()) {
                         return;
                     }
-                    
+
                     scope.editing = true;
                     scope.editedContent = scope.model;
                 };
                 
                 scope.save = function () {
-                    if (!scope.editedContent) {
+                    if (!scope.editedContent || !isEnabled()) {
                         return ;
                     }
                     
@@ -93,6 +101,14 @@ angular.module('shace.directives', []).
                         scope.cancel();
                     }
                 };
+                
+                // Watch enabled condition
+                scope.$watch('enabled()', function (newVal) {
+                    setEnabled(newVal);
+                });
+                
+                // Init
+                setEnabled(isEnabled());
             }
         };
     }]).

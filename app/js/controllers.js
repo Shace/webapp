@@ -228,7 +228,10 @@ angular.module('shace.controllers', []).
         };
         
         $scope.canEditInfos = function () {
-            return true;
+            if (!$scope.event || !$scope.event.$resolved) {
+                return false;
+            }
+            return shace.access.getPermissionOnEvent($scope.event, 'administrate');
         };
 
         $scope.saveInfos = function () {
@@ -261,7 +264,7 @@ angular.module('shace.controllers', []).
                 medias.push({});
                 
                 // Add file infos
-                file.previewUrl = window.URL.createObjectURL(file);
+                //file.previewUrl = window.URL.createObjectURL(file);
             }
             Medias.save({
                 eventToken: $scope.event.token
