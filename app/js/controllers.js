@@ -228,7 +228,7 @@ angular.module('shace.controllers', []).
         };
         
         $scope.canEditInfos = function () {
-            if (!$scope.event || !$scope.event.$resolved) {
+            if (!$scope.event || !$scope.event.$resolved || !$scope.event.token) {
                 return false;
             }
             return shace.access.getPermissionOnEvent($scope.event, 'administrate');
