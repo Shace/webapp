@@ -26,8 +26,10 @@ config(
         .state('logout', { url: '/logout', controller: 'LogoutController'})
         .state('me', { url: '/me', templateUrl: 'partials/users/me.html', controller: 'MeController'})
         .state('event', { abstract:true, url: '/events/:token', templateUrl: 'partials/events/event.html', controller: 'EventController'})
-        .state('event.medias', { url: '', templateUrl: 'partials/events/medias.html', controller: 'EventMediasController'})
         .state('event.upload', { url: '/upload', templateUrl: 'partials/events/upload.html', controller: 'EventUploadController'})
+        .state('event.medias', { abstract:true, url: '', templateUrl: 'partials/events/medias.html', controller: 'EventMediasController'})
+        .state('event.medias.rootBucket', { url: '', templateUrl: 'partials/events/bucket.html', controller: 'EventMediasBucketController'})
+        .state('event.medias.bucket', { url: '/bucket/:bucketId', templateUrl: 'partials/events/bucket.html', controller: 'EventMediasBucketController'})
         .state('media', { url: '/events/:eventToken/medias/:id', templateUrl: 'partials/medias/media.html', controller: 'MediaController'})
     ;
     

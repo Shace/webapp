@@ -1,19 +1,11 @@
 <div class="container">
     <div class="row">
-        <h2>Add medias</h2>
-        <file-select select="uploadMedias(files)"></file-select>
-    </div>
-    <div class="row">
-        <h2><date-interval begin="event.bucket.first" end="event.bucket.last" full="true"></h2>
+        <h2><date-interval begin="bucket.first" end="bucket.last" full="true"></h2>
     </div>
 </div>
-<div ng-if="event.bucket.children">
-    <div class="event-bucket" ng-repeat="bucket in event.bucket.children">
-        <div class="bucket-header">
-            <div class="container">
-                <h3 class="bucket-name"><date-interval begin="bucket.first" end="bucket.last"></h3>
-            </div>
-        </div>
+<!-- If bucket has no children, display medias -->
+<div ng-if="!bucket.children.length && bucket.medias">
+    <div class="event-bucket">
         <div class="container bucket-medias" ng-init="bucketRows = (bucket.medias | splitArray:4)">
             <div class="bucket-row" ng-repeat="row in bucketRows">
                 <div class="bucket-media" ng-repeat="media in row">
@@ -25,14 +17,15 @@
         </div>
     </div>
 </div>
-<div ng-if="!event.bucket.children && event.bucket.medias">
-    <div class="event-bucket">
+<!-- Loop over event bucket children -->
+<div ng-if="bucket.children.length">
+    <div class="event-bucket" ng-repeat="bucket in bucket.children">
         <div class="bucket-header">
             <div class="container">
-                <h3 class="bucket-name">{{event.bucket.first | date:'longDate'}} - {{event.bucket.last | date:'longDate'}}</h3>
+                <a class="bucket-link" ui-sref="event.medias.bucket({bucketId: bucket.id})"><date-interval begin="bucket.first" end="bucket.last"></a>
             </div>
         </div>
-        <div class="container bucket-medias" ng-init="bucketRows = (event.bucket.medias | splitArray:4)">
+        <div class="container bucket-medias" ng-init="bucketRows = (bucket.medias | splitArray:4)">
             <div class="bucket-row" ng-repeat="row in bucketRows">
                 <div class="bucket-media" ng-repeat="media in row">
                     <a ng-href="#/events/{{event.token}}/medias/{{media.id}}">

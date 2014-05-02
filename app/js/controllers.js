@@ -242,6 +242,20 @@ angular.module('shace.controllers', []).
         
         $scope.loadEvent();
     }]).
+    controller('EventUploadController',
+    ['$scope', '$rootScope', 'Uploader', function ($scope, $rootScope, Uploader) {
+        // Event will need to be reloaded after leaving upload page
+        $scope.event.needReload = true;
+    
+        $scope.queue = Uploader.queue;
+        $scope.uploadDone = false;
+    
+        $rootScope.$on('FileUploadDone', function (event, file, progress) {
+            if (Uploader.getPendingFilesCount() === 0) {
+                $scope.uploadDone = true;
+            }
+        });
+    }]).
     controller('EventMediasController',
         ['$scope', '$state', '$rootScope', 'shace', 'Notifications', 'Uploader', 'Events', 'Medias',
         function ($scope, $state, $rootScope, shace, Notifications, Uploader, Events, Medias) {
@@ -290,17 +304,45 @@ angular.module('shace.controllers', []).
             });
         };
     }]).
-    controller('EventUploadController',
-    ['$scope', '$rootScope', 'Uploader', function ($scope, $rootScope, Uploader) {
-        // Event will need to be reloaded after leaving upload page
-        $scope.event.needReload = true;
+    controller('EventMediasBucketController', ['$scope', '$state', function ($scope, $state) {
+        function getBucket(id) {
+            // Search for the bucket with given id
+            var
+                bucket = $scope.event.bucket,
+                toCheck = []
+            ;
+            
+            if (!bucket) {
+                return;
+            }
+            toCheck = toCheck.concat(bucket.children);
+            while (toCheck.length > 0) {
+                if (bucket.id === id) {
+                    return bucket;
+                }
+                bucket = toCheck.shift();
+                toCheck = toCheck.concat(bucket.children);
+            }
+        }
+        
+        function loadBucket() {
+            var bucket;
+            
+            if ($state.params.bucketId) {
+                bucket = getBucket(parseInt($state.params.bucketId));
+            } else {
+                bucket = $scope.event.bucket;
+            }
     
-        $scope.queue = Uploader.queue;
-        $scope.uploadDone = false;
+            if (bucket) {
+                $scope.bucket = bucket;
+            }
+        }
     
-        $rootScope.$on('FileUploadDone', function (event, file, progress) {
-            if (Uploader.getPendingFilesCount() === 0) {
-                $scope.uploadDone = true;
+        // Watch for changes in event root bucket
+        $scope.$watch('event.bucket', function (bucket) {
+            if (bucket) {
+                loadBucket();
             }
         });
     }]).
