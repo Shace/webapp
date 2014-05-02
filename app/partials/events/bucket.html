@@ -1,6 +1,15 @@
 <div class="container">
     <div class="row">
-        <h2><date-interval begin="bucket.first" end="bucket.last" full="true"></h2>
+        <ol class="breadcrumb bucket-breadcrumb">
+            <li ng-repeat="node in breadcrumb">
+                <a ng-if="node.id != bucket.id" ui-sref="event.medias.bucket({bucketId: node.id})">
+                    <date-interval begin="node.first" end="node.last" full="true">
+                </a>
+                <span ng-if="node.id == bucket.id">
+                    <date-interval begin="node.first" end="node.last" full="true">
+                </span>
+            </li>
+        </ol>
     </div>
 </div>
 <!-- If bucket has no children, display medias -->
@@ -22,7 +31,7 @@
     <div class="event-bucket" ng-repeat="bucket in bucket.children">
         <div class="bucket-header">
             <div class="container">
-                <a class="bucket-link" ui-sref="event.medias.bucket({bucketId: bucket.id})"><date-interval begin="bucket.first" end="bucket.last"></a>
+                <a class="bucket-link" ui-sref="event.medias.bucket({bucketId: bucket.id})"><date-interval begin="bucket.first" end="bucket.last" full="fullBucketInterval"></a>
             </div>
         </div>
         <div class="container bucket-medias" ng-init="bucketRows = (bucket.medias | splitArray:4)">

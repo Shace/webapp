@@ -200,7 +200,8 @@ angular.module('shace.directives', []).
                         timeIntervalFull: 'd MMMM yyyy, t1 - t2',
                         dayInterval: 'MMMM t1 - t2',
                         dayIntervalFull: 'MMMM t1 - t2, yyyy',
-                        monthInterval: 't1 - t2 yyyy',
+                        monthInterval: 't1 - t2',
+                        monthIntervalFull: 't1 - t2 yyyy',
                         yearInterval: 't1 - t2'
                     };
 
@@ -216,7 +217,7 @@ angular.module('shace.directives', []).
                         str = str.replace('t1', dateFormatter(begin, formats.day));
                         str = str.replace('t2', dateFormatter(end, formats.day));
                     } else if (beginDate.getYear() === endDate.getYear()) {
-                        str = dateFormatter(begin, formats.monthInterval);
+                        str = dateFormatter(begin, formats['monthInterval'+full]);
                         str = str.replace('t1', dateFormatter(begin, formats.month));
                         str = str.replace('t2', dateFormatter(end, formats.month));
                     } else {
