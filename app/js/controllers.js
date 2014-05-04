@@ -382,12 +382,69 @@ angular.module('shace.controllers', []).
             }
         });
     }]).
-    controller('MediaController', ['$scope', '$state', 'Medias', function ($scope, $state, Medias) {
-
+    controller('MediaController', ['$scope', '$state', 'shace', 'Medias', 'Comments', 'Notifications',
+    function ($scope, $state, shace, Medias, Comments, Notifications) {
+        
         $scope.media = Medias.get({
             eventToken: $state.params.eventToken,
             id: $state.params.id
         });
+        
+        /*
+         * Send a comment
+         */
+        $scope.sendComment = function (comment) {
+            if (comment) {
+                Comments.save({mediaId: $scope.media.id, eventToken: $scope.media.event}, {
+                    message: comment,
+                }, function (response) {
+                    $scope.media.comments.push(response);
+                    $scope.comment = '';
+                }, function (response) {
+                    Notifications.notifyError(response.data);
+                });
+            }
+        };
+        
+        /*
+         * Delete a comment
+         */
+        $scope.deleteComment = function (comment, index) {
+            var commentObject;
+            
+            if (comment) {
+                Comments.delete({mediaId: $scope.media.id, eventToken: $scope.media.event, id: comment.id}, {}, function (response) {
+                    $scope.media.comments.splice(index, 1);
+                }, function (response) {
+                    Notifications.notifyError(response.data);
+                });
+            }
+        };
+        
+        /*
+         * Return true if the current user can delete the given comment
+         */
+        $scope.canDeleteComment = function (comment) {
+            return (shace.user && shace.user.id === comment.owner);
+        };
+        
+        $scope.canEditMediaInfos = function () {
+            return (shace.user && shace.user.id === $scope.media.owner);
+        };
+        
+        $scope.saveMediaInfos = function () {
+            Medias.update({
+                eventToken: $scope.media.event,
+                id: $scope.media.id
+            }, $scope.media, function (response) {
+                
+            }, function (response) {
+                Notifications.notifyError(response.data);
+            });
+        };
 
+        $scope.exit = function() {
+            console.log('exit');
+        };
     }])
 ;

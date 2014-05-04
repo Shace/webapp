@@ -1,4 +1,25 @@
-<div class="container">
-    <h2>{{media.event}}</h2>
-    <img ng-src="{{media.image.medium}}" />
+<div class="overlay">
+    <div class="media-container">
+        <a class="media-exit" ng-click="exit()"><i class="fa fa-times fa-2x"></i></a>
+        <div class="media-wrapper">
+            <img ng-src="{{media.image.medium}}" />
+            <div class="media-caption">
+                {{media.original | date : 'medium'}}
+            </div>
+        </div>
+    </div>
+    <div class="media-information">
+        <h1 class="media-description"><editable model="media.description" on-edit="saveMediaInfos()" enabled="canEditMediaInfos()" placeholder="Enter a description for your media..."></editable></h1>
+        <div>
+            <div class="media-comment" ng-repeat="comment in media.comments">
+                <p class="media-comment-username">{{comment.username}}</p>
+                <p>{{comment.message}}</p>
+                <a class="media-comment-delete" ng-show="canDeleteComment(comment)" ng-click="deleteComment(comment, $index)"><i class="fa fa-times"></i></a>
+            </div>
+        </div>
+        <form ng-submit="sendComment(comment)">
+            <input class="comment-input" type="text" placeholder="Leave a comment..." autofocus 
+                ng-model="comment">
+        </form>
+    </div>
 </div>

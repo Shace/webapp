@@ -172,7 +172,7 @@ angular.module('shace.services', []).
         shace.access.getPermissionOnEvent = function (event, permission) {
             return config.permissionsLevels[event.permission.toLowerCase()] >= config.permissionsLevels[permission.toLowerCase()];
         };
-
+        
         // Private methods
 
         /*
