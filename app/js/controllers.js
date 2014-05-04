@@ -221,8 +221,8 @@ angular.module('shace.controllers', []).
         };
     }]).
     controller('EventController',
-    ['$scope', '$state', '$rootScope', 'shace', 'Notifications', 'Uploader', 'Events', 'Medias',
-    function ($scope, $state, $rootScope, shace, Notifications, Uploader, Events, Medias) {
+    ['$scope', '$state', '$rootScope', '$modal', 'shace', 'Notifications', 'Uploader', 'Events', 'Medias',
+    function ($scope, $state, $rootScope, $modal, shace, Notifications, Uploader, Events, Medias) {
         $scope.loadEvent = function () {
             $scope.event = Events.get({token: $state.params.token});
         };
@@ -240,7 +240,61 @@ angular.module('shace.controllers', []).
             });
         };
         
+        $scope.openPrivacyOptions = function () {
+            $modal.open({
+                controller: 'EventPrivacyOptionsController',
+                templateUrl: 'partials/events/privacy/modal.html',
+                scope: $scope
+            });
+        };
+        
         $scope.loadEvent();
+    }]).
+    controller('EventPrivacyOptionsController',
+    ['$scope', 'Notifications', function ($scope, Notifications) {
+        $scope.view = 'modes';
+        
+        $scope.privacy = $scope.event.privacy;
+        
+        $scope.form = {
+            password: '',
+            passwordConfirm: ''
+        };
+        
+        $scope.selectPrivacy = function (privacy) {
+            $scope.privacy = privacy;
+        };
+    
+        $scope.changePrivacy = function (privacy) {
+            $scope.view = 'form-'+privacy;
+        };
+        
+        $scope.submitForm = function () {
+            if ($scope.view === 'modes') {
+                return;
+            }
+            if ($scope.privacy === 'protected') {
+                $scope.passwordInvalid = false;
+                $scope.passwordMatchInvalid = false;
+                
+                if (!$scope.form.password) {
+                    $scope.passwordInvalid = true;
+                    return;
+                }
+                else if ($scope.form.password !== $scope.form.passwordConfirm) {
+                    $scope.passwordMatchInvalid = true;
+                    return;
+                }
+                
+                $scope.event.privacy = 'protected';
+                $scope.event.password = $scope.form.password;
+                
+                $scope.event.$update({token: $scope.event.token}).then(function(){}, function (response) {
+                    Notifications.notifyError(response.data);
+                });
+            }
+        };
+
     }]).
     controller('EventUploadController',
     ['$scope', '$rootScope', 'Uploader', function ($scope, $rootScope, Uploader) {

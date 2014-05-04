@@ -14,6 +14,10 @@ angular.module('shace.services', []).
     */
     value('config', {
         apiAccessPoint: '//localhost:9000',
+        accessTokenTypes: {
+            guest   : 'guest',
+            user    : 'user'
+        },
         permissionsLevels: {
             'none'          : 0,
             'read'          : 1,
@@ -67,16 +71,16 @@ angular.module('shace.services', []).
 
                 return deferred.promise;
             }()).then(function () {
-
-                // If user is logged in, retrieve its infos
-                shace.retrieveUserInfos().catch(function (response) {
-                    // If infos are not retrieved, token must be invalid.
-                    // Request a new one and retry
-                    shace.requestAccessToken().then(function () {
-                        shace.retrieveUserInfos();
+                if (shace.accessToken.type === config.accessTokenTypes.user) {
+                    // If user is logged in, retrieve its infos
+                    shace.retrieveUserInfos().catch(function (response) {
+                        // If infos are not retrieved, token must be invalid.
+                        // Request a new one and retry
+                        shace.requestAccessToken().then(function () {
+                            shace.retrieveUserInfos();
+                        });
                     });
-                });
-
+                }
             });
         };
 
