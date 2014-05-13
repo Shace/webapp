@@ -177,6 +177,20 @@ angular.module('shace.services', []).
             return config.permissionsLevels[event.permission.toLowerCase()] >= config.permissionsLevels[permission.toLowerCase()];
         };
         
+        /*
+         * Get permissions on a tag for the current user
+         */
+        shace.access.getPermissionOnTag = function (tag, permission) {
+            return config.permissionsLevels[tag.permission.toLowerCase()] >= config.permissionsLevels[permission.toLowerCase()];
+        };
+        
+        /*
+         * Get permissions on a comment for the current user
+         */
+        shace.access.getPermissionOnComment = function (comment, permission) {
+            return config.permissionsLevels[comment.permission.toLowerCase()] >= config.permissionsLevels[permission.toLowerCase()];
+        };
+        
         // Private methods
 
         /*

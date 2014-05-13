@@ -10,6 +10,26 @@
     </div>
     <div class="media-information">
         <h1 class="media-description"><editable model="media.description" on-edit="saveMediaInfos()" enabled="canEditMediaInfos()" placeholder="Enter a description for your media..."></editable></h1>
+        <div class="media-tags-container">
+            <div class="media-tags media-tags-base" ng-show="!editingTags">
+                <div class="tags">
+                    <ul class="tag-list">
+                        <li class="tag-item ng-scope" ng-repeat="tag in media.tags">
+                            <span class="ng-binding">{{tag.name}}</span>
+                            <a class="remove-button ng-binding" ng-click="onTagRemovedBase($index)" ng-show="canDeleteTag(tag)">×</a>
+                            <a class="remove-button ng-binding" ng-click="onTagRemovedBase($index)" ng-show="!canDeleteTag(tag)"> </a>
+                        </li>
+                        <li class="tag-item ng-scope media-tag-edit">
+                            <a class="remove-button ng-binding" ng-click="editTags()">+</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <tags-input ng-model="media.tags" display-property="name" on-tag-added="onTagAdded($tag)"
+                on-tag-removed="onTagRemoved($tag)" replace-spaces-with-dashes="false" class="media-tags"
+                ng-show="editingTags">
+            </tags-input>
+        </div>
         <div>
             <div class="media-comment" ng-repeat="comment in media.comments">
                 <p class="media-comment-username">{{comment.username}}</p>

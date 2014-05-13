@@ -524,12 +524,17 @@ angular.module('shace.controllers', []).
             }
         });
     }]).
-    controller('MediaController', ['$scope', '$state', 'shace', 'Medias', 'Comments', 'Notifications',
-    function ($scope, $state, shace, Medias, Comments, Notifications) {
-        
+    controller('MediaController', ['$scope', '$state', '$q', 'shace', 'Medias', 'Comments', 'Notifications', 'Tags',
+    function ($scope, $state, $q, shace, Medias, Comments, Notifications, Tags) {
+                
         $scope.media = Medias.get({
             eventToken: $state.params.eventToken,
             id: $state.params.id
+        }, function() {
+            var idx = 0;
+            for (; idx < $scope.media.tags.length; ++idx) {
+                $scope.media.tags[idx].index = idx;
+            }
         });
         
         /*
@@ -567,7 +572,7 @@ angular.module('shace.controllers', []).
          * Return true if the current user can delete the given comment
          */
         $scope.canDeleteComment = function (comment) {
-            return (shace.user && shace.user.id === comment.owner);
+            return shace.access.getPermissionOnComment(comment, 'root');
         };
         
         $scope.canEditMediaInfos = function () {
@@ -588,5 +593,46 @@ angular.module('shace.controllers', []).
         $scope.exit = function() {
             console.log('exit');
         };
+                
+        $scope.onTagAdded = function(tag) {
+            return Tags.save({mediaId: $scope.media.id, eventToken: $scope.media.event}, {
+                name: tag.name,
+            }, function (response) {
+                angular.copy(response, tag);
+                tag.idx = $scope.media.tags.length - 1;
+            }, function (response) {
+                $scope.media.tags.splice($scope.media.tags.indexOf(tag), 1);
+            });
+        };
+        
+        $scope.onTagRemoved = function(tag) {
+            return Tags.delete({mediaId: $scope.media.id, eventToken: $scope.media.event, id: tag.id}, {}, function (response) {
+            }, function (response) {
+                $scope.media.tags.splice(tag.index, 0, tag);
+                Notifications.notifyError(response.data);
+            });
+        };
+        
+        $scope.onTagRemovedBase = function(index) {
+            return Tags.delete({mediaId: $scope.media.id, eventToken: $scope.media.event, id: $scope.media.tags[index].id}, {}, function (response) {
+                var idx = 0;
+                $scope.media.tags.splice(index, 1);
+                for (; idx < $scope.media.tags.length; ++idx) {
+                    $scope.media.tags.index = idx;
+                }
+            }, function (response) {
+            });
+        };
+        
+        $scope.editingTags = false;
+
+        $scope.editTags = function() {
+            $scope.editingTags = true;
+        };
+        
+        $scope.canDeleteTag = function (tag) {
+            return shace.access.getPermissionOnTag(tag, 'root');
+        };
+
     }])
 ;

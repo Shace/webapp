@@ -11,7 +11,8 @@ angular.module('shace', [
     'shace.resources',
     'shace.services',
     'shace.directives',
-    'shace.controllers'
+    'shace.controllers',
+    'ngTagsInput'
 ]).
 config(
     ['$stateProvider', '$urlRouterProvider', '$httpProvider', '$compileProvider',
