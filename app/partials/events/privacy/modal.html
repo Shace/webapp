@@ -9,6 +9,9 @@
     <div class="modal-footer">
         <button type="button" class="btn btn-default" ng-click="$close()">Cancel</button>    
         <button ng-show="view == 'modes'" type="button" class="btn btn-primary" ng-click="changePrivacy(privacy)">Change privacy</button>
-        <button ng-show="view != 'modes'" type="submit" class="btn btn-primary" ng-click="submitForm()">Save</button>
+        <button ng-show="view != 'modes'" type="submit" class="btn btn-primary" ng-click="submitForm()" ng-disabled="form.loading">
+            <span ng-show="form.loading">Loading...</span>
+            <span ng-hide="form.loading">Change privacy</span>            
+        </button>
     </div>
 </form>

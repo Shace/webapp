@@ -49,8 +49,8 @@ angular.module('shace.controllers', []).
     }]).
 
     controller('HomeController',
-        ['$scope', '$q', '$location', 'Notifications', 'Events',
-        function ($scope, $q, $location, Notifications, Events) {
+        ['$scope', '$q', '$state', '$modal', 'Notifications', 'Events',
+        function ($scope, $q, $state, $modal, Notifications, Events) {
     
         /*
          * Return auto-completed actions for input token
@@ -87,6 +87,13 @@ angular.module('shace.controllers', []).
             },
             // Error handler
             function(response) {
+                if (response.status === 403) {
+                    actions.push({
+                        type: 'access',
+                        token: inputToken,
+                        privacy: 'protected'
+                    });
+                }
                 actions.push(createAction);
                 deferred.resolve(actions);
             });
@@ -107,7 +114,16 @@ angular.module('shace.controllers', []).
             } else if (action.type === 'create-private') {
                 $scope.createEvent('private', action.token);
             } else if (action.type === 'access') {
-                $scope.accessEvent(action.token);
+                if (action.privacy === 'protected') {
+                    $scope.eventToken = action.token;
+                    $modal.open({
+                        controller: 'AccessProtectedEventController',
+                        templateUrl: 'partials/home/access-protected.html',
+                        scope: $scope
+                    });
+                } else {
+                    $state.go('event.medias.rootBucket', {token: action.token});
+                }
             }
         };
     
@@ -119,7 +135,7 @@ angular.module('shace.controllers', []).
                 Events.get({token: token},
                 // Success handler
                 function(response) {
-                    $location.path('/events/'+token);
+                    $state.go('event.medias.rootBucket', {token: token});
                 },
                 // Error handler
                 function (response) {
@@ -135,12 +151,42 @@ angular.module('shace.controllers', []).
             var name = 'Untitled event';
             
             Events.save({}, {token: token, privacy: privacy, name:name}, function (event) {
-                $location.path('/events/'+event.token);
+                $state.go('event.medias.rootBucket', {token: event.token});
             }, function (response) {
                 Notifications.notifyError(response.data);
             });
         };
 
+    }]).
+    controller('AccessProtectedEventController',
+    ['$scope', '$modalInstance', '$state', 'Events', 'Notifications',
+    function ($scope, $modalInstance, $state, Events, Notifications) {
+        $scope.form = {
+            password: ''
+        };
+        
+        $scope.submit = function () {
+            var
+                token = $scope.eventToken,
+                password = $scope.form.password
+            ;
+            
+            $scope.passwordInvalid = false;
+            
+            if (!password) {
+                $scope.passwordInvalid = true;
+            }
+            
+            Events.access({token: token}, {password: password},
+                function(response) {
+                    $state.go('event.medias.rootBucket', {token: token});
+                    $modalInstance.close();
+                },
+                function (response) {
+                    $scope.passwordInvalid = true;
+                }
+            );
+        };
     }]).
     controller('LoginController', ['$scope', '$location', '$timeout', 'Notifications', 'shace', function ($scope, $location, $timeout, Notifications, shace) {
     
@@ -251,28 +297,57 @@ angular.module('shace.controllers', []).
         $scope.loadEvent();
     }]).
     controller('EventPrivacyOptionsController',
-    ['$scope', 'Notifications', function ($scope, Notifications) {
+    ['$scope', '$state', '$modalInstance', 'Notifications',
+    function ($scope, $state, $modalInstance, Notifications) {
         $scope.view = 'modes';
         
         $scope.privacy = $scope.event.privacy;
         
-        $scope.form = {
-            password: '',
-            passwordConfirm: ''
-        };
+        function initForm() {
+            $scope.form = {
+                loading: false,
+                showToken: false,
+                token: '',
+                password: '',
+                passwordConfirm: ''
+            };
+        }
+        
+        initForm();
         
         $scope.selectPrivacy = function (privacy) {
             $scope.privacy = privacy;
         };
     
         $scope.changePrivacy = function (privacy) {
+            initForm();
+            if ((privacy === 'public' || privacy === 'protected') && $scope.event.privacy === 'private') {
+                $scope.form.showToken = true;
+            }
             $scope.view = 'form-'+privacy;
         };
         
         $scope.submitForm = function () {
+            var
+                eventCopy = angular.copy($scope.event),
+                tokenChanged = false
+            ;
+            
             if ($scope.view === 'modes') {
                 return;
             }
+            
+            if (($scope.privacy === 'public' || $scope.privacy === 'protected') && $scope.event.privacy === 'private') {
+                $scope.tokenInvalid = false;
+
+                if (!$scope.form.token) {
+                    $scope.tokenInvalid = true;
+                    return;
+                }
+                $scope.event.token = $scope.form.token;
+                tokenChanged = true;
+            }
+            
             if ($scope.privacy === 'protected') {
                 $scope.passwordInvalid = false;
                 $scope.passwordMatchInvalid = false;
@@ -285,14 +360,27 @@ angular.module('shace.controllers', []).
                     $scope.passwordMatchInvalid = true;
                     return;
                 }
-                
-                $scope.event.privacy = 'protected';
                 $scope.event.password = $scope.form.password;
-                
-                $scope.event.$update({token: $scope.event.token}).then(function(){}, function (response) {
-                    Notifications.notifyError(response.data);
-                });
+            } else if ($scope.privacy === 'private') {
+                tokenChanged = true;
             }
+            
+            $scope.event.privacy = $scope.privacy;
+
+            $scope.form.loading = true;
+            $scope.event.$update({token: eventCopy.token}).then(function(response){
+                $scope.form.loading = false;
+                $scope.view = 'modes';
+                Notifications.notifySuccess('Event privacy changed successfully');
+                if (tokenChanged) {
+                    $state.go('event.medias.rootBucket', {token: response.token});
+                }
+                $modalInstance.close();
+            }, function (response) {
+                $scope.form.loading = false;
+                Notifications.notifyError(response.data);
+                $scope.event = eventCopy;
+            });
         };
 
     }]).

@@ -402,6 +402,17 @@ angular.module('shace.services', []).
             });
         };
         
+        /*
+         * Helper function to notify a success
+         */
+        Notifications.notifySuccess = function (message, duration) {
+            Notifications.notify({
+                type: 'success',
+                message: message,
+                duration: duration
+            });
+        };
+        
         return Notifications;
     }])
 ;

@@ -34,7 +34,7 @@ angular.module('shace.resources', []).
                 /* Custom actions */
                 
                 /*
-                 * Requests a new access token
+                 * Get currently authentified user
                  */
                 me: {
                     url: config.apiAccessPoint+'/users/me',
@@ -55,7 +55,15 @@ angular.module('shace.resources', []).
             /* Default params */
         }, {
             /* Custom actions */
-            update: {method: 'PUT'}
+            update: {method: 'PUT'},
+            
+            /*
+             * Requests access to an event
+             */
+            access: {
+                url: config.apiAccessPoint+'/events/:token/access',
+                method: 'POST'
+            }
         });
                         
         return Events;

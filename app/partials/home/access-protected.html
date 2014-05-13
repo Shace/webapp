@@ -1,0 +1,17 @@
+<form ng-submit="submit()">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="$close()">&times;</button>
+        <h4 class="modal-title">Access protected event</h4>
+    </div>
+    <div class="modal-body">
+        <div class="form-group" ng-class="{'has-error': passwordInvalid}">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" ng-model="form.password" focus-on="true" required>
+            <span ng-show="passwordInvalid" class="help-block">Invalid password.</span>
+        </div>        
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" ng-click="$close()">Cancel</button>
+        <button type="submit" class="btn btn-primary">Access</button>
+    </div>
+</form>

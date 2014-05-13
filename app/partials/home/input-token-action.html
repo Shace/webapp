@@ -7,7 +7,13 @@
             Token <strong>{{match.model.token}}</strong> is already used. Create a private event
         </div>
         <div ng-switch-when="access">
-            Access event <strong>{{match.model.event.name}}</strong>
+            <div ng-show="match.model.privacy == 'protected'">
+                <i class="fa fa-lock"></i>
+                Access protected event <strong>{{match.model.token}}</strong>
+            </div>
+            <div ng-hide="match.model.privacy == 'protected'">
+                Access event <strong>{{match.model.event.name}}</strong>
+            </div>
         </div>
     </div>
 </a>
