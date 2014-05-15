@@ -87,6 +87,7 @@ angular.module('shace.services', []).
         /*
          * Requests a new access token
          * If no email/password is given, a guest token is retrieved
+         * Else if a guest access token already exists, it is upgraded
          */
         shace.requestAccessToken = function (email, password, autoRenew) {
             var
@@ -105,20 +106,35 @@ angular.module('shace.services', []).
                     auto_renew: autoRenew
                 };
             }
-
-            AccessToken.request(params, function (token) {
+            
+            function updateToken (response) {
                 shace.accessToken = {
-                    token: token.token,
-                    type: token.type,
-                    autoRenew: token.auto_renew,
-                    creation: token.creation,
-                    expiration: token.expiration
+                    token: response.token,
+                    type: response.type,
+                    autoRenew: response.auto_renew,
+                    creation: response.creation,
+                    expiration: response.expiration
                 };
                 storeAccessToken();
-                deferred.resolve();
-            }, function (response) {
-                deferred.reject(response);
-            });
+            }
+            
+            if (shace.accessToken) {
+                AccessToken.update({
+                    accessToken: shace.accessToken.token
+                }, params, function (token) {
+                    updateToken(token);
+                    deferred.resolve();
+                }, function (response) {
+                    deferred.reject(response);
+                });
+            } else {
+                AccessToken.request(params, function (token) {
+                    updateToken(token);
+                    deferred.resolve();
+                }, function (response) {
+                    deferred.reject(response);
+                });
+            }
 
             return deferred.promise;
         };

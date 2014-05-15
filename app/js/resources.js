@@ -16,7 +16,15 @@ angular.module('shace.resources', []).
             /*
              * Requests a new access token
              */
-            request: { method: 'POST' }
+            request: { method: 'POST' },
+            
+            /*
+             * Update an existing access token             
+             */
+            update: {
+                url: config.apiAccessPoint+'/access_token/:accessToken',
+                method: 'PUT'
+            }
         });
                         
         return AccessToken;
