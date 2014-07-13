@@ -2,8 +2,8 @@
 
 angular.module('shace.controllers').
     controller('EventController',
-    ['$scope', '$state', '$rootScope', '$modal', 'shace', 'Notifications', 'Uploader', 'Events', 'Medias',
-        function ($scope, $state, $rootScope, $modal, shace, Notifications, Uploader, Events, Medias) {
+    ['$scope', '$state', '$rootScope', '$modal', 'Shace', 'Notifications', 'Uploader', 'Events', 'Medias',
+        function ($scope, $state, $rootScope, $modal, Shace, Notifications, Uploader, Events, Medias) {
             $scope.loadEvent = function () {
                 $scope.event = Events.get({token: $state.params.token}, function () {
                     $scope.event.currentBucket = false;
@@ -14,7 +14,7 @@ angular.module('shace.controllers').
                 if (!$scope.event || !$scope.event.$resolved || !$scope.event.token) {
                     return false;
                 }
-                return shace.access.getPermissionOnEvent($scope.event, 'administrate');
+                return Shace.access.getPermissionOnEvent($scope.event, 'administrate');
             };
 
             $scope.saveInfos = function () {

@@ -4,7 +4,7 @@ angular.module('shace.services')
     .factory('Shace', ['$q', '$cookieStore', 'config', 'AccessToken', 'Users',
         function ($q, $cookieStore, config, AccessToken, Users) {
 
-            var shace = {
+            var Shace = {
                 accessToken: false,
                 user: false,
                 access: {}
@@ -13,7 +13,7 @@ angular.module('shace.services')
             /*
              * Init the application
              */
-            shace.init = function () {
+            Shace.init = function () {
                 var now = (new Date()).getTime();
 
                 /*
@@ -24,18 +24,18 @@ angular.module('shace.services')
                 (function () {
                     var deferred = $q.defer();
 
-                    if (shace.accessToken === false) {
+                    if (Shace.accessToken === false) {
                         if (!retrieveStoredAccessToken()) {
-                            shace.requestAccessToken().then(function () {
+                            Shace.requestAccessToken().then(function () {
                                 deferred.resolve();
                             });
                         } else {
                             deferred.resolve();
                         }
-                    } else if (shace.accessToken.expiration < now) {
+                    } else if (Shace.accessToken.expiration < now) {
                         // Expired token: request a new one
-                        shace.accessToken = false;
-                        shace.requestAccessToken().then(function () {
+                        Shace.accessToken = false;
+                        Shace.requestAccessToken().then(function () {
                             deferred.resolve();
                         });
                     } else {
@@ -44,14 +44,14 @@ angular.module('shace.services')
 
                     return deferred.promise;
                 }()).then(function () {
-                        if (shace.accessToken.type === config.accessTokenTypes.user) {
+                        if (Shace.accessToken.type === config.accessTokenTypes.user) {
                             // If user is logged in, retrieve its infos
-                            shace.retrieveUserInfos().catch(function (response) {
-                                shace.accessToken = false;
+                            Shace.retrieveUserInfos().catch(function (response) {
+                                Shace.accessToken = false;
                                 // If infos are not retrieved, token must be invalid.
                                 // Request a new one and retry
-                                shace.requestAccessToken().then(function () {
-                                    shace.retrieveUserInfos();
+                                Shace.requestAccessToken().then(function () {
+                                    Shace.retrieveUserInfos();
                                 });
                             });
                         }
@@ -63,7 +63,7 @@ angular.module('shace.services')
              * If no email/password is given, a guest token is retrieved
              * Else if a guest access token already exists, it is upgraded
              */
-            shace.requestAccessToken = function (email, password, autoRenew) {
+            Shace.requestAccessToken = function (email, password, autoRenew) {
                 var
                     deferred = $q.defer(),
                     params = {}
@@ -82,7 +82,7 @@ angular.module('shace.services')
                 }
 
                 function updateToken (response) {
-                    shace.accessToken = {
+                    Shace.accessToken = {
                         token: response.token,
                         type: response.type,
                         autoRenew: response.auto_renew,
@@ -92,9 +92,9 @@ angular.module('shace.services')
                     storeAccessToken();
                 }
 
-                if (shace.accessToken) {
+                if (Shace.accessToken) {
                     AccessToken.update({
-                        accessToken: shace.accessToken.token
+                        accessToken: Shace.accessToken.token
                     }, params, function (token) {
                         updateToken(token);
                         deferred.resolve();
@@ -116,16 +116,16 @@ angular.module('shace.services')
             /*
              * Logout the user (delete access token and request a new guest one)
              */
-            shace.logout = function () {
-                shace.accessToken = false;
-                shace.user = false;
-                shace.requestAccessToken();
+            Shace.logout = function () {
+                Shace.accessToken = false;
+                Shace.user = false;
+                Shace.requestAccessToken();
             };
 
             /*
              * Registers a new user and login
              */
-            shace.signup = function (email, password) {
+            Shace.signup = function (email, password) {
                 var deferred = $q.defer();
 
                 Users.save({}, {
@@ -141,14 +141,14 @@ angular.module('shace.services')
             };
 
             /*
-             * Requests user infos and populate shace object
+             * Requests user infos and populate Shace object
              */
-            shace.retrieveUserInfos = function () {
+            Shace.retrieveUserInfos = function () {
                 var deferred = $q.defer();
 
-                if (shace.accessToken.type === 'user') {
+                if (Shace.accessToken.type === 'user') {
                     Users.me({}, function (user) {
-                        shace.user = user;
+                        Shace.user = user;
                         deferred.resolve(user);
                     }, function (response) {
                         deferred.reject(response);
@@ -163,21 +163,21 @@ angular.module('shace.services')
             /*
              * Get permissions on an event for the current user
              */
-            shace.access.getPermissionOnEvent = function (event, permission) {
+            Shace.access.getPermissionOnEvent = function (event, permission) {
                 return config.permissionsLevels[event.permission.toLowerCase()] >= config.permissionsLevels[permission.toLowerCase()];
             };
 
             /*
              * Get permissions on a tag for the current user
              */
-            shace.access.getPermissionOnTag = function (tag, permission) {
+            Shace.access.getPermissionOnTag = function (tag, permission) {
                 return config.permissionsLevels[tag.permission.toLowerCase()] >= config.permissionsLevels[permission.toLowerCase()];
             };
 
             /*
              * Get permissions on a comment for the current user
              */
-            shace.access.getPermissionOnComment = function (comment, permission) {
+            Shace.access.getPermissionOnComment = function (comment, permission) {
                 return config.permissionsLevels[comment.permission.toLowerCase()] >= config.permissionsLevels[permission.toLowerCase()];
             };
 
@@ -190,7 +190,7 @@ angular.module('shace.services')
                 var accessToken = $cookieStore.get('shace_access_token');
 
                 if (accessToken) {
-                    shace.accessToken = accessToken;
+                    Shace.accessToken = accessToken;
                     return true;
                 }
                 return false;
@@ -200,8 +200,8 @@ angular.module('shace.services')
              * Store the user access token in a persistant store (cookies)
              */
             function storeAccessToken () {
-                $cookieStore.put('shace_access_token', shace.accessToken);
+                $cookieStore.put('shace_access_token', Shace.accessToken);
             }
 
-            return shace;
+            return Shace;
         }]);

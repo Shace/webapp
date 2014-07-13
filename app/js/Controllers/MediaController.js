@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('shace.controllers').
-    controller('MediaController', ['$scope', '$state', '$q', 'shace', 'Medias', 'Comments', 'Notifications', 'Tags',
-        function ($scope, $state, $q, shace, Medias, Comments, Notifications, Tags) {
+    controller('MediaController', ['$scope', '$state', '$q', 'Shace', 'Medias', 'Comments', 'Notifications', 'Tags',
+        function ($scope, $state, $q, Shace, Medias, Comments, Notifications, Tags) {
 
             $scope.media = Medias.get({
                 eventToken: $state.params.token,
@@ -72,11 +72,11 @@ angular.module('shace.controllers').
              * Return true if the current user can delete the given comment
              */
             $scope.canDeleteComment = function (comment) {
-                return shace.access.getPermissionOnComment(comment, 'root');
+                return Shace.access.getPermissionOnComment(comment, 'root');
             };
 
             $scope.canEditMediaInfos = function () {
-                return (shace.user && shace.user.id === $scope.media.owner);
+                return (Shace.user && Shace.user.id === $scope.media.owner);
             };
 
             $scope.saveMediaInfos = function () {
@@ -135,7 +135,7 @@ angular.module('shace.controllers').
             };
 
             $scope.canDeleteTag = function (tag) {
-                return shace.access.getPermissionOnTag(tag, 'root');
+                return Shace.access.getPermissionOnTag(tag, 'root');
             };
 
             $scope.prevMedia = function () {

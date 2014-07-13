@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('shace.controllers').controller('EventMediasController',
-    ['$scope', '$state', '$rootScope', 'shace', 'Notifications', 'Uploader', 'Events', 'Medias',
-        function ($scope, $state, $rootScope, shace, Notifications, Uploader, Events, Medias) {
+    ['$scope', '$state', '$rootScope', 'Shace', 'Notifications', 'Uploader', 'Events', 'Medias',
+        function ($scope, $state, $rootScope, Shace, Notifications, Uploader, Events, Medias) {
 
             // Reload medias if necessary
             if ($scope.event.needReload) {

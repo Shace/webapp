@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('shace.controllers').
-    controller('LoginController', ['$scope', '$location', '$timeout', 'Notifications', 'shace', function ($scope, $location, $timeout, Notifications, shace) {
+    controller('LoginController', ['$scope', '$location', '$timeout', 'Notifications', 'Shace', function ($scope, $location, $timeout, Notifications, Shace) {
 
         $scope.rememberMe = true;
 
@@ -13,9 +13,9 @@ angular.module('shace.controllers').
                 ;
 
             if (email && password) {
-                shace.requestAccessToken(email, password, autoRenew).then(function () {
+                Shace.requestAccessToken(email, password, autoRenew).then(function () {
                     // User is logged, redirect to home
-                    shace.retrieveUserInfos().finally(function () {
+                    Shace.retrieveUserInfos().finally(function () {
                         $location.path('/');
                     });
                 }, function (response) {
@@ -31,7 +31,7 @@ angular.module('shace.controllers').
                 ;
 
             if (email && password) {
-                shace.signup(email, password).then(function () {
+                Shace.signup(email, password).then(function () {
                     $scope.login();
                 }, function (response) {
                     Notifications.notifyError(response.data);
