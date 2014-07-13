@@ -12,6 +12,10 @@ angular.module('shace.controllers', []).
             $scope.isHome = (state.controller === 'HomeController');
             $scope.currentState = state;
         });
+        
+        $scope.keyboardAction = function (event) {
+            $scope.$broadcast('keyboadAction', event);
+        };
     }]).
     
     controller('NotificationsController', ['$scope', '$timeout', 'Notifications', function ($scope, $timeout, Notifications) {
@@ -257,23 +261,13 @@ angular.module('shace.controllers', []).
             shace.user.$update();
         };
     }]).
-    controller('EventsNewController', ['$scope', '$state', '$location', 'Events', function ($scope, $state, $location, Events) {
-        $scope.event = {
-            token: '',
-            privacy: 'public'
-        };
-        
-        $scope.createEvent = function () {
-            Events.save({}, $scope.event, function (event) {
-                $location.path('/events/'+event.token);
-            });
-        };
-    }]).
     controller('EventController',
     ['$scope', '$state', '$rootScope', '$modal', 'shace', 'Notifications', 'Uploader', 'Events', 'Medias',
     function ($scope, $state, $rootScope, $modal, shace, Notifications, Uploader, Events, Medias) {
         $scope.loadEvent = function () {
-            $scope.event = Events.get({token: $state.params.token});
+            $scope.event = Events.get({token: $state.params.token}, function () {
+                $scope.event.currentBucket = false;
+            });
         };
         
         $scope.canEditInfos = function () {
@@ -512,6 +506,12 @@ angular.module('shace.controllers', []).
                 endDate = new Date(bucket.last);
                 $scope.breadcrumb = generateBreadcrumb(bucket);
                 $scope.fullBucketInterval = beginDate.getFullYear() !== endDate.getFullYear();
+                // Update current bucket
+                if ($scope.event.bucket.id === bucket.id) {
+                    $scope.event.currentBucket = false;
+                } else {
+                    $scope.event.currentBucket = $scope.bucket;
+                }
             }
         }
     
@@ -531,7 +531,7 @@ angular.module('shace.controllers', []).
     function ($scope, $state, $q, shace, Medias, Comments, Notifications, Tags) {
                 
         $scope.media = Medias.get({
-            eventToken: $state.params.eventToken,
+            eventToken: $state.params.token,
             id: $state.params.id
         }, function() {
             var idx = 0;
@@ -594,7 +594,11 @@ angular.module('shace.controllers', []).
         };
 
         $scope.exit = function() {
-            console.log('exit');
+            if ($scope.event.currentBucket) {
+                $state.go('event.medias.bucket', {bucketId: $scope.event.currentBucket.id});
+            } else {
+                $state.go('event.medias.rootBucket', {token: $scope.media.event});
+            }
         };
                 
         $scope.onTagAdded = function(tag) {
@@ -632,10 +636,57 @@ angular.module('shace.controllers', []).
         $scope.editTags = function() {
             $scope.editingTags = true;
         };
-        
+
         $scope.canDeleteTag = function (tag) {
             return shace.access.getPermissionOnTag(tag, 'root');
         };
+        
+        $scope.prevMedia = function () {
+            var currentIdx = getMediaIndex($scope.media);
+            
+            if (currentIdx !== false && currentIdx > 0) {
+                $state.go('event.media', {id: $scope.event.medias[currentIdx-1].id});
+                $scope.event.currentBucket = false;
+            }
+        };
+        
+        $scope.nextMedia = function () {
+            var currentIdx = getMediaIndex($scope.media);
+            
+            if (currentIdx !== false && currentIdx+1 < $scope.event.medias.length) {
+                $state.go('event.media', {id: $scope.event.medias[currentIdx+1].id});
+                $scope.event.currentBucket = false;
+            }
+        };
+        
+        // Handle keyboard actions for navigating between medias
+        $scope.$on('keyboadAction', function (event, keyEvent) {
+            if (keyEvent.keyCode === 27) {
+                // Echap key
+                $scope.exit();
+            }
+            if (keyEvent.keyCode === 37) {
+                // Left arrow
+                $scope.prevMedia();
+            } else if (keyEvent.keyCode === 39) {
+                // Right arrow
+                $scope.nextMedia();
+            }
+        });
+        
+        /*
+         * Find media index in event
+         */
+        function getMediaIndex(media) {
+            var i, l;
+            
+            for (i = 0, l = $scope.event.medias.length; i < l; ++i) {
+                if ($scope.event.medias[i].id === media.id) {
+                    return i;
+                }
+            }
+            return false;
+        }
 
     }])
 ;

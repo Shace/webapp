@@ -21,7 +21,7 @@
         <!-- endbuild -->
     </head>
 
-    <body ng-controller="MainController" ng-class="{home: isHome}">
+    <body ng-controller="MainController" ng-class="{home: isHome}" ng-keydown="keyboardAction($event)">
 
         <!-- Header -->
         <ng-include src="'partials/layout/header.html'"></ng-include>
