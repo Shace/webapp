@@ -538,6 +538,29 @@ angular.module('shace.controllers', []).
             for (; idx < $scope.media.tags.length; ++idx) {
                 $scope.media.tags[idx].index = idx;
             }
+            
+            // Preload prev and next images so actions happen faster
+            $scope.$watch('event.medias', function (medias) {
+                var currentIdx, mediaToLoad, img;
+                
+                if (!medias) {
+                    return;
+                }
+                currentIdx = getMediaIndex($scope.media);
+                
+                // Load previous image
+                if (currentIdx > 0) {
+                    mediaToLoad = $scope.event.medias[currentIdx-1];
+                    img = new Image();
+                    img.src = mediaToLoad.image.medium;
+                }
+                // Load next image
+                if (currentIdx+1 < $scope.event.medias.length) {
+                    mediaToLoad = $scope.event.medias[currentIdx+1];
+                    img = new Image();
+                    img.src = mediaToLoad.image.medium;
+                }
+            });
         });
         
         /*
