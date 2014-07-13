@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('shace.services').factory('shace',
-    ['$q', '$cookieStore', 'config', 'AccessToken', 'Users',
+angular.module('shace.services')
+    .factory('Shace', ['$q', '$cookieStore', 'config', 'AccessToken', 'Users',
         function ($q, $cookieStore, config, AccessToken, Users) {
 
             var shace = {

@@ -8,22 +8,21 @@ angular.module('shace', [
     'ui.router',
     'ui.bootstrap',
     'shace.filters',
-    'shace.resources',
-    'shace.services',
     'shace.directives',
     'shace.controllers',
     'ngTagsInput'
 ]);
 
 angular.module('shace.filters', []);
-angular.module('shace.resources', ['ngResource']);
-angular.module('shace.services', ['ngCookies', 'shace.resources']);
-angular.module('shace.directives', ['shace.services']);
-angular.module('shace.controllers', ['shace.services', 'shace.resources']);
+angular.module('shace.resources', []);
+angular.module('shace.services', []);
+angular.module('shace.directives', []);
+angular.module('shace.controllers', ['shace.resources', 'shace.services']);
 
-require('js/directives/*');
+
+require('js/app/*');
 require('js/controllers/*');
 require('js/filters/*');
 require('js/resources/*');
+require('js/directives/*');
 require('js/services/*');
-require('js/root');

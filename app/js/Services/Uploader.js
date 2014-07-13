@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module('shace.services').factory('Uploader',
-    ['$q', '$rootScope', 'shace', 'config', 'Medias',
-        function ($q, $rootScope, shace, config, Medias) {
+angular.module('shace.services').
+    factory('Uploader', ['$q', '$rootScope', 'Shace', 'config', 'Medias',
+        function ($q, $rootScope, Shace, config, Medias) {
 
             var Uploader = {
                 queue: [],
@@ -88,8 +88,8 @@ angular.module('shace.services').factory('Uploader',
 
                 file.isUploading = true;
 
-                if (shace.accessToken) {
-                    url += '?access_token='+shace.accessToken.token;
+                if (Shace.accessToken) {
+                    url += '?access_token='+Shace.accessToken.token;
                 }
 
                 // Request event handlers
