@@ -2,7 +2,6 @@
 
 angular.module('shace.resources').
     factory('AccessToken', ['$resource', 'config', function ($resource, config) {
-
         return $resource(config.apiAccessPoint+'/access_token', {
             /* Default params */
         }, {
