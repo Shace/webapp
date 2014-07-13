@@ -93,8 +93,11 @@ angular.module('shace.controllers', []).
                         token: inputToken,
                         privacy: 'protected'
                     });
+                    createAction.enabled = false;
+                    actions.push(createPrivateAction);
+                } else {
+                    actions.push(createAction);
                 }
-                actions.push(createAction);
                 deferred.resolve(actions);
             });
             return deferred.promise;

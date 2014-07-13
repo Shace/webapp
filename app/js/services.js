@@ -64,7 +64,11 @@ angular.module('shace.services', []).
                         deferred.resolve();
                     }
                 } else if (shace.accessToken.expiration < now) {
-                    // TODO: handle expired token
+                    // Expired token: request a new one
+                    shace.accessToken = false;
+                    shace.requestAccessToken().then(function () {
+                        deferred.resolve();
+                    });
                 } else {
                     deferred.resolve();
                 }
@@ -74,6 +78,7 @@ angular.module('shace.services', []).
                 if (shace.accessToken.type === config.accessTokenTypes.user) {
                     // If user is logged in, retrieve its infos
                     shace.retrieveUserInfos().catch(function (response) {
+                        shace.accessToken = false;
                         // If infos are not retrieved, token must be invalid.
                         // Request a new one and retry
                         shace.requestAccessToken().then(function () {
