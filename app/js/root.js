@@ -54,10 +54,10 @@ angular.module('shace').config(
             }]);
         }]);
 
-//angular.module('shace').run(['$rootScope', 'shace', function($rootScope, shace) {
-//    /* Expose some global application data to root scope */
-//    $rootScope.shace = shace;
-//    $rootScope.showLoadingIndicator = false;
-//
-//    shace.init();
-//}]);
+angular.module('shace').run(['$rootScope', 'shace', function($rootScope, shace) {
+    /* Expose some global application data to root scope */
+    $rootScope.shace = shace;
+    $rootScope.showLoadingIndicator = false;
+
+    shace.init();
+}]);
