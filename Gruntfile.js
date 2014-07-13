@@ -155,7 +155,7 @@ module.exports = function (grunt) {
 
         wiredep: {
             target: {
-                src: ['<%= project.app %>/{,partials/}{,*/}*.html'],
+                src: ['<%= project.app %>/{,partials/}{,*/}*.html']
             }
         },
 
