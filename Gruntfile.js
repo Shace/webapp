@@ -28,7 +28,7 @@ module.exports = function (grunt) {
 
         replace: {
             default: {
-                src: ['<%= project.dist %>/scripts/*.js'],
+                src: ['<%= project.dist %>/js/*.js'],
                 overwrite: true,
                 replacements: [{
                     from: 'localhost:9000',
@@ -45,7 +45,7 @@ module.exports = function (grunt) {
                     }
                 },
                 src: '<%= project.app %>/js/app.js',
-                dest: '.tmp/scripts/combined-scripts.js'
+                dest: '.tmp/js/combined-scripts.js'
             }
         },
 
@@ -160,7 +160,7 @@ module.exports = function (grunt) {
             dist: {
                 files: {
                     src: [
-                        '<%= project.dist %>/scripts/{,*/}*.js',
+                        '<%= project.dist %>/js/{,*/}*.js',
                         '<%= project.dist %>/styles/{,*/}*.css',
                         '<%= project.dist %>/img/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
                         '<%= project.dist %>/styles/fonts/*'
