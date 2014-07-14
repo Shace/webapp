@@ -137,6 +137,18 @@ angular.module('shace.controllers').
             $scope.canDeleteTag = function (tag) {
                 return Shace.access.getPermissionOnTag(tag, 'root');
             };
+            
+            $scope.hasPrevMedia = function () {
+                var currentIdx = getMediaIndex($scope.media);
+                
+                return (currentIdx !== false && currentIdx > 0);
+            };
+            
+            $scope.hasNextMedia = function () {
+                var currentIdx = getMediaIndex($scope.media);
+                
+                return (currentIdx !== false && currentIdx+1 < $scope.event.medias.length);
+            };
 
             $scope.prevMedia = function () {
                 var currentIdx = getMediaIndex($scope.media);
