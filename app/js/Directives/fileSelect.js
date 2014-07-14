@@ -4,7 +4,8 @@ angular.module('shace.directives').
     directive('fileSelect', ['$http', function($http) {
         return {
             restrict: 'E',
-            template: '<input class="file-selector-input" type="file" multiple>',
+            templateUrl: 'partials/components/file-select.html',
+            transclude: true,
             link: function (scope, element, attrs) {
                 element.find('.file-selector-input').on('change', function (event) {
                     var i, l, files = [];

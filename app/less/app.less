@@ -81,6 +81,31 @@ img {
     .btn-primary;
 }
 
+/*
+ * File input
+ */
+ 
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 999px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+ 
+
 .header {
     position: absolute;
     z-index: 1;
@@ -318,8 +343,14 @@ body.home header {
     }
 }
 
+.add-medias-btn {
+    display: block;
+    margin-top: 10px;
+}
+
 .bucket-breadcrumb {
     font-size: 15px;
+    margin-bottom: 0;
 }
 
 .event-bucket {
