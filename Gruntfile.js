@@ -1,22 +1,21 @@
 'use strict';
 
+var project = {
+    app: require('./bower.json').appPath || 'app',
+    dist: 'dist'
+};
+
 module.exports = function (grunt) {
     require('load-grunt-tasks')(grunt);
     require('time-grunt')(grunt);
 
     grunt.initConfig({
-        project: {
-            app: require('./bower.json').appPath || 'app',
-            dist: 'dist'
-        },
+        project: project,
 
         watch: {
-            js: {
-                files: ['<%= project.app %>/js/{,*/}*.js'],
-                tasks: ['newer:jshint:all'],
-                options: {
-                    livereload: true
-                }
+            neuter: {
+                files: ['<%= project.app %>/js/**/*.js'],
+                tasks: ['neuter']
             },
             less: {
                 files: ['<%= project.app %>/less/{,*/}*.less'],
@@ -24,16 +23,6 @@ module.exports = function (grunt) {
             },
             gruntfile: {
                 files: ['Gruntfile.js']
-            },
-            livereload: {
-                options: {
-                    livereload: '<%= connect.options.livereload %>'
-                },
-                files: [
-                    '<%= project.app %>/{,partials/}{,*/}*.html',
-                    '.tmp/styles/{,*/}*.css',
-                    '<%= project.app %>/img/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
-                ]
             }
         },
 
@@ -45,7 +34,19 @@ module.exports = function (grunt) {
                     from: 'localhost:9000',
                     to: grunt.option('api') || 'api.shace.io'
                 }]
-            },
+            }
+        },
+
+        neuter: {
+            app: {
+                options: {
+                    filepathTransform: function (filepath) {
+                        return project.app + '/' + filepath;
+                    }
+                },
+                src: '<%= project.app %>/js/app.js',
+                dest: '.tmp/scripts/combined-scripts.js'
+            }
         },
 
         coveralls: {
@@ -59,16 +60,11 @@ module.exports = function (grunt) {
         connect: {
             options: {
                 port: 8000,
-                hostname: '*',
-                livereload: 35729
+                hostname: '*'
             },
-            livereload: {
+            dev: {
                 options: {
-                    open: true,
-                    base: [
-                        '.tmp',
-                        '<%= project.app %>'
-                    ]
+                    base:  ['.tmp', '<%= project.app %>']
                 }
             },
             test: {
@@ -110,7 +106,7 @@ module.exports = function (grunt) {
                 options: {
                     path: '<%= project.app %>/less/{,*/}*.less',
                     compile: true,
-                    cleancss: true,
+                    cleancss: true
                 },
 
                 files: [{
@@ -232,19 +228,6 @@ module.exports = function (grunt) {
             }
         },
 
-    // Allow the use of non-minsafe AngularJS files. Automatically makes it
-    // minsafe compatible so Uglify does not destroy the ng references
-        ngmin: {
-            dist: {
-                files: [{
-                    expand: true,
-                    cwd: '.tmp/concat/scripts',
-                    src: '*.js',
-                    dest: '.tmp/concat/scripts'
-                }]
-            }
-        },
-
         // Copies remaining files to places other tasks can use
         copy: {
             dist: {
@@ -321,7 +304,8 @@ module.exports = function (grunt) {
             'wiredep',
             'concurrent:server',
             'autoprefixer',
-            'connect:livereload',
+            'neuter:app',
+            'connect:dev',
             'watch'
         ]);
     });
@@ -330,6 +314,7 @@ module.exports = function (grunt) {
         'clean:server',
         'concurrent:test',
         'autoprefixer',
+        'neuter:app',
         'connect:test',
         'karma:default'
     ]);
@@ -338,6 +323,7 @@ module.exports = function (grunt) {
         'clean:server',
         'concurrent:test',
         'autoprefixer',
+        'neuter:app',
         'connect:test',
         'karma:travis'
     ]);
@@ -347,6 +333,7 @@ module.exports = function (grunt) {
         'concurrent:test',
         'autoprefixer',
         'connect:test',
+        'neuter:app',
         'karma:coverall'
     ]);
 
@@ -355,9 +342,9 @@ module.exports = function (grunt) {
         'wiredep',
         'useminPrepare',
         'concurrent:dist',
+        'neuter:app',
         'autoprefixer',
         'concat',
-        'ngmin',
         'copy:dist',
         'cssmin',
         'uglify',
@@ -368,7 +355,7 @@ module.exports = function (grunt) {
     ]);
 
     grunt.registerTask('heroku:production', [
-        'build',
+        'build'
     ]);
 
     grunt.registerTask('travis', [

@@ -471,6 +471,54 @@ body.home header {
     position: relative;
 }
 
+.media-nav-area {
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    opacity: 1;
+    color: #fff;
+    font-size: 40px;
+    text-stroke: 2px rgba(0, 0, 0, 0.6);
+    -webkit-text-stroke: 2px rgba(0, 0, 0, 0.6);
+    opacity: 0;
+    transition: opacity .15s ease-in-out;
+    -moz-transition: opacity .15s ease-in-out;
+    -webkit-transition: opacity .15s ease-in-out;
+    
+    .fa {
+        position: absolute;
+        top: 48%;
+    }
+}
+
+.media-wrapper:hover .media-nav-area {
+    opacity: 0.3;
+    
+    &:hover {
+        color: #fff;
+        opacity: 0.9;
+    }
+}
+
+.media-nav-prev {
+    right: 50%;
+    
+    .fa {
+        left: 10px;
+    }
+}
+
+.media-nav-next {
+    left: 50%;
+    
+    .fa {
+        right: 10px;
+    }
+}
+
 .media-caption {
     background-color: rgba(0.0, 0.0, 0.0, 0.8);
     color: #DDDDDD;
@@ -480,9 +528,9 @@ body.home header {
     bottom: 0;
     width: 100%;
     opacity: 0;
-    transition: opacity .35s ease-in-out;
-    -moz-transition: opacity .35s ease-in-out;
-    -webkit-transition: opacity .35s ease-in-out;
+    transition: opacity .15s ease-in-out;
+    -moz-transition: opacity .15s ease-in-out;
+    -webkit-transition: opacity .15s ease-in-out;
     
     .media-wrapper:hover & {
         opacity: 1.0;
@@ -526,6 +574,10 @@ body.home header {
     color: #DDDDDD;
     position: absolute;
     z-index: 15;
+    
+    .fa {
+        font-size: 1.5em;
+    }
 }
 
 .media-exit:hover {
