@@ -6,7 +6,9 @@ angular.module('shace.services').
 
             var Uploader = {
                 queue: [],
-                maxSimultaneousUpload: 10
+                maxSimultaneousUpload: 10,
+                onUploadDone: angular.noop,
+                onUploadProgress: angular.noop
             };
 
             /*
@@ -135,7 +137,7 @@ angular.module('shace.services').
                 file.progress = (event.loaded / event.total)*100;
 
                 // Emit event
-                $rootScope.$emit('FileUploadProgress', file, event);
+                Uploader.onUploadProgress(file, event);
             }
 
             /*
@@ -151,7 +153,7 @@ angular.module('shace.services').
                 (file.callback || angular.noop)();
 
                 // Emit event
-                $rootScope.$emit('FileUploadDone', file, event);
+                Uploader.onUploadDone(file, event);
 
                 queueChanged();
             }
