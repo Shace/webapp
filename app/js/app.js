@@ -12,7 +12,7 @@ angular.module('shace', [
     'shace.resources',
     'shace.services',
     'shace.directives',
-    'shace.controllers'    
+    'shace.controllers'
 ]);
 
 angular.module('shace.filters', []);
@@ -21,9 +21,9 @@ angular.module('shace.services', ['shace.resources']);
 angular.module('shace.directives', []);
 angular.module('shace.controllers', ['shace.resources', 'shace.services']);
 
-require('js/app/*');
-require('js/resources/*');
-require('js/filters/*');
-require('js/directives/*');
-require('js/services/*');
-require('js/controllers/*');
+require('js/App/*');
+require('js/Resources/*');
+require('js/Filters/*');
+require('js/Directives/*');
+require('js/Services/*');
+require('js/Controllers/*');
