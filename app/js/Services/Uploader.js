@@ -77,7 +77,7 @@ angular.module('shace.services').
                     url,
                     xhr = new XMLHttpRequest(),
                     formData = new FormData()
-                    ;
+                ;
 
                 // Only handle medias at this time
                 if (file.media) {
@@ -99,8 +99,9 @@ angular.module('shace.services').
                     });
                 }, false);
                 xhr.upload.addEventListener('load', function (event) {
+                    // Update progress: upload is not done yet, waiting for server response
                     $rootScope.$apply(function() {
-                        uploadDone(file, event);
+                        uploadProgress(file, event);
                     });
                 }, false);
                 xhr.upload.addEventListener('error', function (event) {
@@ -109,6 +110,11 @@ angular.module('shace.services').
                     });
                 }, false);
                 xhr.upload.addEventListener('abort', function (event) {
+                    $rootScope.$apply(function() {
+                        uploadDone(file, event);
+                    });
+                }, false);
+                xhr.addEventListener('load', function (event) {
                     $rootScope.$apply(function() {
                         uploadDone(file, event);
                     });
@@ -139,7 +145,7 @@ angular.module('shace.services').
                 // Update file infos
                 file.isUploading = false;
                 file.done = true;
-                file.progress = (event.loaded / event.total)*100;
+                file.progress = 100;
 
                 // Execute file-specific callback
                 (file.callback || angular.noop)();

@@ -1,14 +1,26 @@
 <div class="container">
     <div class="row">
-        <h2>Upload</h2>
-        <p ng-hide="uploadDone">Upload in progress, please do not leave page...</p>
+        <h2>
+            <span ng-hide="uploadDone">Upload in progress, please do not leave page...</span>
+            <span ng-show="uploadDone">Upload done !</span>
+        </h2>
         <p ng-show="uploadDone">
-            Upload done, <a ui-sref="event.medias.rootBucket">click here</a> to go back to event page.
+            <a class="btn btn-primary" ui-sref="event.medias.rootBucket">Back to event</a>
         </p>
     </div>
-    <div class="row">
-        <div class="col-md-3" ng-repeat="file in queue">
-            <progressbar class="progress-striped" value="file.progress" ng-class="{active: file.progress < 100}"></progressbar>
+</div>
+
+<div class="container" ng-init="filesRows = (queue | splitArray: 4)">
+    <div class="row file-upload-row" ng-repeat="fileRow in filesRows">
+        <div class="file-upload-container" ng-repeat="file in fileRow">
+            <div class="file-upload-wrapper">
+                <div class="file-upload-progress" ng-show="!file.media.image.small">
+                    <progressbar class="file-upload-progressbar progress-striped" value="file.progress" ng-class="{active: file.isUploading}"></progressbar>
+                </div>
+                <div class="file-upload-thumbnail" ng-show="file.media.image.small">
+                    <img ng-src="{{file.media.image.small}}">
+                </div>
+            </div>            
         </div>
     </div>
 </div>
