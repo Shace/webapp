@@ -6,4 +6,4 @@ before_script:
     - 'bower install'
 script:
     - grunt travis
-    - cat coverage/PhantomJS*/lcov.info | node_modules/coveralls/bin/coveralls.js || true
+    # - cat coverage/PhantomJS*/lcov.info | node_modules/coveralls/bin/coveralls.js || true
