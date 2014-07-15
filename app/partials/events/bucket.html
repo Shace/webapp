@@ -1,6 +1,10 @@
 <div class="container">
-    <div class="row">
+    <file-select class="add-medias-btn" select="uploadMedias(files)">Add medias</file-select>
+    <div class="row">    
         <ol class="breadcrumb bucket-breadcrumb">
+            <li>
+                <i class="fa fa-calendar"></i>
+            </li>
             <li ng-repeat="node in breadcrumb">
                 <a ng-if="node.id != bucket.id" ui-sref="event.medias.bucket({bucketId: node.id})">
                     <date-interval begin="node.first" end="node.last" full="true">
