@@ -28,6 +28,61 @@
 
         <!-- Page content -->
         <div class="content" ui-view></div>
+        <div ng-show="isHome">
+            <hr>
+            <div id="more" class="container">
+                <div class="row row-centered">
+                    <div class="col-xs-6 col-centered">
+                        <div class="pull-left">
+                            <h2>The magic token<br />
+                            <small>Each of your events is represented by one simple token. 
+                            Choose one that fits the best with your awesome experience.
+                            Then, just share it with your friends ! :skiing, :beach, :yellowstone, ...</small></h2>
+                        </div>
+                    </div>
+                    <div class="col-xs-3 col-centered">
+                        <img class="pull-left home-image" src="img/magic.svg">
+                    </div>
+                </div>
+                <div class="row row-centered">
+                    <div class="col-xs-3 col-centered">
+                        <img class="pull-left home-image" src="img/security.svg">
+                    </div>
+                    <div class="col-xs-6 col-centered">
+                        <div class="pull-left">
+                            <h2>Full control<br />
+                            <small>We don't want to share our family souvenirs with everyone. 
+                            Shace enables you to choose the perfect level of security for each event. Regain control !</small></h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="row row-centered">
+                    <div class="col-xs-6 col-centered">
+                        <div class="pull-left">
+                            <h2>Simplicity<br />
+                            <small>We want you to spend time taking photos, not sharing them !
+                            Send, share, retrieve, comment, tag, like. 
+                            Everything is easy and fast. Your family and friends will enjoy it !</small></h2>
+                        </div>
+                    </div>
+                    <div class="col-xs-3 col-centered">
+                        <img class="pull-left home-image" src="img/photo.svg">
+                    </div>
+                </div>
+                <div class="row row-centered">
+                    <div class="col-xs-3 col-centered">
+                        <img class="pull-left home-image" src="img/camera.svg">
+                    </div>
+                    <div class="col-xs-6 col-centered">
+                        <div class="pull-left">
+                            <h2>Everywhere with everyone<br />
+                            <small>With Shace you are able to share all you photos. From old cameras to moders smartphones.
+                            Picture-taking evolves and we want to speed up this revolution. Be part of it by using Shace !</small></h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         
         <!-- Global notifications -->
         <ng-include src="'partials/layout/notifications.html'"></ng-include>
