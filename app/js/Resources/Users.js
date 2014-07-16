@@ -3,9 +3,9 @@
 /* Resources */
 
 angular.module('shace.resources').
-    factory('Users', ['$resource', 'config', function ($resource, config) {
+    factory('Users', ['$resource', 'Config', function ($resource, Config) {
 
-        return $resource(config.apiAccessPoint+'/users/:id', {
+        return $resource(Config.apiAccessPoint+'/users/:id', {
             /* Default params */
             id: '@id'
         }, {
@@ -15,7 +15,7 @@ angular.module('shace.resources').
              * Get currently authentified user
              */
             me: {
-                url: config.apiAccessPoint+'/users/me',
+                url: Config.apiAccessPoint+'/users/me',
                 method: 'GET'
             },
             update: {method: 'PUT'}

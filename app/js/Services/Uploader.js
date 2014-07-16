@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('shace.services').
-    factory('Uploader', ['$q', '$rootScope', 'Shace', 'config', 'Medias',
-        function ($q, $rootScope, Shace, config, Medias) {
+    factory('Uploader', ['$q', '$rootScope', 'Shace', 'Config', 'Medias',
+        function ($q, $rootScope, Shace, Config, Medias) {
 
             var Uploader = {
                 queue: [],

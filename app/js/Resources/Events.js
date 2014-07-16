@@ -1,9 +1,9 @@
 'use strict';
 
 angular.module('shace.resources').
-    factory('Events', ['$resource', 'config', function ($resource, config) {
+    factory('Events', ['$resource', 'Config', function ($resource, Config) {
 
-    return $resource(config.apiAccessPoint+'/events/:token', {
+    return $resource(Config.apiAccessPoint+'/events/:token', {
         /* Default params */
     }, {
         /* Custom actions */
@@ -13,8 +13,25 @@ angular.module('shace.resources').
          * Requests access to an event
          */
         access: {
-            url: config.apiAccessPoint+'/events/:token/access',
+            url: Config.apiAccessPoint+'/events/:token/access',
             method: 'POST'
-        }
+        },
+        
+        /*
+         * Get users that can access an event
+         */
+         users: {
+             url: Config.apiAccessPoint+'/events/:token/users',
+             method: 'GET'
+         },
+         
+         /*
+          * Add an user access to the event
+          */
+         addUser: {
+             url: Config.apiAccessPoint+'/events/:token/users',
+             method: 'PUT',
+             isArray: true
+         }
     });
 }]);

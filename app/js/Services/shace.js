@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('shace.services')
-    .factory('Shace', ['$q', '$cookieStore', 'config', 'AccessToken', 'Users',
-        function ($q, $cookieStore, config, AccessToken, Users) {
+    .factory('Shace', ['$q', '$cookieStore', 'Config', 'AccessToken', 'Users',
+        function ($q, $cookieStore, Config, AccessToken, Users) {
 
             var Shace = {
                 accessToken: false,
@@ -44,7 +44,7 @@ angular.module('shace.services')
 
                     return deferred.promise;
                 }()).then(function () {
-                        if (Shace.accessToken.type === config.accessTokenTypes.user) {
+                        if (Shace.accessToken.type === Config.accessTokenTypes.user) {
                             // If user is logged in, retrieve its infos
                             Shace.retrieveUserInfos().catch(function (response) {
                                 Shace.accessToken = false;
@@ -164,21 +164,21 @@ angular.module('shace.services')
              * Get permissions on an event for the current user
              */
             Shace.access.getPermissionOnEvent = function (event, permission) {
-                return config.permissionsLevels[event.permission.toLowerCase()] >= config.permissionsLevels[permission.toLowerCase()];
+                return Config.permissionsLevels[event.permission.toLowerCase()] >= Config.permissionsLevels[permission.toLowerCase()];
             };
 
             /*
              * Get permissions on a tag for the current user
              */
             Shace.access.getPermissionOnTag = function (tag, permission) {
-                return config.permissionsLevels[tag.permission.toLowerCase()] >= config.permissionsLevels[permission.toLowerCase()];
+                return Config.permissionsLevels[tag.permission.toLowerCase()] >= Config.permissionsLevels[permission.toLowerCase()];
             };
 
             /*
              * Get permissions on a comment for the current user
              */
             Shace.access.getPermissionOnComment = function (comment, permission) {
-                return config.permissionsLevels[comment.permission.toLowerCase()] >= config.permissionsLevels[permission.toLowerCase()];
+                return Config.permissionsLevels[comment.permission.toLowerCase()] >= Config.permissionsLevels[permission.toLowerCase()];
             };
 
             // Private methods

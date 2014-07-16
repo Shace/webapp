@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('shace.resources').
-    factory('Comments', ['$resource', 'config', function ($resource, config) {
-    var Comments = $resource(config.apiAccessPoint+'/events/:eventToken/medias/:mediaId/comments/:id', {
+    factory('Comments', ['$resource', 'Config', function ($resource, Config) {
+    var Comments = $resource(Config.apiAccessPoint+'/events/:eventToken/medias/:mediaId/comments/:id', {
         /* Default params */
     }, {
         /* Custom actions */
@@ -10,7 +10,7 @@ angular.module('shace.resources').
     });
 
     Comments.getUploadUrl = function (comment) {
-        return config.apiAccessPoint+'/events/'+comment.media.event+'/medias/'+comment.media.id+'/comments/'+comment.id;
+        return Config.apiAccessPoint+'/events/'+comment.media.event+'/medias/'+comment.media.id+'/comments/'+comment.id;
     };
 
     return Comments;

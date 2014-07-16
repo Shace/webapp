@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('shace.services').
-    value('version', '0.1').
-    value('config', {
+    value('Version', '0.1').
+    value('Config', {
         apiAccessPoint: '//localhost:9000',
         accessTokenTypes: {
             guest   : 'guest',

@@ -1,9 +1,9 @@
 'use strict';
 
 angular.module('shace.resources').
-    factory('Medias', ['$resource', 'config', function ($resource, config) {
+    factory('Medias', ['$resource', 'Config', function ($resource, Config) {
 
-        var Medias = $resource(config.apiAccessPoint+'/events/:eventToken/medias/:id', {
+        var Medias = $resource(Config.apiAccessPoint+'/events/:eventToken/medias/:id', {
             /* Default params */
         }, {
             /* Custom actions */
@@ -11,7 +11,7 @@ angular.module('shace.resources').
         });
 
         Medias.getUploadUrl = function (media) {
-            return config.apiAccessPoint+'/events/'+media.event+'/medias/'+media.id;
+            return Config.apiAccessPoint+'/events/'+media.event+'/medias/'+media.id;
         };
 
         return Medias;
