@@ -84,6 +84,21 @@
             </div>
         </div>
         
+		<div class="beta-vignette">
+			<div class="beta-icon pull-left">Beta<i class="fa fa-angle-double-right"></i></div>
+			<div class="beta-infos pull-left">
+				<a ng-hide="shace.user" href="#/">
+					<i class="fa fa-user"></i>
+					Request a beta account
+				</a>
+				<a ng-show="shace.user" href="#/">
+					<i class="fa fa-user"></i>
+					Invite some friends
+				</a>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+		
         <!-- Global notifications -->
         <ng-include src="'partials/layout/notifications.html'"></ng-include>
 

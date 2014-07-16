@@ -28,6 +28,47 @@ img {
     max-height: 100%;
 }
 
+.beta-vignette {
+	position: fixed;
+	bottom: 50px;
+	right: -205px;
+	line-height: 48px;
+	color: #FFFFFF;
+	transition: right 0.5s;
+
+	&:hover {
+		right: 0px;
+	}
+
+	.beta-icon {
+		background-color: #9AC73B;
+		border-radius: 24px 0px 0px 24px;
+		padding-left: 10px;
+		font-weight: bold;
+		
+		i {
+			padding: 0px 8px;
+			font-size: 20px;
+		}
+
+	}
+	
+	.beta-infos {
+		background-color: #9AC73B;
+		width: 205px;
+		padding: 0px 10px;
+
+		a {
+			color: #FAFAFA;
+			font-weight: bold;
+
+			&:hover {
+				color: #FFF;
+			}			
+		}
+	}
+}
+
 .loading-indicator {
     width: 150px;
     background: rgba(0, 0, 0, 0.8);
