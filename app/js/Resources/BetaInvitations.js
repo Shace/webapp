@@ -5,7 +5,15 @@ angular.module('shace.resources').
     var BetaInvitations = $resource(Config.apiAccessPoint+'/beta/invitations', {
         /* Default params */
     }, {
-
+        pending: {
+            url: Config.apiAccessPoint+'/beta/administration',
+            method: 'GET'
+        },
+        
+        accept: {
+            url: Config.apiAccessPoint+'/beta/administration',
+            method: 'PUT'
+        }
     });
 
     return BetaInvitations;

@@ -1,0 +1,28 @@
+<div class="container">
+    <h2>Beta invitations admin</h2>
+    <table class="table table-striped table-hover" style="background:#fff">
+        <thead>
+            <tr>
+                <th style="width:30px">#</th>
+                <th>Email</th>
+                <th style="width:85px"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="invit in invitations.processing">
+                <td>{{ invit.id }}</td>
+                <td>{{ invit.email }}</td>
+                <td><a ng-click="acceptInvit(invit)" class="btn btn-success">Accept</a></td>
+            </tr>
+        </tbody>
+    </table>    
+    <form class="form-inline" role="form" ng-show="betaInvitations.remaining">
+        <div class="form-group beta-email">
+            <div class="input-group">
+                <div class="input-group-addon">@</div>
+                <input class="form-control" type="email" placeholder="Enter email" ng-model="email" id="email" auto-fill-sync required>
+            </div>
+        </div>
+        <button ng-click="addBeta()" type="submit" class="btn btn-primary">Add</button>
+    </form>
+</div>
