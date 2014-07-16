@@ -1,0 +1,32 @@
+<div class="container">
+    <h2>Invit some friends to join the beta</h2>
+    <table class="table" ng-show="betaInvitations.invited.length">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Email</th>
+                <th>Has accepted</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="invit in betaInvitations.invited" ng-class="invit.hasAccepted ? 'success' : 'danger'">
+                <td>{{ $index + 1 }}</td>
+                <td>{{ invit.email }}</td>
+                <td>{{ invit.hasAccepted ? 'Yes' : 'No'}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <h4 ng-hide="betaInvitations.invited.length">Start inviting some friends now !</h4>
+    
+    <form class="form-inline" role="form" ng-show="betaInvitations.remaining">
+        <div class="form-group beta-email">
+            <div class="input-group">
+                <div class="input-group-addon">@</div>
+                <input class="form-control" type="email" placeholder="Enter email" ng-model="email" id="email" auto-fill-sync required>
+            </div>
+        </div>
+        <button ng-click="addBeta()" type="submit" class="btn btn-primary">Add</button>
+    </form>
+    <h4 ng-hide="betaInvitations.remaining">You have been too generous...</h4>
+    <h5>You can invit {{betaInvitations.remaining}} more.</h5>
+</div>

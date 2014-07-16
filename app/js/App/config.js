@@ -18,6 +18,7 @@ angular.module('shace').config(
                 .state('event.medias.rootBucket', { url: '', templateUrl: 'partials/events/bucket.html', controller: 'EventMediasBucketController'})
                 .state('event.medias.bucket', { url: '/bucket/:bucketId', templateUrl: 'partials/events/bucket.html', controller: 'EventMediasBucketController'})
                 .state('event.media', { url: '/medias/:id', templateUrl: 'partials/events/media.html', controller: 'MediaController'})
+                .state('invits', { url: '/invits', templateUrl: 'partials/invits/invits.html', controller: 'InvitsController'})
             ;
 
             // Config compile service to allow for blob urls
