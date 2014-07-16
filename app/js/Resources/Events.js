@@ -26,12 +26,20 @@ angular.module('shace.resources').
          },
          
          /*
-          * Add an user access to the event
+          * Add a user access to the event
           */
-         addUser: {
+         addUsers: {
              url: Config.apiAccessPoint+'/events/:token/users',
              method: 'PUT',
              isArray: true
+         },
+         
+         /*
+          * Remove a user access to the event
+          */
+         removeUser: {
+             url: Config.apiAccessPoint+'/events/:token/users/:user',
+             method: 'DELETE'
          }
     });
 }]);

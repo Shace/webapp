@@ -2,8 +2,8 @@
 
 angular.module('shace.controllers').
     controller('EventPrivacyOptionsController',
-    ['$scope', '$state', '$modalInstance', 'Notifications',
-        function ($scope, $state, $modalInstance, Notifications) {
+    ['$scope', '$state', '$modalInstance', 'Shace', 'Config', 'Notifications', 'Events',
+        function ($scope, $state, $modalInstance, Shace, Config, Notifications, Events) {
             $scope.view = 'modes';
 
             $scope.privacy = $scope.event.privacy;
@@ -14,7 +14,8 @@ angular.module('shace.controllers').
                     showToken: false,
                     token: '',
                     password: '',
-                    passwordConfirm: ''
+                    passwordConfirm: '',
+                    email: ''
                 };
             }
 
@@ -31,6 +32,54 @@ angular.module('shace.controllers').
                 }
                 $scope.view = 'form-'+privacy;
             };
+            
+            $scope.cancel = function () {
+                if ($scope.view === 'modes') {
+                    $modalInstance.close();
+                } else {
+                    $scope.view = 'modes';
+                    $scope.privacy = $scope.event.privacy;
+                }
+            };
+            
+            $scope.openPrivateOptions = function () {
+                initForm();
+                $scope.eventUsers = Events.users({token: $scope.event.token});
+                $scope.view = 'private-options';
+            };
+            
+            $scope.isNotCurrentUser = function (user) {
+                return user.user != Shace.user.id;
+            };
+            
+            $scope.removeUserPermission = function (user) {
+                $scope.form.loading = true;
+                Events.removeUser({token: $scope.event.token, user: user.user}, function (res) {
+                    $scope.form.loading = false;
+                    $scope.eventUsers = Events.users({token: $scope.event.token});
+                });
+            };
+            
+            $scope.addUser = function () {
+                if (!$scope.form.email) {
+                    $scope.form.emailInvalid = true;
+                    return;
+                }
+                // Add user permission
+                $scope.form.loading = true;
+                Events.addUsers({token: $scope.event.token}, {
+                    permissions: [
+                        {
+                            email: $scope.form.email,
+                            permission: 'ADMINISTRATE'
+                        }
+                    ]
+                }, function (res) {
+                    $scope.form.loading = false;
+                    $scope.form.email = '';
+                    $scope.eventUsers = Events.users({token: $scope.event.token});
+                });
+            };
 
             $scope.submitForm = function () {
                 var
@@ -41,12 +90,17 @@ angular.module('shace.controllers').
                 if ($scope.view === 'modes') {
                     return;
                 }
+                
+                if ($scope.view === 'private-options') {
+                    $scope.addUser();
+                    return;
+                }
 
                 if (($scope.privacy === 'public' || $scope.privacy === 'protected') && $scope.event.privacy === 'private') {
-                    $scope.tokenInvalid = false;
+                    $scope.form.tokenInvalid = false;
 
                     if (!$scope.form.token) {
-                        $scope.tokenInvalid = true;
+                        $scope.form.tokenInvalid = true;
                         return;
                     }
                     $scope.event.token = $scope.form.token;
@@ -54,15 +108,15 @@ angular.module('shace.controllers').
                 }
 
                 if ($scope.privacy === 'protected') {
-                    $scope.passwordInvalid = false;
+                    $scope.form.passwordInvalid = false;
                     $scope.passwordMatchInvalid = false;
 
                     if (!$scope.form.password) {
-                        $scope.passwordInvalid = true;
+                        $scope.form.passwordInvalid = true;
                         return;
                     }
                     else if ($scope.form.password !== $scope.form.passwordConfirm) {
-                        $scope.passwordMatchInvalid = true;
+                        $scope.form.passwordMatchInvalid = true;
                         return;
                     }
                     $scope.event.password = $scope.form.password;

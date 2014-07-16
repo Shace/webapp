@@ -12,4 +12,5 @@
     <input type="radio" class="privacy-mode-input" ng-checked="privacy == 'private'">
     <label class="privacy-mode-label">Private</label>
     <p class="privacy-mode-desc">Only a restricted set of people can see the event</p>
+    <a ng-show="event.privacy == 'private'" ng-click="openPrivateOptions()" class="config-btn"><i class="fa fa-cog"></i></a>
 </div>

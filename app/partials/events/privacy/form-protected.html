@@ -1,15 +1,15 @@
 <div class="privacy-form">
-    <h2>Protected</h2>
+    <h2 class="privacy-form-title">Protected</h2>
     <p>By using the protected privacy mode, you will modify the privacy of your event so that users will need a password to access your event in addition to its token.</p>
-    <div class="form-group" ng-class="{'has-error': tokenInvalid}" ng-show="form.showToken">
+    <div class="form-group" ng-class="{'has-error': form.tokenInvalid}" ng-show="form.showToken">
         <label for="privacy-password">Token</label>
         <input type="text" class="form-control" id="privacy-password" ng-model="form.token" required>
     </div>    
-    <div class="form-group" ng-class="{'has-error': passwordInvalid}">
+    <div class="form-group" ng-class="{'has-error': form.passwordInvalid}">
         <label for="privacy-password">Password</label>
         <input type="password" class="form-control" id="privacy-password" ng-model="form.password" required>
     </div>
-    <div class="form-group" ng-class="{'has-error': passwordMatchInvalid}">
+    <div class="form-group" ng-class="{'has-error': form.passwordMatchInvalid}">
         <label for="privacy-password-confirm">Confirm password</label>
         <input type="password" class="form-control" id="privacy-password-confirm" ng-model="form.passwordConfirm" required>
         <span ng-show="passwordMatchInvalid" class="help-block">Password doesn't match.</span>

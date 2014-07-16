@@ -432,6 +432,7 @@ body.home header {
     /* Mode selection view */
     
     .privacy-mode {
+        position: relative;
         padding: 20px 25px;
         margin: 10px;
         background: #eee;
@@ -441,6 +442,15 @@ body.home header {
         &.selected {
             margin: 9px;
             border: 1px solid #CECECE;
+        }
+        
+        .config-btn {
+            .btn;
+            .btn-sm;
+            .btn-default;
+            position: absolute;
+            top: 10px;
+            right: 10px;
         }
     }
     
@@ -487,7 +497,27 @@ body.home header {
     /* Mode form view */
     
     .privacy-form {
-        padding: 10px;
+        padding: 10px 10px 0px 10px;
+    }
+    
+    .privacy-form-title {
+        margin: 0;
+    }
+    
+    /*
+     * Permissions options view
+     */
+    
+    .permissions-table {
+        margin-bottom: 0;
+    }
+    
+    .permissions-table-user {
+        vertical-align: middle;
+    }
+    
+    .permissions-table-action {
+        width: 45px;
     }
 }
 
