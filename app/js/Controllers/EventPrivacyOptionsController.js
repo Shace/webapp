@@ -2,11 +2,8 @@
 
 angular.module('shace.controllers').
     controller('EventPrivacyOptionsController',
-    ['$scope', '$state', '$modalInstance', 'Shace', 'Config', 'Notifications', 'Events',
-        function ($scope, $state, $modalInstance, Shace, Config, Notifications, Events) {
-            $scope.view = 'modes';
-
-            $scope.privacy = $scope.event.privacy;
+    ['$scope', '$rootScope', '$state', '$modalInstance', 'Shace', 'Config', 'Notifications', 'Events',
+        function ($scope, $rootScope, $state, $modalInstance, Shace, Config, Notifications, Events) {
 
             function initForm() {
                 $scope.form = {
@@ -18,8 +15,6 @@ angular.module('shace.controllers').
                     email: ''
                 };
             }
-
-            initForm();
 
             $scope.selectPrivacy = function (privacy) {
                 $scope.privacy = privacy;
@@ -122,6 +117,7 @@ angular.module('shace.controllers').
                     $scope.event.password = $scope.form.password;
                 } else if ($scope.privacy === 'private') {
                     tokenChanged = true;
+                    $rootScope.onLoadAction = 'openPrivateOptions';
                 }
 
                 $scope.event.privacy = $scope.privacy;
@@ -141,5 +137,16 @@ angular.module('shace.controllers').
                     $scope.event = eventCopy;
                 });
             };
+            
+            // Init
+            $scope.view = 'modes';
+            $scope.privacy = $scope.event.privacy;
+            
+            initForm();
+            
+            if ($rootScope.onLoadAction == 'openPrivateOptions') {
+                $scope.openPrivateOptions();
+                $rootScope.onLoadAction = false;
+            }
 
         }]);
