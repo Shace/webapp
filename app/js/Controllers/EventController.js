@@ -37,6 +37,14 @@ angular.module('shace.controllers').
                     scope: $scope
                 });
             };
+            
+            $scope.openSharingOptions = function () {
+                $modal.open({
+                    controller: 'EventSharingController',
+                    templateUrl: '../../partials/events/sharing.html',
+                    scope: $scope
+                });
+            };
 
             $scope.loadEvent().then(function () {
                 if ($rootScope.onLoadAction === 'openPrivateOptions') {
