@@ -31,13 +31,14 @@ img {
 .beta-vignette {
 	position: fixed;
 	bottom: 50px;
-	right: -205px;
+	right: 0px;
 	line-height: 48px;
 	color: #FFFFFF;
-	transition: right 0.5s;
 
 	&:hover {
-		right: 0px;
+		.beta-infos {
+			max-width: 220px;
+		}
 	}
 
 	.beta-icon {
@@ -54,13 +55,18 @@ img {
 	}
 	
 	.beta-infos {
+		transition: max-width 0.6s;
 		background-color: #9AC73B;
-		width: 205px;
-		padding: 0px 10px;
+		max-width: 0;
+		padding: 0;
+		height: 48px;
 
 		a {
+			padding-right: 10px;
 			color: #FAFAFA;
 			font-weight: bold;
+			word-wrap: break-word;
+			word-break: break-all;
 
 			&:hover {
 				color: #FFF;
