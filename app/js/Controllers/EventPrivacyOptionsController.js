@@ -79,8 +79,9 @@ angular.module('shace.controllers').
             $scope.submitForm = function () {
                 var
                     eventCopy = angular.copy($scope.event),
-                    tokenChanged = false
-                    ;
+                    tokenChanged = false,
+                    event
+                ;
 
                 if ($scope.view === 'modes') {
                     return;
@@ -123,7 +124,11 @@ angular.module('shace.controllers').
                 $scope.event.privacy = $scope.privacy;
 
                 $scope.form.loading = true;
-                $scope.event.$update({token: eventCopy.token}).then(function(response){
+                // Do not send all event data...
+                event = $scope.event;
+                event.bucket = undefined;
+                event.medias = undefined;
+                event.$update({token: eventCopy.token}).then(function(response){
                     $scope.form.loading = false;
                     $scope.view = 'modes';
                     Notifications.notifySuccess('Event privacy changed successfully');

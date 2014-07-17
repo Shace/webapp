@@ -25,7 +25,11 @@ angular.module('shace.controllers').
             };
 
             $scope.saveInfos = function () {
-                $scope.event.$update({token: $scope.event.token}).then(function(){}, function (response) {
+                var event = angular.copy($scope.event);
+                // Do not send all event data...
+                event.bucket = undefined;
+                event.medias = undefined;
+                event.$update({token: event.token}).then(function(){}, function (response) {
                     Notifications.notifyError(response.data);
                 });
             };
