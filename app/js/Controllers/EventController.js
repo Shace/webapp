@@ -33,7 +33,7 @@ angular.module('shace.controllers').
             $scope.openPrivacyOptions = function () {
                 $modal.open({
                     controller: 'EventPrivacyOptionsController',
-                    templateUrl: '../../partials/events/privacy/modal.html',
+                    templateUrl: '../../partials/events/privacy-modal.html',
                     scope: $scope
                 });
             };
@@ -48,11 +48,7 @@ angular.module('shace.controllers').
 
             $scope.loadEvent().then(function () {
                 if ($rootScope.onLoadAction === 'openPrivateOptions') {
-                    $modal.open({
-                        controller: 'EventPrivacyOptionsController',
-                        templateUrl: '../../partials/events/privacy/modal.html',
-                        scope: $scope
-                    });
+                    $scope.openPrivacyOptions();
                 }
             });
         }]);
