@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('shace.controllers').controller('HomeController',
-    ['$scope', '$q', '$state', '$modal', '$location', '$anchorScroll', 'Notifications', 'Events',
-        function ($scope, $q, $state, $modal, $location, $anchorScroll, Notifications, Events) {
+    ['$scope', '$q', '$state', '$modal', '$location', '$document', 'Notifications', 'Events',
+        function ($scope, $q, $state, $modal, $location, $document, Notifications, Events) {
 
             /*
              * Return auto-completed actions for input token
@@ -113,12 +113,8 @@ angular.module('shace.controllers').controller('HomeController',
             };
             
             $scope.gotoBottom = function() {
-                // set the location.hash to the id of
-                // the element you wish to scroll to.
-                $location.hash('more');
-        
-                // call $anchorScroll()
-                $anchorScroll();
+                var element = angular.element(document.getElementById('more'));
+                $document.scrollToElement(element, 0, 700);
             };
             
         }]);
