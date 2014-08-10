@@ -59,7 +59,6 @@ angular.module('shace.services')
                         // Get user language
                         if (Shace.lang === undefined) {
                             if (Shace.accessToken.lang === undefined || Shace.accessToken.lang === "none" || Shace.accessToken.lang === null) {
-                                    $translate.use($translate.use().substring(0, 2));
                                     Shace.lang = $translate.use();
                                     Shace.accessToken.lang = $translate.use();
                                     Shace.storeAccessToken();
