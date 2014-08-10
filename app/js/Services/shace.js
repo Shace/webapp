@@ -141,6 +141,7 @@ angular.module('shace.services')
                 Shace.accessToken = false;
                 Shace.user = false;
                 Shace.requestAccessToken();
+                removeAccessToken();
             };
 
             /*
@@ -222,10 +223,17 @@ angular.module('shace.services')
             }
 
             /*
-             * Store the user access token in a persistant store (cookies)
+             * Store the user access token in a persistent store (cookies)
              */
             Shace.storeAccessToken = function () {
                 $cookieStore.put('shace_access_token', Shace.accessToken);
+            }
+
+            /*
+             * Remove the user access token from the cookies
+             */
+            function removeAccessToken () {
+                $cookieStore.remove('shace_access_token');
             }
 
             return Shace;
