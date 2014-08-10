@@ -8,6 +8,7 @@ angular.module('shace', [
     'ui.router',
     'ui.bootstrap',
     'ngTagsInput',
+    'pascalprecht.translate',
     'shace.filters',
     'shace.resources',
     'shace.services',

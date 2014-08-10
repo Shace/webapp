@@ -1,20 +1,20 @@
 <div class="event-header">
     <div class="container">
         <div class="event-infos">
-            <h1 class="event-name"><editable model="event.name" on-edit="saveInfos()" enabled="canEditInfos()" placeholder="Enter event name..."></editable></h1>
-            <p class="event-description"><editable model="event.description" on-edit="saveInfos()" enabled="canEditInfos()" placeholder="Enter event description..."></editable></p>
+            <h1 class="event-name"><editable model="event.name" on-edit="saveInfos()" enabled="canEditInfos()" placeholder="{{'ENTER_EVENT_NAME'|translate}}"></editable></h1>
+            <p class="event-description"><editable model="event.description" on-edit="saveInfos()" enabled="canEditInfos()" placeholder="{{'ENTER_EVENT_DESCRIPTION' | translate}}"></editable></p>
         </div>
         <div class="event-actions">
             <div class="event-action">
                 <button class="privacy-button" ng-click="openPrivacyOptions()">
                     <i class="fa fa-lock"></i>
-                    Who can see this ?
+                    {{'WHO_CAN_SEE' | translate}}
                 </button>
             </div>
             <div class="event-action">
                 <button class="share-button" ng-click="openSharingOptions()">
                     <i class="fa fa-share-square"></i>
-                    Share
+                    {{'SHARE'|translate}}
                 </button>
             </div>
         </div>

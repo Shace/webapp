@@ -1,17 +1,17 @@
 <form ng-submit="submitForm()">
     <div class="modal-header">
         <button type="button" class="close" ng-click="$close()">&times;</button>
-        <h4 class="modal-title">Privacy</h4>
+        <h4 class="modal-title">{{'PRIVACY'|translate}}</h4>
     </div>
     <div class="modal-body privacy-modal">
         <div ng-include="'partials/events/privacy-'+view+'.html'"></div>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-default" ng-click="cancel()">Cancel</button>
-        <button ng-show="view == 'modes'" type="button" class="btn btn-primary" ng-click="changePrivacy(privacy)">Change privacy</button>
+        <button type="button" class="btn btn-default" ng-click="cancel()">{{'CANCEL'|translate}}</button>
+        <button ng-show="view == 'modes'" type="button" class="btn btn-primary" ng-click="changePrivacy(privacy)">{{'CHANGE_PRIVACY'|translate}}</button>
         <button ng-show="view != 'modes'" type="submit" class="btn btn-primary" ng-click="submitForm()" ng-disabled="form.loading">
-            <span ng-show="form.loading">Loading...</span>
-            <span ng-hide="form.loading">Change privacy</span>
+            <span ng-show="form.loading">{{'LOADING'|translate}}</span>
+            <span ng-hide="form.loading">{{'CHANGE_PRIVACY'|translate}}</span>
         </button>
     </div>
 </form>

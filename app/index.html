@@ -34,10 +34,8 @@
                 <div class="row row-centered">
                     <div class="col-xs-6 col-centered">
                         <div class="pull-left">
-                            <h2>The magic token<br />
-                            <small>Each of your events is represented by one simple token. 
-                            Choose one that fits the best with your awesome experience.
-                            Then, just share it with your friends ! :skiing, :beach, :yellowstone, ...</small></h2>
+                            <h2>{{ 'MAGIC_TOKEN' | translate }}<br />
+                            <small>{{'MAGIC_TOKEN_DESC'|translate}}</small></h2>
                         </div>
                     </div>
                     <div class="col-xs-3 col-centered">
@@ -50,19 +48,16 @@
                     </div>
                     <div class="col-xs-6 col-centered">
                         <div class="pull-left">
-                            <h2>Full control<br />
-                            <small>We don't want to share our family souvenirs with everyone. 
-                            Shace enables you to choose the perfect level of security for each event. Regain control !</small></h2>
+                            <h2>{{'FULL_CONTROL'|translate}}<br />
+                            <small>{{'FULL_CONTROL_DESC'|translate}}</small></h2>
                         </div>
                     </div>
                 </div>
                 <div class="row row-centered">
                     <div class="col-xs-6 col-centered">
                         <div class="pull-left">
-                            <h2>Simplicity<br />
-                            <small>We want you to spend time taking photos, not sharing them !
-                            Send, share, retrieve, comment, tag, like. 
-                            Everything is easy and fast. Your family and friends will enjoy it !</small></h2>
+                            <h2>{{'SIMPLICITY'|translate}}<br />
+                            <small>{{'SIMPLICITY_DESC'|translate}}</small></h2>
                         </div>
                     </div>
                     <div class="col-xs-3 col-centered">
@@ -75,25 +70,28 @@
                     </div>
                     <div class="col-xs-6 col-centered">
                         <div class="pull-left">
-                            <h2>Everywhere with everyone<br />
-                            <small>With Shace you are able to share all you photos. From old cameras to moders smartphones.
-                            Picture-taking evolves and we want to speed up this revolution. Be part of it by using Shace !</small></h2>
+                            <h2>{{'EVERYWHERE'|translate}}<br />
+                            <small>{{'EVERYWHERE_DESC'|translate}}</small></h2>
                         </div>
                     </div>
+                </div>
+
+                <div class="row row-centered">
+                    <iframe width="560" height="315" src="//www.youtube.com/embed/O48B823JrLQ?rel=0&controls=0&showinfo=0" frameborder="0" allowfullscreen></iframe>
                 </div>
             </div>
         </div>
         
 		<div class="beta-vignette">
-			<div class="beta-icon pull-left">Beta<i class="fa fa-angle-double-right"></i></div>
+			<div class="beta-icon pull-left">{{'BETA'|translate}}<i class="fa fa-angle-double-right"></i></div>
 			<div class="beta-infos pull-left">
 				<a ng-hide="shace.user" href="#/login">
 					<i class="fa fa-user"></i>
-					Request a beta account
+					{{'REQUEST_BETA'|translate}}
 				</a>
 				<a ng-show="shace.user" href="#/invits">
 					<i class="fa fa-user"></i>
-					Invite some friends
+					{{'INVITE_SOME_FRIENDS'|translate}}
 				</a>
 			</div>
 			<div class="clearfix"></div>
@@ -123,6 +121,8 @@
         <script src="bower_components/angular-animate/angular-animate.js"></script>
         <script src="bower_components/autofill-event/src/autofill-event.js"></script>
         <script src="bower_components/ng-tags-input/ng-tags-input.min.js"></script>
+        <script src="bower_components/angular-translate/angular-translate.js"></script>
+        <script src="bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
         <!-- endbower -->
         <!-- endbuild -->
 

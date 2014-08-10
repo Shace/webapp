@@ -1,11 +1,11 @@
 <div class="container">
     <div class="row">
         <h2>
-            <span ng-hide="uploadDone">Upload in progress, please do not leave page...</span>
-            <span ng-show="uploadDone">Upload done !</span>
+            <span ng-hide="uploadDone">{{'UPLOAD_PROGRESS'|translate}}</span>
+            <span ng-show="uploadDone">{{'UPLOAD_DONE'|translate}}</span>
         </h2>
         <p ng-show="uploadDone">
-            <a class="btn btn-primary" ui-sref="event.medias.rootBucket">Back to event</a>
+            <a class="btn btn-primary" ui-sref="event.medias.rootBucket">{{'BACK_EVENT'|translate}}</a>
         </p>
     </div>
 </div>

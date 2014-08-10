@@ -16,18 +16,18 @@
 
     <form role="form" class="clearfix">
         <div class="form-group">
-            <label for="email">Email</label>
-            <input autofocus focus-on="state.name = 'login'" tabindex="1" ng-model="email" auto-fill-sync type="email" class="form-control" placeholder="Email" id="email" required>
+            <label for="email">{{'EMAIL'|translate}}</label>
+            <input autofocus focus-on="state.name = 'login'" tabindex="1" ng-model="email" auto-fill-sync type="email" class="form-control" placeholder="{{'EMAIL'|translate}}" id="email" required>
         </div>
         <div class="form-group">
-            <a class="forgot-password" href="#">Forgot password?</a>
-            <label for="password">Password</label>
-            <input tabindex="2" ng-model="password" auto-fill-sync type="password" class="form-control" id="password" placeholder="Password" required>
+            <a class="forgot-password" href="#">{{'FORGOT_PASSWORD'|translate}}</a>
+            <label for="password">{{'PASSWORD'|translate}}</label>
+            <input tabindex="2" ng-model="password" auto-fill-sync type="password" class="form-control" id="password" placeholder="{{'PASSWORD'|translate}}" required>
         </div>
         <div class="checkbox remember-me">
-            <label><input ng-model="rememberMe" type="checkbox">Remember me </label>
+            <label><input ng-model="rememberMe" type="checkbox">{{'REMEMBER_ME'|translate}} </label>
         </div>
-        <button tabindex="3" ng-click="login()" type="submit" class="login-btn">Log In</button>
-        <button tabindex="4" ng-click="signup()" type="submit" class="signup-btn">Join the beta</button>
+        <button tabindex="3" ng-click="login()" type="submit" class="login-btn">{{'LOG_IN'|translate}}</button>
+        <button tabindex="4" ng-click="signup()" type="submit" class="signup-btn">{{'JOIN_BETA'|translate}}</button>
     </form>
 </div>

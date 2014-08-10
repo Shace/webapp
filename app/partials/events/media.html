@@ -11,7 +11,7 @@
         </div>
     </div>
     <div class="media-information">
-        <h1 class="media-description"><editable model="media.description" on-edit="saveMediaInfos()" enabled="canEditMediaInfos()" placeholder="Enter a description for your media..."></editable></h1>
+        <h1 class="media-description"><editable model="media.description" on-edit="saveMediaInfos()" enabled="canEditMediaInfos()" placeholder="{{'ENTER_MEDIA_DESCRIPTION'|translate}}"></editable></h1>
         <div class="media-tags-container">
             <div class="media-tags media-tags-base" ng-show="!editingTags">
                 <div class="tags">
@@ -40,7 +40,7 @@
             </div>
         </div>
         <form ng-submit="sendComment(comment)">
-            <input class="comment-input" type="text" placeholder="Leave a comment..." ng-model="comment">
+            <input class="comment-input" type="text" placeholder="{{'LEAVE_COMMENT'|translate}}" ng-model="comment">
         </form>
     </div>
 </div>

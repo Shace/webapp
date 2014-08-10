@@ -5,7 +5,7 @@
             <div class="token-input-loading-indicator" ng-show="inputTokenActionLoading">
                 <i class="loading-indicator-icon fa fa-spinner fa-spin"></i>
             </div>
-            <input class="token-input" type="text" placeholder="Type in your :token and let the magic happen..." autofocus
+            <input class="token-input" type="text" placeholder="{{'TYPE_TOKEN'|translate}}" autofocus
                 ng-model="inputToken"
                 typeahead="action as action.token for action in getInputTokenActions($viewValue)"
                 typeahead-loading="inputTokenActionLoading"
@@ -14,11 +14,11 @@
             >
         </div>
         <div class="private-event-link">
-            or <a ng-click="createEvent('private')">create a private event</a>
+            {{ 'OR' | translate }} <a ng-click="createEvent('private')">{{'CREATE_PRIVATE_EVENT'|translate}}</a>
         </div>
     </form>
 </div><!-- /.container -->
 
 <div class="more">
-    <a ng-click="gotoBottom()">Learn more <span class="fa fa-chevron-down"></span></a>
+    <a ng-click="gotoBottom()">{{ 'LEARN_MORE' | translate }} <span class="fa fa-chevron-down"></span></a>
 </div>

@@ -12,6 +12,11 @@ angular.module('shace.resources').
              */
             request: { method: 'POST' },
 
+            changeLanguage: {
+                url: Config.apiAccessPoint+'/language',
+                method: 'PUT'
+            },
+
             /*
              * Update an existing access token
              */

@@ -1,6 +1,6 @@
 <div class="privacy-form">
-    <h2 class="privacy-form-title">Event access control</h2>
-    <p>People listed below have access to the event.</p>
+    <h2 class="privacy-form-title">{{'EVENT_CONTROL'|translate}}</h2>
+    <p>{{'PEOPLE_LISTED'|translate}}</p>
     <table class="table table-hover permissions-table">
         <tr ng-repeat="user in eventUsers.permissions | filter:isNotCurrentUser">
             <td class="permissions-table-user">{{user.email}}</td>
@@ -8,7 +8,7 @@
         </tr>
     </table>
     <div class="form-group" ng-class="{'has-error': form.emailInvalid}">
-        <label for="add-user-input">Add user</label>
-        <input ng-model="form.email" type="email" class="form-control" id="add-user-input" placeholder="User email" required>
+        <label for="add-user-input">{{'ADD_USER'|translate}}</label>
+        <input ng-model="form.email" type="email" class="form-control" id="add-user-input" placeholder="{{'USER_EMAIL'|translate}}" required>
     </div>
 </div>

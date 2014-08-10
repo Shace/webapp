@@ -1,17 +1,17 @@
 <form ng-submit="submit()">
     <div class="modal-header">
         <button type="button" class="close" ng-click="$close()">&times;</button>
-        <h4 class="modal-title">Access protected event</h4>
+        <h4 class="modal-title">{{'ACCESS_PROTECTED'|translate}}</h4>
     </div>
     <div class="modal-body">
         <div class="form-group" ng-class="{'has-error': passwordInvalid}">
-            <label for="password">Password</label>
+            <label for="password">{{'PASSWORD'|translate}}</label>
             <input type="password" class="form-control" id="password" ng-model="form.password" focus-on="true" required>
-            <span ng-show="passwordInvalid" class="help-block">Invalid password.</span>
+            <span ng-show="passwordInvalid" class="help-block">{{'INVALID_PASSWORD'|translate}}</span>
         </div>        
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-default" ng-click="$close()">Cancel</button>
-        <button type="submit" class="btn btn-primary">Access</button>
+        <button type="button" class="btn btn-default" ng-click="$close()">{{'CANCEL'|translate}}</button>
+        <button type="submit" class="btn btn-primary">{{'ACCESS'|translate}}</button>
     </div>
 </form>

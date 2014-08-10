@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('shace').config(
-    ['$stateProvider', '$urlRouterProvider', '$httpProvider', '$compileProvider',
-        function($stateProvider, $urlRouterProvider, $httpProvider, $compileProvider) {
+    ['$stateProvider', '$urlRouterProvider', '$httpProvider', '$compileProvider', '$translateProvider', 
+        function($stateProvider, $urlRouterProvider, $httpProvider, $compileProvider, $translateProvider) {
 
             // Config app states (routes)
             $urlRouterProvider.otherwise('/');
@@ -54,4 +54,18 @@ angular.module('shace').config(
                     }
                 };
             }]);
+
+        // Config i18n
+        /*$translateProvider.translations('en', {
+            MAGIC_TOKEN: 'The magic token',
+          })
+        .translations('fr', {
+            MAGIC_TOKEN: 'Le token magique',
+          });*/
+        $translateProvider.useStaticFilesLoader({
+          prefix: '/languages/',
+          suffix: '.json'
+        });
+        $translateProvider.preferredLanguage("en");
+ 
         }]);

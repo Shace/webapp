@@ -1,8 +1,8 @@
 <div class="privacy-form">
-    <h2 class="privacy-form-title">Public</h2>
-    <p>By using the public privacy mode, you will modify the privacy of your event so that any user will be able to access it using the token you defined.</p>
+    <h2 class="privacy-form-title">{{'PUBLIC'|translate}}</h2>
+    <p>{{'PUBLIC_NOTICE'|translate}}</p>
     <div class="form-group" ng-class="{'has-error': form.tokenInvalid}" ng-show="form.showToken">
-        <label for="privacy-password">Token</label>
+        <label for="privacy-password">{{'TOKEN'|translate}}</label>
         <input type="text" class="form-control" id="privacy-password" ng-model="form.token" required>
     </div>
 </div>

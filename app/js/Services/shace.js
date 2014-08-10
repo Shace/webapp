@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('shace.services')
-    .factory('Shace', ['$q', '$cookieStore', 'Config', 'AccessToken', 'Users',
-        function ($q, $cookieStore, Config, AccessToken, Users) {
+    .factory('Shace', ['$q', '$cookieStore', '$translate', 'Config', 'AccessToken', 'Users',
+        function ($q, $cookieStore, $translate, Config, AccessToken, Users) {
 
             var Shace = {
                 accessToken: false,
@@ -55,6 +55,22 @@ angular.module('shace.services')
                                 });
                             });
                         }
+
+                        // Get user language
+                        if (Shace.lang === undefined) {
+                            if (Shace.accessToken.lang === undefined || Shace.accessToken.lang === "none" || Shace.accessToken.lang === null) {
+                                    $translate.use($translate.use().substring(0, 2));
+                                    Shace.lang = $translate.use();
+                                    Shace.accessToken.lang = $translate.use();
+                                    Shace.storeAccessToken();
+                            } else {
+                                $translate.use(Shace.accessToken.lang);
+                                Shace.lang = Shace.accessToken.lang;
+                            }
+                        } else {
+                            Shace.accessToken.lang = Shace.lang;
+                            Shace.storeAccessToken();
+                        }
                     });
             };
 
@@ -87,9 +103,14 @@ angular.module('shace.services')
                         type: response.type,
                         autoRenew: response.auto_renew,
                         creation: response.creation,
-                        expiration: response.expiration
+                        expiration: response.expiration,
+                        lang: response.lang
                     };
-                    storeAccessToken();
+
+                    if (Shace.lang !== undefined) {
+                            Shace.accessToken.lang = Shace.lang;
+                    }
+                    Shace.storeAccessToken();
                 }
 
                 if (Shace.accessToken) {
@@ -149,6 +170,10 @@ angular.module('shace.services')
                 if (Shace.accessToken.type === 'user') {
                     Users.me({}, function (user) {
                         Shace.user = user;
+                        if (user.lang !== undefined && user.lang !== null && user.lang !== "none") {
+                            Shace.accessToken.lang = user.lang;
+                            Shace.lang = user.lang;
+                        }
                         deferred.resolve(user);
                     }, function (response) {
                         deferred.reject(response);
@@ -199,7 +224,7 @@ angular.module('shace.services')
             /*
              * Store the user access token in a persistant store (cookies)
              */
-            function storeAccessToken () {
+            Shace.storeAccessToken = function () {
                 $cookieStore.put('shace_access_token', Shace.accessToken);
             }
 

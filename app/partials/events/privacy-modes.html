@@ -1,16 +1,16 @@
 <div class="privacy-mode" ng-class="{selected: privacy == 'public'}" ng-click="selectPrivacy('public')">
     <input type="radio" class="privacy-mode-input" ng-checked="privacy == 'public'">
-    <label class="privacy-mode-label">Public</label>
-    <p class="privacy-mode-desc">Anyone can access the event using its token</p>
+    <label class="privacy-mode-label">{{'PUBLIC'|translate}}</label>
+    <p class="privacy-mode-desc">{{'PUBLIC_DESCRIPTION'|translate}}</p>
 </div>
 <div class="privacy-mode" ng-class="{selected: privacy == 'protected'}" ng-click="selectPrivacy('protected')">
     <input type="radio" class="privacy-mode-input" ng-checked="privacy == 'protected'">
-    <label class="privacy-mode-label">Protected</label>
-    <p class="privacy-mode-desc">The event is protected by a password</p>
+    <label class="privacy-mode-label">{{'PROTECTED'|translate}}</label>
+    <p class="privacy-mode-desc">{{'PROTECTED_DESCRIPTION'|translate}}</p>
 </div>
 <div class="privacy-mode" ng-class="{selected: privacy == 'private'}" ng-click="selectPrivacy('private')">
     <input type="radio" class="privacy-mode-input" ng-checked="privacy == 'private'">
-    <label class="privacy-mode-label">Private</label>
-    <p class="privacy-mode-desc">Only a restricted set of people can see the event</p>
+    <label class="privacy-mode-label">{{'PRIVATE'|translate}}</label>
+    <p class="privacy-mode-desc">{{'PRIVATE_DESCRIPTION'|translate}}</p>
     <a ng-show="event.privacy == 'private'" ng-click="openPrivateOptions()" class="config-btn"><i class="fa fa-cog"></i></a>
 </div>

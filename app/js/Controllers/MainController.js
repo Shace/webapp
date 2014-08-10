@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('shace.controllers').controller('MainController', ['$scope', function ($scope) {
+angular.module('shace.controllers').controller('MainController', ['$scope', '$translate', 'Shace', 'AccessToken', function ($scope, $translate, Shace, AccessToken) {
     $scope.isHome = true;
     $scope.currentState = undefined;
 
@@ -12,4 +12,18 @@ angular.module('shace.controllers').controller('MainController', ['$scope', func
     $scope.keyboardAction = function (event) {
         $scope.$broadcast('keyboadAction', event);
     };
+
+    $scope.changeLanguage = function (lang) {
+        Shace.accessToken.lang = lang;
+        Shace.lang = lang;
+        Shace.storeAccessToken();
+        $translate.use(lang);
+
+        // Store lang server side
+        AccessToken.changeLanguage({'language':lang}, {}, function () {
+            
+        }, function (response) {
+            deferred.reject(response);
+        });
+    }
 }]);
