@@ -10,6 +10,7 @@ angular.module('shace').config(
             $stateProvider
                 .state('home', { url: '/', templateUrl: 'partials/home/home.html', controller: 'HomeController'})
                 .state('login', { url: '/login', templateUrl: 'partials/login/login.html', controller: 'LoginController'})
+                .state('signup', { url: '/signup', templateUrl: 'partials/login/signup.html', controller: 'SignUpController'})
                 .state('logout', { url: '/logout', controller: 'LogoutController'})
                 .state('me', { url: '/me', templateUrl: 'partials/users/me.html', controller: 'MeController'})
                 .state('event', { abstract:true, url: '/events/:token', templateUrl: 'partials/events/event.html', controller: 'EventController'})

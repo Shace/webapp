@@ -60,7 +60,7 @@
     "FORGOT_PASSWORD" : "Mot de passe oublié ?",
     "REMEMBER_ME" : "Se souvenir de moi",
     "LOG_IN" : "Se connecter",
-    "JOIN_BETA" : "Rejoindre la beta",
+    "JOIN_BETA" : "Demander à rejoindre la beta",
     "FIRSTNAME" : "Prénom",
     "LASTNAME" : "Nom",
     "BIRTH" : "Date de naissance",
@@ -75,7 +75,10 @@
     "EVERYWHERE_DESC" : "Avec Shace vous pouvez partager toutes vos photos. Des vieux appareils photos aux smartphones modernes. La prise de photo évolue et nous voulons accélérer cette révolution. Prenez-y part en utilisant Shace !",
     "BETA" : "Beta",
     "REQUEST_BETA" : "Demander un accès",
-    "INVITE_SOME_FRIENDS" : "Inviter vos amis"
+    "INVITE_SOME_FRIENDS" : "Inviter vos amis",
+    "REGISTER" : "Inscription",
+    "NO_ACCOUNT" : "Pas encore de compte ? Cliquez ici.",
+    "ALREADY_ACCOUNT" : "Vous avez déjà un compte ? Cliquez ici."
 }
 
 

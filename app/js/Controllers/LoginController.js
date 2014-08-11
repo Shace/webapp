@@ -24,19 +24,4 @@ angular.module('shace.controllers').
             }
         };
 
-        $scope.signup = function () {
-            var
-                email = $scope.email,
-                password = $scope.password
-                ;
-
-            if (email && password) {
-                Shace.signup(email, password).then(function () {
-                    $scope.login();
-                }, function (response) {
-                    Notifications.notifyError(response.data);
-                });
-            }
-        };
-
     }]);

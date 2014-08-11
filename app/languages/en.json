@@ -56,11 +56,11 @@
     "ACCESS_EVENT" : "Access event",
     "ACCOUNT" : "Account",
     "LOGOUT" : "Logout",
-    "LOGIN" : "Login",
+    "LOGIN" : "Sign in",
     "FORGOT_PASSWORD" : "Forgot password?",
     "REMEMBER_ME" : "Remember me",
     "LOG_IN" : "Log In",
-    "JOIN_BETA" : "Join the beta",
+    "JOIN_BETA" : "Request to join the beta",
     "FIRSTNAME" : "Firstname",
     "LASTNAME" : "Lastname",
     "BIRTH" : "Birth date",
@@ -75,7 +75,10 @@
     "EVERYWHERE_DESC" : "With Shace you are able to share all you photos. From old cameras to moders smartphones. Picture-taking evolves and we want to speed up this revolution. Be part of it by using Shace !",
     "BETA" : "Beta",
     "REQUEST_BETA" : "Request a beta account",
-    "INVITE_SOME_FRIENDS" : "Invite some friends"
+    "INVITE_SOME_FRIENDS" : "Invite some friends",
+    "REGISTER" : "Sign up",
+    "NO_ACCOUNT" : "You don't have an account yet ? Create one.",
+    "ALREADY_ACCOUNT" : "You already have an account ? Sign in."
 }
 
 

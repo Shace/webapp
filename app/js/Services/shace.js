@@ -146,12 +146,14 @@ angular.module('shace.services')
             /*
              * Registers a new user and login
              */
-            Shace.signup = function (email, password) {
+            Shace.signup = function (email, password, firstname, lastname) {
                 var deferred = $q.defer();
 
                 Users.save({}, {
                     email: email,
-                    password: password
+                    password: password,
+                    firstname: firstname,
+                    lastname: lastname
                 }, function (user) {
                     deferred.resolve(user);
                 }, function (response) {

@@ -17,10 +17,13 @@
                 </ul>
             </div>
         </div>
-        <div class="user-account">
-            <a ng-hide="shace.user" href="#/login">
+        <div ng-hide="shace.user" class="user-account">
+            <a href="#/login">
                 <i class="fa fa-user"></i>
                 {{'LOGIN'|translate}}
+            </a>/
+            <a href="#/signup">
+                {{'REGISTER'|translate}}
             </a>
         </div>
     </div>
