@@ -152,8 +152,8 @@ angular.module('shace.services')
                 Users.save({}, {
                     email: email,
                     password: password,
-                    firstname: firstname,
-                    lastname: lastname
+                    first_name: firstname,
+                    last_name: lastname
                 }, function (user) {
                     deferred.resolve(user);
                 }, function (response) {
