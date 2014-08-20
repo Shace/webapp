@@ -175,6 +175,7 @@ angular.module('shace.services')
                         if (user.lang !== undefined && user.lang !== null && user.lang !== "none") {
                             Shace.accessToken.lang = user.lang;
                             Shace.lang = user.lang;
+                            $translate.use(Shace.accessToken.lang);
                         }
                         deferred.resolve(user);
                     }, function (response) {
