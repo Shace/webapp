@@ -78,7 +78,12 @@
     "INVITE_SOME_FRIENDS" : "Inviter vos amis",
     "REGISTER" : "Inscription",
     "NO_ACCOUNT" : "Pas encore de compte ? Cliquez ici.",
-    "ALREADY_ACCOUNT" : "Vous avez déjà un compte ? Cliquez ici."
+    "ALREADY_ACCOUNT" : "Vous avez déjà un compte ? Cliquez ici.",
+    "INVALID_USER_OR_PASSWORD": "Email ou mot de passe invalide",
+    "REQUEST_BETA_PROCESSING": "Votre demande d'accès à la beta est en cours de traitement",
+    "5_CHAR_MINIMUM": "5 caractères minimum",
+    "2_CHAR_MINIMUM": "2 caractères minimum",
+    "DUPLICATE_EMAIL": "Cet email est déjà utilisé"
 }
 
 

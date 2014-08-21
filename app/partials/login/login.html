@@ -14,7 +14,11 @@
     </div>
 -->
 
-    <form role="form" class="clearfix">
+    <form role="form" class="clearfix" action="">
+        <div class="form-group has-error has-feedback" ng-show="error">
+            <label ng-show="error.code == 201" class="control-label">{{'INVALID_USER_OR_PASSWORD'|translate}}</label>
+            <label ng-show="error.code == 203" class="control-label">{{'REQUEST_BETA_PROCESSING'|translate}}</label>
+        </div>
         <div class="form-group">
             <label for="email">{{'EMAIL'|translate}}</label>
             <input autofocus focus-on="state.name = 'login'" tabindex="1" ng-model="email" auto-fill-sync type="email" class="form-control" placeholder="{{'EMAIL'|translate}}" id="email" required>

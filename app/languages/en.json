@@ -43,7 +43,7 @@
     "SHARE" : "Share",
     "SHARE_EVENT" : "Share your event !",
     "SHARE_LINK" : "Here is the link to share your event:",
-    "UPLOAD_PROGRESS" : "Upload in progress, please do not leave page...",
+    "UPLOAD_PROGRESS" : "Upload in progress, please do not close the page...",
     "UPLOAD_DONE" : "Upload done !",
     "BACK_EVENT" : "Back to event",
     "ACCESS_PROTECTED" : "Access protected event",
@@ -78,7 +78,12 @@
     "INVITE_SOME_FRIENDS" : "Invite some friends",
     "REGISTER" : "Sign up",
     "NO_ACCOUNT" : "You don't have an account yet ? Create one.",
-    "ALREADY_ACCOUNT" : "You already have an account ? Sign in."
+    "ALREADY_ACCOUNT" : "You already have an account ? Sign in.",
+    "INVALID_USER_OR_PASSWORD": "Invalid email or password",
+    "REQUEST_BETA_PROCESSING": "Your request to join the beta is still being processed.",
+    "5_CHAR_MINIMUM": "5 characters minimum",
+    "2_CHAR_MINIMUM": "2 characters minimum",
+    "DUPLICATE_EMAIL": "This email is already taken"
 }
 
 

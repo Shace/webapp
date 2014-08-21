@@ -4,6 +4,7 @@ angular.module('shace.controllers').
     controller('SignUpController', ['$scope', '$location', '$timeout', 'Notifications', 'Shace', function ($scope, $location, $timeout, Notifications, Shace) {
 
         $scope.rememberMe = true;
+        $scope.error = null;
 
         $scope.signup = function () {
             var
@@ -18,13 +19,20 @@ angular.module('shace.controllers').
                     Shace.requestAccessToken(email, password, true).then(function () {
                         // User is logged, redirect to home
                         Shace.retrieveUserInfos().finally(function () {
-                            $location.path('/');
+                            if (Notifications.redirection) {
+                                $location.path(Notifications.redirection);
+                                Notifications.redirection = undefined;
+                            } else {
+                                $location.path('/');
+                            }
                         });
                     }, function (response) {
                         Notifications.notifyError(response.data);
                     });
                 }, function (response) {
                     Notifications.notifyError(response.data);
+                    $scope.error = response.data.error;
+                    console.log($scope.error);
                 });
             }
         };

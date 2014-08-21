@@ -2,7 +2,7 @@
 
 angular.module('shace.services').
     factory('Notifications',
-    ['$timeout', function ($timeout) {
+    ['$timeout', '$location', 'Shace', function ($timeout, $location, Shace) {
 
         var Notifications = {
             notifier: undefined
@@ -40,6 +40,14 @@ angular.module('shace.services').
                 message: message,
                 duration: duration
             });
+            if (message.error && message.error.code == 207) {
+                Notifications.redirection = $location.path();
+                console.log(Notifications);
+                $location.path('/login');
+            }
+            if (message.error && message.error.code == 200) {
+                Shace.logout();
+            }
         };
 
         /*

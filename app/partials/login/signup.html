@@ -15,21 +15,27 @@
 -->
 
     <form role="form" class="clearfix">
-        <div class="form-group">
-            <label for="email">{{'EMAIL'|translate}}*</label>
+        <div class="form-group has-error has-feedback" ng-show="error && error.code == 101 && error.parameters.email == 'duplicate'">
+            <label class="control-label">{{'DUPLICATE_EMAIL'|translate}}</label>
+        </div>
+        <div class="form-group has-success has-feedback" ng-show="error && error.code == 203">
+            <label class="control-label">{{'REQUEST_BETA_PROCESSING'|translate}}</label>
+        </div>
+        <div class="form-group" ng-class="(error && error.code == 101 && error.parameters.email) ? 'has-error' : ''">
+            <label class="control-label" for="email">{{'EMAIL'|translate}}*</label>
             <input autofocus focus-on="state.name = 'login'" tabindex="1" ng-model="email" auto-fill-sync type="email" class="form-control" placeholder="{{'EMAIL'|translate}}" id="email" required>
         </div>
-        <div class="form-group">
-            <label for="password">{{'PASSWORD'|translate}}*</label>
-            <input tabindex="2" ng-model="password" auto-fill-sync type="password" class="form-control" id="password" placeholder="{{'PASSWORD'|translate}}" required>
+        <div class="form-group" ng-class="(error && error.code == 101 && error.parameters.password) ? 'has-error' : ''">
+            <label class="control-label"  for="password">{{'PASSWORD'|translate}}*</label>
+            <input pattern=".{5,}" required title="{{'5_CHAR_MINIMUM'|translate}}" tabindex="2" ng-model="password" auto-fill-sync type="password" class="form-control" id="password" placeholder="{{'PASSWORD'|translate}}" required>
         </div>
-        <div class="form-group">
-            <label for="firstname">{{'FIRSTNAME'|translate}}*</label>
-            <input tabindex="3" ng-model="firstname" auto-fill-sync type="firstname" class="form-control" placeholder="{{'FIRSTNAME'|translate}}" id="firstname" required>
+        <div class="form-group" ng-class="(error && error.code == 101 && error.parameters.first_name) ? 'has-error' : ''">
+            <label class="control-label" for="firstname">{{'FIRSTNAME'|translate}}*</label>
+            <input pattern=".{2,}" required title="{{'2_CHAR_MINIMUM'|translate}}" tabindex="3" ng-model="firstname" auto-fill-sync type="firstname" class="form-control" placeholder="{{'FIRSTNAME'|translate}}" id="firstname" required>
         </div>
-        <div class="form-group">
-            <label for="lastname">{{'LASTNAME'|translate}}*</label>
-            <input tabindex="4" ng-model="lastname" auto-fill-sync type="lastname" class="form-control" placeholder="{{'LASTNAME'|translate}}" id="lastname" required>
+        <div class="form-group" ng-class="(error && error.code == 101 && error.parameters.last_name) ? 'has-error' : ''">
+            <label class="control-label" for="lastname">{{'LASTNAME'|translate}}*</label>
+            <input pattern=".{2,}" required title="{{'2_CHAR_MINIMUM'|translate}}" tabindex="4" ng-model="lastname" auto-fill-sync type="lastname" class="form-control" placeholder="{{'LASTNAME'|translate}}" id="lastname" required>
         </div>
         <div class="form-group">
             <a href="#/login">{{'ALREADY_ACCOUNT'|translate}}</a>
