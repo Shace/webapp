@@ -35,18 +35,22 @@ angular.module('shace.services').
          * Helper function to notify an error
          */
         Notifications.notifyError = function (message, duration) {
-            Notifications.notify({
-                type: 'danger',
-                message: message,
-                duration: duration
-            });
+            
             if (message.error && message.error.code == 207) {
                 Notifications.redirection = $location.path();
                 console.log(Notifications);
                 $location.path('/login');
             }
-            if (message.error && message.error.code == 200) {
+            if (message.error && (message.error.code == 200 || message.error && message.error.code == 202)) {
                 Shace.logout();
+            }
+            if (message.error && message.error.code == 412) {
+                $location.path('/');
+                Notifications.notify({
+                    type: 'danger',
+                    message: message.error.type,
+                    duration: duration
+                });
             }
         };
 

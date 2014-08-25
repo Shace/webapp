@@ -10,7 +10,8 @@ angular.module('shace.controllers').
                 $scope.event = Events.get({token: $state.params.token}, function () {
                     $scope.event.currentBucket = false;
                     deferred.resolve();
-                }, function () {
+                }, function (response) {
+                    Notifications.notifyError(response.data);
                     deferred.reject();
                 });
                 
