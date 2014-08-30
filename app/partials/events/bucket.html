@@ -32,7 +32,7 @@
 </div>
 <!-- Loop over event bucket children -->
 <div ng-if="bucket.children.length">
-    <div class="event-bucket" ng-repeat="bucket in bucket.children">
+    <div class="event-bucket" ng-repeat="bucket in bucket.children | orderBy:'first'">
         <div class="bucket-header">
             <div class="container">
                 <a class="bucket-link" ui-sref="event.medias.bucket({bucketId: bucket.id})"><date-interval begin="bucket.first" end="bucket.last" full="fullBucketInterval"></a>
