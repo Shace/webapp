@@ -12,7 +12,7 @@ angular.module('shace.controllers').
                 password = $scope.password,
                 firstname = $scope.firstname,
                 lastname = $scope.lastname
-                ;
+            ;
 
             if (email && password && firstname && lastname) {
                 Shace.signup(email, password, firstname, lastname).then(function () {
@@ -28,11 +28,11 @@ angular.module('shace.controllers').
                         });
                     }, function (response) {
                         Notifications.notifyError(response.data);
+                        $scope.error = response.data.error;
                     });
                 }, function (response) {
                     Notifications.notifyError(response.data);
                     $scope.error = response.data.error;
-                    console.log($scope.error);
                 });
             }
         };
