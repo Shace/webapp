@@ -13,6 +13,8 @@
     "NO_MORE_INVITS" : "Vous avez été trop généreux...",
     "REMAINING_INVITS": "Vous pouvez encore inviter {{number}} ami(s).",
     "ADD_MEDIAS": "Ajouter des photos",
+    "EMPTY_EVENT_MESSAGE_1": "Votre évènement est prêt !",
+    "EMPTY_EVENT_MESSAGE_2": "Cliquez ici pour ajouter vos photos",
     "ENTER_EVENT_NAME" : "Entrez le nom de l'évènement...",
     "ENTER_EVENT_DESCRIPTION" : "Entrez la description de l'évènement...",
     "WHO_CAN_SEE" : "Qui peut voir cet évènement?",

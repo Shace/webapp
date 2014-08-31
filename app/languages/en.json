@@ -13,6 +13,8 @@
     "NO_MORE_INVITS" : "You have been too generous...",
     "REMAINING_INVITS": "You can invit {{number}} more.",
     "ADD_MEDIAS": "Add medias",
+    "EMPTY_EVENT_MESSAGE_1": "Your event is ready to go !",
+    "EMPTY_EVENT_MESSAGE_2": "Click here to add some medias",
     "ENTER_EVENT_NAME" : "Enter event name...",
     "ENTER_EVENT_DESCRIPTION" : "Enter event description...",
     "WHO_CAN_SEE" : "Who can see this ?",
