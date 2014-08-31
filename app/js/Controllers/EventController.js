@@ -16,7 +16,7 @@ angular.module('shace.controllers').
                         $scope.eventToken = $state.params.token;
                         $modal.open({
                             controller: 'AccessProtectedEventController',
-                            templateUrl: '../../partials/home/access-protected.html',
+                            templateUrl: '../../partials/components/access-protected.html',
                             scope: $scope
                         });                
                         Notifications.notifyError(response.data);
