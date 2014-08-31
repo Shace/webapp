@@ -12,7 +12,7 @@ angular.module('shace.controllers').
                 var
                     token = $scope.eventToken,
                     password = $scope.form.password
-                    ;
+                ;
 
                 $scope.passwordInvalid = false;
 
@@ -22,7 +22,7 @@ angular.module('shace.controllers').
 
                 Events.access({token: token}, {password: password},
                     function(response) {
-                        $state.go('event.medias.rootBucket', {token: token});
+                        $state.go('event.medias.rootBucket', {token: token}, {reload: true});
                         $modalInstance.close();
                     },
                     function (response) {

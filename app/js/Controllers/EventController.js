@@ -11,7 +11,19 @@ angular.module('shace.controllers').
                     $scope.event.currentBucket = false;
                     deferred.resolve();
                 }, function (response) {
-                    Notifications.notifyError(response.data);
+                    // Protected event, ask for password
+                    if (response.data.error.code === 411) {                        
+                        $scope.eventToken = $state.params.token;
+                        $modal.open({
+                            controller: 'AccessProtectedEventController',
+                            templateUrl: '../../partials/home/access-protected.html',
+                            scope: $scope
+                        });                
+                        Notifications.notifyError(response.data);
+                    } else {
+                        // Else, redirect to home
+                        $state.go('home');
+                    }
                     deferred.reject();
                 });
                 
