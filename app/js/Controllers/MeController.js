@@ -5,7 +5,7 @@ angular.module('shace.controllers').
         var birth_date;
 
         $scope.$watch('Shace.user', function (newValue) {
-            if (newValue.birth_date) {
+            if (newValue && newValue.birth_date) {
                 $scope.birth_date = $filter('date')(newValue.birth_date, 'yyyy-MM-dd');
             }
         });
