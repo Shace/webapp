@@ -37,7 +37,7 @@ angular.module('shace.controllers').controller('MainController',
             $scope.openFeedbackForm = function() {
                 $modal.open({
                     controller: 'BetaFeedbackController',
-                    templateUrl: '../../partials/beta/feedback-modal.html',
+                    templateUrl: 'partials/beta/feedback/modal.html',
                     scope: $scope
                 });
             };

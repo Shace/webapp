@@ -1,0 +1,16 @@
+<div class="feedback-edit">
+    <a class="feedback-close" ui-sref="feedbackadmin"><i class="fa fa-times"></i></a>
+    <h3>Feedback #{{feedback.id}}</h3>
+    <blockquote>
+        <p>{{feedback.description}}</p>
+        <footer>{{feedback.senderEmail}} - {{feedback.creationDate | date:'short'}}</footer>
+    </blockquote>
+    <form ng-show="!feedback.adminRead" ng-submit="processFeedback()">
+        <p ng-hide="feedback.okForAnswer" class="bg-warning no-answer">This user doesn't want an answer to his feedback</p>
+        <div ng-show="feedback.okForAnswer" class="form-group">
+            <label for="answer">Feedback answer <small>(not required)</small></label>
+            <textarea class="form-control" id="answer" ng-model="feedback.answer"></textarea>
+        </div>
+        <button type="submit" class="btn btn-success">Process</button>
+    </form>
+</div>

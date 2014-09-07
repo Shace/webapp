@@ -21,6 +21,8 @@ angular.module('shace').config(
                 .state('event.media', { url: '/medias/:id', templateUrl: 'partials/events/media.html', controller: 'MediaController'})
                 .state('invits', { url: '/invits', templateUrl: 'partials/beta/invits.html', controller: 'InvitsController'})
                 .state('betadmin', { url: '/betadmin', templateUrl: 'partials/beta/admin.html', controller: 'BetaAdminController'})
+                .state('feedbackadmin', { url: '/feedbackadmin', templateUrl: 'partials/beta/feedback/admin.html', controller: 'BetaFeedbackAdminController'})
+                .state('feedbackadmin.feedback', { url: '/:id', templateUrl: 'partials/beta/feedback/view.html', controller: 'BetaFeedbackAdminViewController'})
             ;
 
             // Config compile service to allow for blob urls
