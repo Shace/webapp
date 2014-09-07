@@ -20,10 +20,6 @@ angular.module('shace.controllers').controller('MainController', ['$scope', '$tr
         $translate.use(lang);
 
         // Store lang server side
-        AccessToken.changeLanguage({'language':lang}, {}, function () {
-            
-        }, function (response) {
-            deferred.reject(response);
-        });
+        AccessToken.changeLanguage({'language':lang}, {});
     }
 }]);
