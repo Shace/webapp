@@ -6,3 +6,6 @@ dist
 *.sublime-*
 coverage/
 *.db
+
+# Webstorm project
+.idea/
