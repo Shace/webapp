@@ -67,6 +67,7 @@
     "LASTNAME" : "Nom",
     "BIRTH" : "Date de naissance",
     "SAVE" : "Enregistrer",
+    "HOME_VIDEO_URL": "//www.youtube.com/embed/yQHzanGSaaU?rel=0&showinfo=0",
     "MAGIC_TOKEN" : "Le token magique",
     "MAGIC_TOKEN_DESC" : "Chacun de vos évènements est représenté par un simple token. Choisissez-en un qui décrit le mieux vos merveilleux souvenirs.Ensuite, partagez-le simplement avec vos amis ! :ski, :plage, :grandcanyon, ...",
     "FULL_CONTROL" : "Contrôle total",

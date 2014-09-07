@@ -1,6 +1,9 @@
 'use strict';
 
-angular.module('shace.controllers').controller('MainController', ['$scope', '$translate', 'Shace', 'AccessToken', function ($scope, $translate, Shace, AccessToken) {
+angular.module('shace.controllers').controller('MainController',
+    ['$scope', '$rootScope', '$translate', '$sce', 'Shace', 'AccessToken',
+        function ($scope, $rootScope, $translate, $sce, Shace, AccessToken) {
+
     $scope.isHome = true;
     $scope.currentState = undefined;
 
@@ -22,4 +25,12 @@ angular.module('shace.controllers').controller('MainController', ['$scope', '$tr
         // Store lang server side
         AccessToken.changeLanguage({'language':lang}, {});
     }
+
+    // Home video
+    $scope.homeVideoSrc = '';
+    $rootScope.$on('$translateChangeSuccess', function() {
+        $translate('HOME_VIDEO_URL').then(function(t) {
+            $scope.homeVideoSrc = $sce.trustAsResourceUrl(t);
+        });
+    });
 }]);
