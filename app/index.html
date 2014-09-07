@@ -82,21 +82,27 @@
                 
             </div>
         </div>
-        
+
+        <!--Beta vignette-->
 		<div class="beta-vignette">
 			<div class="beta-icon pull-left">{{'BETA'|translate}}<i class="fa fa-angle-double-right"></i></div>
 			<div class="beta-infos pull-left">
-				<a ng-hide="shace.user" href="#/signup">
+				<a class="beta-link" ng-hide="shace.user" href="#/signup">
 					<i class="fa fa-user"></i>
 					{{'REQUEST_BETA'|translate}}
 				</a>
-				<a ng-show="shace.user" href="#/invits">
+				<a class="beta-link" ng-show="shace.user" href="#/invits">
 					<i class="fa fa-user"></i>
 					{{'INVITE_SOME_FRIENDS'|translate}}
 				</a>
+                <a class="beta-link" ng-click="openFeedbackForm()">
+                    <i class="fa fa-comment"></i>
+                    {{'SEND_FEEDBACK'|translate}}
+                </a>
 			</div>
 			<div class="clearfix"></div>
 		</div>
+
 		
         <!-- Global notifications -->
         <ng-include src="'partials/layout/notifications.html'"></ng-include>

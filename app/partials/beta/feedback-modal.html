@@ -1,0 +1,39 @@
+<form ng-submit="submit()" ng-hide="feedbackSent">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="$close()">&times;</button>
+        <h4 class="modal-title">{{'SEND_FEEDBACK'|translate}}</h4>
+    </div>
+    <div class="modal-body">
+        <div class="form-group" ng-class="{'has-error': invalidEmail}" ng-hide="shace.user">
+            <label for="email">{{'EMAIL'|translate}}</label>
+            <input type="email" class="form-control" id="email" ng-model="form.email" focus-on="true">
+            <span ng-show="invalidEmail" class="help-block">{{'REQUIRED_FIELD'|translate}}</span>
+        </div>
+        <div class="form-group" ng-class="{'has-error': invalidDescription}">
+            <label for="message">{{'MESSAGE'|translate}}</label>
+            <textarea class="form-control" id="message" ng-model="form.description" required></textarea>
+        </div>
+        <div class="checkbox">
+            <label>
+                {{'OK_FOR_ANSWER'|translate}}
+                <input type="checkbox" ng-model="form.okForAnswer">
+            </label>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" ng-click="$close()">{{'CANCEL'|translate}}</button>
+        <button type="submit" class="btn btn-primary">{{'SEND'|translate}}</button>
+    </div>
+</form>
+<div ng-show="feedbackSent">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="$close()">&times;</button>
+        <h4 class="modal-title">{{'SEND_FEEDBACK'|translate}}</h4>
+    </div>
+    <div class="modal-body">
+        <p class="text-success">{{'THANKS_FEEDBACK_MESSAGE'|translate}}</p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" ng-click="$close()">{{'BACK'|translate}}</button>
+    </div>
+</div>

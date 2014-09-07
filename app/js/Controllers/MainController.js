@@ -33,4 +33,12 @@ angular.module('shace.controllers').controller('MainController',
                 });
             });
 
+            // Feedback modal
+            $scope.openFeedbackForm = function() {
+                $modal.open({
+                    controller: 'BetaFeedbackController',
+                    templateUrl: '../../partials/beta/feedback-modal.html',
+                    scope: $scope
+                });
+            };
         }]);

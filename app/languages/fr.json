@@ -49,7 +49,7 @@
     "UPLOAD_DONE" : "Envoi terminé !",
     "BACK_EVENT" : "Retour à l'évènement",
     "ACCESS_PROTECTED" : "Accéder à un évènement protégé",
-    "INVALID_PASSWORD" : "Mot de passe unvalide",
+    "INVALID_PASSWORD" : "Mot de passe invalide",
     "ACCESS" : "Accéder",
     "CREATE_NEW" : "Créer un nouvel évènement avec le token",
     "THE_TOKEN" : "Le token",
@@ -79,6 +79,7 @@
     "BETA" : "Beta",
     "REQUEST_BETA" : "Demander un accès",
     "INVITE_SOME_FRIENDS" : "Inviter vos amis",
+    "SEND_FEEDBACK": "Donnez vos impressions",
     "REGISTER" : "Inscription",
     "NO_ACCOUNT" : "Pas encore de compte ? Cliquez ici.",
     "ALREADY_ACCOUNT" : "Vous avez déjà un compte ? Cliquez ici.",
@@ -86,7 +87,13 @@
     "REQUEST_BETA_PROCESSING": "Votre demande d'accès à la beta est en cours de traitement",
     "5_CHAR_MINIMUM": "5 caractères minimum",
     "2_CHAR_MINIMUM": "2 caractères minimum",
-    "DUPLICATE_EMAIL": "Cet email est déjà utilisé"
+    "DUPLICATE_EMAIL": "Cet email est déjà utilisé",
+    "MESSAGE": "Message",
+    "OK_FOR_ANSWER": "Me prévenir de l'avancement",
+    "REQUIRED_FIELD": "Ce champ est requis",
+    "SEND": "Envoyer",
+    "BACK": "Retour",
+    "THANKS_FEEDBACK_MESSAGE": "Merci pour votre message !"
 }
 
 

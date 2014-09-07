@@ -37,7 +37,7 @@ img {
 
 	&:hover {
 		.beta-infos {
-			max-width: 220px;
+			max-width: 200px;
 		}
 	}
 
@@ -59,14 +59,19 @@ img {
 		background-color: #9AC73B;
 		max-width: 0;
 		padding: 0;
+        overflow: hidden;
 		height: 48px;
+        padding-top: 4px;
 
-		a {
+		.beta-link {
+            width: 200px;
 			padding-right: 10px;
 			color: #FAFAFA;
 			font-weight: bold;
 			word-wrap: break-word;
 			word-break: break-all;
+            float: left;
+            line-height: 20px;
 
 			&:hover {
 				color: #FFF;

@@ -79,6 +79,7 @@
     "BETA" : "Beta",
     "REQUEST_BETA" : "Request a beta account",
     "INVITE_SOME_FRIENDS" : "Invite some friends",
+    "SEND_FEEDBACK": "Send feedback",
     "REGISTER" : "Sign up",
     "NO_ACCOUNT" : "You don't have an account yet ? Create one.",
     "ALREADY_ACCOUNT" : "You already have an account ? Sign in.",
@@ -86,7 +87,13 @@
     "REQUEST_BETA_PROCESSING": "Your request to join the beta is still being processed.",
     "5_CHAR_MINIMUM": "5 characters minimum",
     "2_CHAR_MINIMUM": "2 characters minimum",
-    "DUPLICATE_EMAIL": "This email is already taken"
+    "DUPLICATE_EMAIL": "This email is already taken",
+    "MESSAGE": "Message",
+    "OK_FOR_ANSWER": "Keep me updated",
+    "REQUIRED_FIELD": "This field is required",
+    "SEND": "Send",
+    "BACK": "Back",
+    "THANKS_FEEDBACK_MESSAGE": "Thank you for your feedback !"
 }
 
 

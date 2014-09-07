@@ -18,6 +18,7 @@ angular.module('shace.controllers').
 
                 if (!password) {
                     $scope.passwordInvalid = true;
+                    return;
                 }
 
                 Events.access({token: token}, {password: password},
