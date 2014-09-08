@@ -4,11 +4,13 @@ angular.module('shace.controllers').
     controller('MeController', ['$scope', '$location', '$filter', 'Shace', function ($scope, $location, $filter, Shace) {
         var birth_date;
 
-        $scope.$watch('Shace.user', function (newValue) {
-            if (newValue && newValue.birth_date) {
-                $scope.birth_date = $filter('date')(newValue.birth_date, 'yyyy-MM-dd');
+        function updateBirthDate() {
+            if (Shace.user && Shace.user.birth_date) {
+                $scope.birth_date = $filter('date')(Shace.user.birth_date, 'yyyy-MM-dd');
             }
-        });
+        }
+
+        $scope.$watch('Shace.user', updateBirthDate);
 
         $scope.saveUser = function () {
             if ($scope.password) {
