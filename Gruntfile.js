@@ -18,7 +18,7 @@ module.exports = function (grunt) {
                 tasks: ['neuter']
             },
             less: {
-                files: ['<%= project.app %>/less/{,*/}*.less'],
+                files: ['<%= project.app %>/less/**/*.less'],
                 tasks: ['less:dist']
             },
             gruntfile: {
@@ -28,7 +28,7 @@ module.exports = function (grunt) {
 
         replace: {
             default: {
-                src: ['<%= project.dist %>/js/*.js'],
+                src: ['<%= project.dist %>/js/**/*.js'],
                 overwrite: true,
                 replacements: [{
                     from: 'localhost:9000',
@@ -91,20 +91,20 @@ module.exports = function (grunt) {
             },
             all: [
                 'Gruntfile.js',
-                '<%= project.app %>/js/{,*/}*.js'
+                '<%= project.app %>/js/**/*.js'
             ],
             test: {
                 options: {
                     jshintrc: 'test/.jshintrc'
                 },
-                src: ['test/spec/{,*/}*.js']
+                src: ['test/spec/**/*.js']
             }
         },
 
         less: {
             dist: {
                 options: {
-                    path: '<%= project.app %>/less/{,*/}*.less',
+                    path: '<%= project.app %>/less/**/*.less',
                     compile: true,
                     cleancss: true
                 },
@@ -112,7 +112,7 @@ module.exports = function (grunt) {
                 files: [{
                     expand: true,
                     cwd: '<%= project.app %>/less',
-                    src: '{,*/}*.less',
+                    src: '**/*.less',
                     dest: '.tmp/styles/',
                     ext: '.css'
                 }]
@@ -143,7 +143,7 @@ module.exports = function (grunt) {
                 files: [{
                     expand: true,
                     cwd: '.tmp/styles/',
-                    src: '{,*/}*.css',
+                    src: '**/*.css',
                     dest: '.tmp/styles/'
                 }]
             }
@@ -151,7 +151,7 @@ module.exports = function (grunt) {
 
         wiredep: {
             target: {
-                src: ['<%= project.app %>/{,partials/}{,*/}*.html']
+                src: ['<%= project.app %>/*.html', '<%= project.app %>/partials/**/*.html']
             }
         },
 
@@ -160,9 +160,9 @@ module.exports = function (grunt) {
             dist: {
                 files: {
                     src: [
-                        '<%= project.dist %>/js/{,*/}*.js',
-                        '<%= project.dist %>/styles/{,*/}*.css',
-                        '<%= project.dist %>/img/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
+                        '<%= project.dist %>/js/**/*.js',
+                        '<%= project.dist %>/styles/**/*.css',
+                        '<%= project.dist %>/img/**/*.{png,jpg,jpeg,gif,webp,svg}',
                         '<%= project.dist %>/styles/fonts/*'
                     ]
                 }
@@ -173,7 +173,8 @@ module.exports = function (grunt) {
         // concat, minify and revision files. Creates configurations in memory so
         // additional tasks can operate on them
         useminPrepare: {
-            html: '<%= project.app %>/{,partials/}{,*/}*.html',
+            html: ['<%= project.app %>/*.html', '<%= project.app %>/partials/**/*.html'],
+            //html: ['<%= project.app %>/**/*.html'],
             options: {
                 dest: '<%= project.dist %>'
             }
@@ -181,8 +182,8 @@ module.exports = function (grunt) {
 
         // Performs rewrites based on rev and the useminPrepare configuration
         usemin: {
-            html: ['<%= project.dist %>/{,partials/}{,*/}*.html'],
-            css: ['<%= project.dist %>/styles/{,*/}*.css'],
+            html: ['<%= project.dist %>/*.html', '<%= project.dist %>/partials/**/*.html'],
+            css: ['<%= project.dist %>/styles/**/*.css'],
             options: {
                 assetsDirs: ['<%= project.dist %>']
             }
@@ -194,7 +195,7 @@ module.exports = function (grunt) {
                 files: [{
                     expand: true,
                     cwd: '<%= project.app %>/img',
-                    src: '{,*/}*.{png,jpg,jpeg,gif}',
+                    src: '**/*.{png,jpg,jpeg,gif}',
                     dest: '<%= project.dist %>/img'
                 }]
             }
@@ -205,7 +206,7 @@ module.exports = function (grunt) {
                 files: [{
                     expand: true,
                     cwd: '<%= project.app %>/img',
-                    src: '{,*/}*.svg',
+                    src: '**/*.svg',
                     dest: '<%= project.dist %>/img'
                 }]
             }
@@ -222,7 +223,7 @@ module.exports = function (grunt) {
                 files: [{
                     expand: true,
                     cwd: '<%= project.dist %>',
-                    src: ['*.html', 'partials/{,*/}*.html'],
+                    src: ['*.html', 'partials/**/*.html'],
                     dest: '<%= project.dist %>'
                 }]
             }
@@ -240,7 +241,7 @@ module.exports = function (grunt) {
                         '*.{ico,png,txt}',
                         '.htaccess',
                         '*.html',
-                        'partials/{,*/}*.html',
+                        'partials/**/*.html',
                         'languages/*.json',
                         'bower_components/**/*',
                         'img/{,*/}*.{webp}',
@@ -257,7 +258,7 @@ module.exports = function (grunt) {
                 expand: true,
                 cwd: '<%= project.app %>/less',
                 dest: '.tmp/styles/',
-                src: '{,*/}*.css'
+                src: '**/*.css'
             }
         },
 
