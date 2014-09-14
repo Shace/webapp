@@ -2,9 +2,9 @@
     <h2 class="privacy-form-title">{{'EVENT_CONTROL'|translate}}</h2>
     <p>{{'PEOPLE_LISTED'|translate}}</p>
     <table class="table table-hover permissions-table">
-        <tr ng-repeat="user in eventUsers.permissions | filter:isNotCurrentUser">
-            <td class="permissions-table-user">{{user.email}}</td>
-            <td class="permissions-table-action"><a ng-click="removeUserPermission(user)" class="btn btn-sm btn-danger"><i class="fa fa-times"></i></a></td>
+        <tr ng-repeat="permission in eventUsers.permissions | filter:isNotCurrentUser">
+            <td class="permissions-table-user">{{permission.email}}</td>
+            <td class="permissions-table-action"><a ng-click="removeUserPermission(permission)" class="btn btn-sm btn-danger"><i class="fa fa-times"></i></a></td>
         </tr>
     </table>
     <div class="form-group" ng-class="{'has-error': form.emailInvalid}">

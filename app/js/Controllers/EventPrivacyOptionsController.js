@@ -44,12 +44,12 @@ angular.module('shace.controllers').
             };
             
             $scope.isNotCurrentUser = function (user) {
-                return user.user != Shace.user.id;
+                return user.email !== Shace.user.email;
             };
             
-            $scope.removeUserPermission = function (user) {
+            $scope.removeUserPermission = function (permission) {
                 $scope.form.loading = true;
-                Events.removeUser({token: $scope.event.token, user: user.user}, function (res) {
+                Events.removeUser({token: $scope.event.token, id: permission.id}, function (res) {
                     $scope.form.loading = false;
                     $scope.eventUsers = Events.users({token: $scope.event.token});
                 });

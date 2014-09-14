@@ -38,7 +38,7 @@ angular.module('shace.resources').
           * Remove a user access to the event
           */
          removeUser: {
-             url: Config.apiAccessPoint+'/events/:token/users/:user',
+             url: Config.apiAccessPoint+'/events/:token/users/:id',
              method: 'DELETE'
          }
     });
