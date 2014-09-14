@@ -93,7 +93,9 @@
     "REQUIRED_FIELD": "Ce champ est requis",
     "SEND": "Envoyer",
     "BACK": "Retour",
-    "THANKS_FEEDBACK_MESSAGE": "Merci pour votre message !"
+    "THANKS_FEEDBACK_MESSAGE": "Merci pour votre message !",
+    "CHANGE_COVER": "Changer la photo de couverture",
+    "ADD_COVER": "Cliquez ici pour ajouter une photo de couverture à votre évènement !"
 }
 
 

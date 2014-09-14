@@ -2,8 +2,8 @@
 
 angular.module('shace.controllers').
     controller('EventController',
-    ['$scope', '$q', '$state', '$rootScope', '$modal', 'Shace', 'Notifications', 'Uploader', 'Events', 'Medias',
-        function ($scope, $q, $state, $rootScope, $modal, Shace, Notifications, Uploader, Events, Medias) {
+    ['$scope', '$q', '$state', '$rootScope', '$modal', '$timeout', 'Shace', 'Notifications', 'Uploader', 'Events', 'Medias',
+        function ($scope, $q, $state, $rootScope, $modal, $timeout, Shace, Notifications, Uploader, Events, Medias) {
             $scope.loadEvent = function () {
                 var deferred = $q.defer();
                 
@@ -63,7 +63,36 @@ angular.module('shace.controllers').
                 });
             };
 
+
+            $scope.changeCover = function (file) {
+                // Empty current uploader queue
+                Uploader.queue = [];
+
+                file.uploadURL = Events.getCoverUploadURL($scope.event);
+
+                // Set handler
+                Uploader.onUploadDone = function (file, event) {
+                    // Load event to get cover url
+                    Events.get({token: $state.params.token}, function (event) {
+                        $scope.event = event;
+                        $timeout(function() {
+                            $scope.eventCoverBackground = {
+                                'background-image': 'url('+$scope.event.cover.cover+')'
+                            };
+                        }, 1000);
+                    });
+                };
+
+                // Queue file
+                Uploader.queueFiles([file]);
+            };
+
             $scope.loadEvent().then(function () {
+                // Set cover image
+                $scope.eventCoverBackground = {
+                    'background-image': 'url('+$scope.event.cover.cover+')'
+                };
+
                 if ($rootScope.onLoadAction === 'openPrivateOptions') {
                     $scope.openPrivacyOptions();
                 }

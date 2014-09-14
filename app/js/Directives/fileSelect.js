@@ -14,9 +14,9 @@ angular.module('shace.directives').
                     for (i = 0, l = this.files.length; i < l; i += 1) {
                         files.push(this.files[i]);
                     }
-                    if (attrs.select) {
+                    if (attrs.select && files.length > 0) {
                         scope.$apply(function() {
-                            scope.$eval(attrs.select, {files: files});
+                            scope.$eval(attrs.select, {files: files, file: files[0]});
                         });
                     }
                 });

@@ -1,22 +1,39 @@
-<div class="event-header">
-    <div class="container">
-        <div class="event-infos">
-            <h1 class="event-name"><editable model="event.name" on-edit="saveInfos()" enabled="canEditInfos()" placeholder="{{'ENTER_EVENT_NAME'|translate}}"></editable></h1>
-            <p class="event-description"><editable model="event.description" on-edit="saveInfos()" enabled="canEditInfos()" placeholder="{{'ENTER_EVENT_DESCRIPTION' | translate}}"></editable></p>
+<div class="event-header" ng-style="eventCoverBackground">
+    <file-select class="event-change-cover" select="changeCover(file)" ng-class="{show: !event.cover.cover}">
+        <i class="fa fa-picture-o"></i>
+        {{'CHANGE_COVER'|translate}}
+    </file-select>
+    <div ng-show="event && !event.cover.cover" class="event-no-cover-placeholder">
+        <p class="placeholder-text">{{'ADD_COVER'|translate}}</p>
+        <img class="add-cover-arrow" src="img/arrow.svg" />
+    </div>
+    <div class="event-actions">
+        <button class="event-action" ng-click="openPrivacyOptions()" ng-show="shace.user">
+            <span ng-show="event.privacy == 'public'"><i class="fa fa-globe"></i> {{'PUBLIC' | translate}}</span>
+            <span ng-show="event.privacy == 'protected'"><i class="fa fa-lock"></i> {{'PROTECTED' | translate}}</span>
+            <span ng-show="event.privacy == 'private'"><i class="fa fa-lock"></i> {{'PRIVATE' | translate}}</span>
+        </button>
+        <button class="event-action" ng-click="openSharingOptions()">
+            <i class="fa fa-share-alt"></i>
+            {{'SHARE'|translate}}
+        </button>
+    </div>
+    <div class="event-infos">
+        <div class="event-title">
+            <h1 class="event-name">
+                <editable model="event.name" on-edit="saveInfos()" enabled="canEditInfos()" placeholder="{{'ENTER_EVENT_NAME'|translate}}"></editable>
+            </h1>
+            <p class="event-description">
+                <editable model="event.description" on-edit="saveInfos()" enabled="canEditInfos()" placeholder="{{'ENTER_EVENT_DESCRIPTION' | translate}}"></editable>
+            </p>
         </div>
-        <div class="event-actions">
-            <div class="event-action">
-                <button class="privacy-button" ng-click="openPrivacyOptions()">
-                    <i class="fa fa-lock"></i>
-                    {{'WHO_CAN_SEE' | translate}}
-                </button>
-            </div>
-            <div class="event-action">
-                <button class="share-button" ng-click="openSharingOptions()">
-                    <i class="fa fa-share-square"></i>
-                    {{'SHARE'|translate}}
-                </button>
-            </div>
+        <div class="event-data">
+            <h2 class="event-token" ng-show="event.privacy != 'private'">
+                :{{event.token}}
+            </h2>
+            <!--<p class="event-date">-->
+               <!--<i class="fa fa-clock-o"></i> March 24 - 26-->
+            <!--</p>-->
         </div>
     </div>
 </div>

@@ -1,6 +1,6 @@
 <div class="container">
     <file-select class="add-medias-btn" select="uploadMedias(files)">{{'ADD_MEDIAS'|translate}}</file-select>
-    <div class="row">    
+    <div class="row">
         <ol class="breadcrumb bucket-breadcrumb">
             <li>
                 <i class="fa fa-calendar"></i>
@@ -47,13 +47,5 @@
                 </div>
             </div>
         </div>
-    </div>
-</div>
-<!-- Event has no medias yet -->
-<div ng-if="bucket && !bucket.medias.length" class="container">
-    <div class="empty-event-placeholder">
-        <p>{{'EMPTY_EVENT_MESSAGE_1'|translate}}</p>
-        <p>{{'EMPTY_EVENT_MESSAGE_2'|translate}}</p>
-        <img class="add-medias-arrow" src="img/arrow.svg" />
     </div>
 </div>

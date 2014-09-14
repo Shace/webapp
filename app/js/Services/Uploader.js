@@ -81,9 +81,10 @@ angular.module('shace.services').
                     formData = new FormData()
                 ;
 
-                // Only handle medias at this time
                 if (file.media) {
                     url = Medias.getUploadUrl(file.media);
+                } else if (file.uploadURL) {
+                    url = file.uploadURL;
                 } else {
                     return;
                 }

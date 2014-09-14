@@ -1,1 +1,9 @@
+<!-- Event has no medias yet -->
+<div ng-show="event && !event.medias.length" class="container">
+    <div class="empty-event-placeholder">
+        <p>{{'EMPTY_EVENT_MESSAGE_1'|translate}}</p>
+        <p>{{'EMPTY_EVENT_MESSAGE_2'|translate}}</p>
+        <img class="add-medias-arrow" src="img/arrow.svg" />
+    </div>
+</div>
 <ui-view></ui-view>
