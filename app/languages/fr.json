@@ -55,7 +55,7 @@
     "THE_TOKEN" : "Le token",
     "CREATE_PRIVATE" : "est déjà utlisé. Créer un évènement privé.",
     "ACCESS_PROTECTED" : "Accéder à l'évènement protégé",
-    "ACCESS_EVENT" : "Accéder à lévènement",
+    "ACCESS_EVENT" : "Accéder à l'évènement",
     "ACCOUNT" : "Compte",
     "LOGOUT" : "Déconnexion",
     "LOGIN" : "Connexion",
