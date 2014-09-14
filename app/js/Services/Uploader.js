@@ -118,8 +118,15 @@ angular.module('shace.services').
                     });
                 }, false);
                 xhr.addEventListener('load', function (event) {
+                    var response, json;
+
                     $rootScope.$apply(function() {
-                        uploadDone(file, event);
+                        response = xhr.response;
+                        try {
+                            json = JSON.parse(response);
+                            response = json;
+                        } catch (e) {}
+                        uploadDone(file, event, response);
                     });
                 }, false);
 
@@ -144,7 +151,7 @@ angular.module('shace.services').
             /*
              * Called when a file has been uploaded
              */
-            function uploadDone(file, event) {
+            function uploadDone(file, event, response) {
                 // Update file infos
                 file.isUploading = false;
                 file.done = true;
@@ -154,7 +161,7 @@ angular.module('shace.services').
                 (file.callback || angular.noop)();
 
                 // Emit event
-                Uploader.onUploadDone(file, event);
+                Uploader.onUploadDone(file, event, response);
 
                 queueChanged();
             }

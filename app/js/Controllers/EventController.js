@@ -71,16 +71,11 @@ angular.module('shace.controllers').
                 file.uploadURL = Events.getCoverUploadURL($scope.event);
 
                 // Set handler
-                Uploader.onUploadDone = function (file, event) {
-                    // Load event to get cover url
-                    Events.get({token: $state.params.token}, function (event) {
-                        $scope.event = event;
-                        $timeout(function() {
-                            $scope.eventCoverBackground = {
-                                'background-image': 'url('+$scope.event.cover.cover+')'
-                            };
-                        }, 1000);
-                    });
+                Uploader.onUploadDone = function (file, event, response) {
+                    $scope.event.cover = response;
+                    $scope.eventCoverBackground = {
+                        'background-image': 'url('+$scope.event.cover.bigCover+')'
+                    };
                 };
 
                 // Queue file
@@ -89,9 +84,11 @@ angular.module('shace.controllers').
 
             $scope.loadEvent().then(function () {
                 // Set cover image
-                $scope.eventCoverBackground = {
-                    'background-image': 'url('+$scope.event.cover.cover+')'
-                };
+                if ($scope.event.cover.bigCover) {
+                    $scope.eventCoverBackground = {
+                        'background-image': 'url(' + $scope.event.cover.bigCover + ')'
+                    };
+                }
 
                 if ($rootScope.onLoadAction === 'openPrivateOptions') {
                     $scope.openPrivacyOptions();
