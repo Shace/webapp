@@ -2,7 +2,7 @@
 
 angular.module('shace.services').
     factory('Notifications',
-    ['$timeout', '$location', 'Shace', function ($timeout, $location, Shace) {
+    ['$timeout', '$state', 'Shace', function ($timeout, $state, Shace) {
 
         var Notifications = {
             notifier: undefined
@@ -20,7 +20,7 @@ angular.module('shace.services').
          * using the registered notifier
          */
         Notifications.notify = function (notification) {
-            // Report creation of the notification to ensure
+            // Postpone creation of the notification to ensure
             // notifier has already been registered
             $timeout(function() {
                 if (!Notifications.notifier) {
@@ -37,15 +37,14 @@ angular.module('shace.services').
         Notifications.notifyError = function (message, duration) {
             
             if (message.error && message.error.code == 207) {
-                Notifications.redirection = $location.path();
-                console.log(Notifications);
-                $location.path('/login');
+                Notifications.redirection = {state:$state.$current, params: $state.params};
+                $state.go('login');
             }
             if (message.error && (message.error.code == 200 || message.error && message.error.code == 202)) {
                 Shace.logout();
             }
             if (message.error && message.error.code == 412) {
-                $location.path('/');
+                $state.go('home');
                 Notifications.notify({
                     type: 'danger',
                     message: message.error.type,
