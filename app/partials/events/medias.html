@@ -1,3 +1,9 @@
+<div class="event-navigation-bar">
+    <file-select class="add-medias-btn" select="uploadMedias(files)">
+        <i class="fa fa-plus-square"></i>
+        {{'ADD_MEDIAS'|translate}}
+    </file-select>
+</div>
 <!-- Event has no medias yet -->
 <div ng-show="event && !event.medias.length" class="container">
     <div class="empty-event-placeholder">

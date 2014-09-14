@@ -1,21 +1,3 @@
-<div class="container">
-    <file-select class="add-medias-btn" select="uploadMedias(files)">{{'ADD_MEDIAS'|translate}}</file-select>
-    <div class="row">
-        <ol class="breadcrumb bucket-breadcrumb">
-            <li>
-                <i class="fa fa-calendar"></i>
-            </li>
-            <li ng-repeat="node in breadcrumb">
-                <a ng-if="node.id != bucket.id" ui-sref="event.medias.bucket({bucketId: node.id})">
-                    <date-interval begin="node.first" end="node.last" full="true">
-                </a>
-                <span ng-if="node.id == bucket.id">
-                    <date-interval begin="node.first" end="node.last" full="true">
-                </span>
-            </li>
-        </ol>
-    </div>
-</div>
 <!-- If bucket has no children, display medias -->
 <div ng-if="!bucket.children.length && bucket.medias">
     <div class="event-bucket">

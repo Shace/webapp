@@ -31,9 +31,9 @@
             <h2 class="event-token" ng-show="event.privacy != 'private'">
                 :{{event.token}}
             </h2>
-            <!--<p class="event-date">-->
-               <!--<i class="fa fa-clock-o"></i> March 24 - 26-->
-            <!--</p>-->
+            <p class="event-date">
+               <i class="fa fa-clock-o"></i> <date-interval begin="event.bucket.first" end="event.bucket.last">
+            </p>
         </div>
     </div>
 </div>

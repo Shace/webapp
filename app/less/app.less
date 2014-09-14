@@ -394,7 +394,6 @@ body.home header {
     .container;
 
     padding: 0;
-    background-position: top;
     border-left: 1px solid #D8D8D8;
     border-right: 1px solid #D8D8D8;
     position: relative;
@@ -516,11 +515,25 @@ body.home header {
     }
 }
 
-.add-medias-btn {
-    display: block;
-    float: right;
-    margin-top: 10px;    
-    margin-right: 15px;
+.event-navigation-bar {
+    .container;
+
+    background-color: #fff;
+    border-left: 1px solid #D8D8D8;
+    border-right: 1px solid #D8D8D8;
+    border-bottom: 1px solid #D8D8D8;
+    padding: 10px;
+
+    .add-medias-btn {
+        float: right;
+
+        .btn {
+            background: none;
+            border: none;
+            color: #4D4D4D;
+            padding: 0;
+        }
+    }
 }
 
 .empty-event-placeholder {
