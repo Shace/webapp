@@ -1,10 +1,11 @@
 <div class="overlay">
     <div class="media-container" ng-click="exit()">
+        <div ng-show="displayRepeatHint" class="repeat-hint"><i class="fa fa-repeat icon"></i></div>
         <a class="media-exit" ng-click="exit()"><i class="fa fa-times"></i></a>
         <div class="media-wrapper" ng-click="$event.stopPropagation()">
             <img ng-src="{{media.image.medium}}" />
-            <a class="media-nav-area media-nav-prev" ng-show="hasPrevMedia()" ng-click="prevMedia()"><i class="fa fa-chevron-left"></i></a>
-            <a class="media-nav-area media-nav-next" ng-show="hasNextMedia()" ng-click="nextMedia()"><i class="fa fa-chevron-right"></i></a>
+            <a class="media-nav-area media-nav-prev" ng-click="prevMedia()"><i class="fa fa-chevron-left"></i></a>
+            <a class="media-nav-area media-nav-next" ng-click="nextMedia()"><i class="fa fa-chevron-right"></i></a>
             <div class="media-caption">
                 {{media.original | date : 'medium'}}
             </div>

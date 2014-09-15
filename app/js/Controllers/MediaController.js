@@ -1,8 +1,16 @@
 'use strict';
 
 angular.module('shace.controllers').
-    controller('MediaController', ['$scope', '$state', '$q', 'Shace', 'Medias', 'Comments', 'Notifications', 'Tags',
-        function ($scope, $state, $q, Shace, Medias, Comments, Notifications, Tags) {
+    controller('MediaController', ['$scope', '$state', '$q', '$timeout', 'Shace', 'Medias', 'Comments', 'Notifications', 'Tags',
+        function ($scope, $state, $q, $timeout, Shace, Medias, Comments, Notifications, Tags) {
+
+            if ($scope.event && $scope.event.repeating) {
+                $scope.displayRepeatHint = true;
+                $timeout(function () {
+                    $scope.displayRepeatHint = false;
+                }, 200);
+                $scope.event.repeating = false;
+            }
 
             $scope.media = Medias.get({
                 eventToken: $state.params.token,
@@ -137,35 +145,28 @@ angular.module('shace.controllers').
             $scope.canDeleteTag = function (tag) {
                 return Shace.access.getPermissionOnTag(tag, 'root');
             };
-            
-            $scope.hasPrevMedia = function () {
-                var currentIdx = getMediaIndex($scope.media);
-                
-                return (currentIdx !== false && currentIdx > 0);
-            };
-            
-            $scope.hasNextMedia = function () {
-                var currentIdx = getMediaIndex($scope.media);
-                
-                return (currentIdx !== false && currentIdx+1 < $scope.event.medias.length);
-            };
 
             $scope.prevMedia = function () {
-                var currentIdx = getMediaIndex($scope.media);
+                var idx = getMediaIndex($scope.media) - 1;
 
-                if (currentIdx !== false && currentIdx > 0) {
-                    $state.go('event.media', {id: $scope.event.medias[currentIdx-1].id});
-                    $scope.event.currentBucket = false;
+                if (idx < 0) {
+                    idx = $scope.event.medias.length-1;
+                    $scope.event.repeating = true;
                 }
+                $state.go('event.media', {id: $scope.event.medias[idx].id});
+                $scope.event.currentBucket = false;
             };
 
             $scope.nextMedia = function () {
-                var currentIdx = getMediaIndex($scope.media);
+                var idx = getMediaIndex($scope.media) + 1;
 
-                if (currentIdx !== false && currentIdx+1 < $scope.event.medias.length) {
-                    $state.go('event.media', {id: $scope.event.medias[currentIdx+1].id});
-                    $scope.event.currentBucket = false;
+                if (idx >= $scope.event.medias.length) {
+                    idx = 0;
+                    $scope.event.repeating = true;
                 }
+
+                $state.go('event.media', {id: $scope.event.medias[idx].id});
+                $scope.event.currentBucket = false;
             };
 
             // Handle keyboard actions for navigating between medias
@@ -189,6 +190,9 @@ angular.module('shace.controllers').
             function getMediaIndex(media) {
                 var i, l;
 
+                if (!$scope.event || !$scope.event.medias) {
+                    return false;
+                }
                 for (i = 0, l = $scope.event.medias.length; i < l; ++i) {
                     if ($scope.event.medias[i].id === media.id) {
                         return i;
