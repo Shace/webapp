@@ -568,23 +568,29 @@ body.home header {
 }
 
 .event-bucket {
+    .container;
+
+    padding: 15px 0px;
     margin-top: 10px;
+    transition: background-color 0.2s ease;
     
     &:last-of-type {
         margin-bottom: 20px;
     }
+
+    &:hover {
+        background-color: #fff;
+    }
     
     .bucket-header {
-        width: 100%;
-        background: #E7E7E7;
-        padding: 8px 0;
-        margin-bottom: 10px;
-        
+        .container;
+
+        padding: 0px 0px 15px 10px;
+
         .bucket-link {
-            margin: 0px;
-            font-size: 16px;
-            font-weight: normal;
-            color: #333;
+            cursor: default;
+            color: #4D4D4D;
+            font-size: 14px;
         }
     }
     
@@ -593,24 +599,72 @@ body.home header {
     }
     
     .bucket-medias {
-        display: table;        
+        padding: 0;
     }
-    
-    .bucket-row {
-        display: table-row;
-    }    
 
     .bucket-media {
-        display: table-cell;
-        text-align: center;
-        vertical-align: middle;
+        float: left;
+        width: 50%;
     }
-    
-    .media-thumbnail {    
-        border: 3px solid #fff;
-        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
-        margin: 10px 0px;
+
+    .media-thumbnail {
+        width: 100%;
     }
+
+    @media (min-width: 768px) {
+        .bucket-media {
+            position: relative;
+        }
+
+        .media-thumbnail {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            max-width: none;
+            max-height: none;
+            transition: all 0.2s ease;
+
+            &:hover {
+                top: -5px;
+                left: -5px;
+                z-index: 2;
+                box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+            }
+        }
+
+        .bucket-media, .media-thumbnail {
+            width: 150px;
+            height: 150px;
+        }
+        .media-thumbnail:hover {
+            width: 160px;
+            height: 160px;
+        }
+    }
+
+    @media (min-width: 992px) {
+        .bucket-media, .media-thumbnail {
+            width: 194px;
+            height: 194px;
+        }
+        .media-thumbnail:hover {
+            width: 204px;
+            height: 204px;
+        }
+    }
+
+    @media (min-width: 1200px) {
+        .bucket-media, .media-thumbnail {
+            width: 195px;
+            height: 195px;
+        }
+        .media-thumbnail:hover {
+            width: 205px;
+            height: 205px;
+        }
+    }
+
 }
 
 .sharing-modal {

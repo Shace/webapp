@@ -1,13 +1,11 @@
 <!-- If bucket has no children, display medias -->
 <div ng-if="!bucket.children.length && bucket.medias">
     <div class="event-bucket">
-        <div class="container bucket-medias" ng-init="bucketRows = (bucket.medias | splitArray:4)">
-            <div class="bucket-row" ng-repeat="row in bucketRows">
-                <div class="bucket-media" ng-repeat="media in row">
-                    <a ng-href="#/events/{{event.token}}/medias/{{media.id}}">
-                        <img class="media-thumbnail" ng-src="{{media.image.small}}" />
-                    </a>
-                </div>
+        <div class="container bucket-medias">
+            <div class="bucket-media" ng-repeat="media in bucket.medias">
+                <a ng-href="#/events/{{event.token}}/medias/{{media.id}}">
+                    <img class="media-thumbnail" ng-src="{{media.image.small}}" />
+                </a>
             </div>
         </div>
     </div>
@@ -16,17 +14,13 @@
 <div ng-if="bucket.children.length">
     <div class="event-bucket" ng-repeat="bucket in bucket.children | orderBy:'first'">
         <div class="bucket-header">
-            <div class="container">
-                <a class="bucket-link" ui-sref="event.medias.bucket({bucketId: bucket.id})"><date-interval begin="bucket.first" end="bucket.last" full="fullBucketInterval"></a>
-            </div>
+            <span class="bucket-link"><date-interval begin="bucket.first" end="bucket.last" full="fullBucketInterval"></span>
         </div>
-        <div class="container bucket-medias" ng-init="bucketRows = (bucket.medias | splitArray:4)">
-            <div class="bucket-row" ng-repeat="row in bucketRows">
-                <div class="bucket-media" ng-repeat="media in row">
-                    <a ng-href="#/events/{{event.token}}/medias/{{media.id}}">
-                        <img class="media-thumbnail" ng-src="{{media.image.small}}" />
-                    </a>
-                </div>
+        <div class="bucket-medias" ng-init="bucketRows = (bucket.medias | splitArray:4)">
+            <div class="bucket-media" ng-repeat="media in bucket.medias">
+                <a ng-href="#/events/{{event.token}}/medias/{{media.id}}">
+                    <img class="media-thumbnail" ng-src="{{media.image.small}}" />
+                </a>
             </div>
         </div>
     </div>
