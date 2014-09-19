@@ -8,6 +8,7 @@ angular.module('shace.controllers').controller('HomeController',
              * Return auto-completed actions for input token
              */
             $scope.getInputTokenActions = function(inputToken) {
+                
                 var
                     deferred = $q.defer(),
                     actions = [],
@@ -59,6 +60,7 @@ angular.module('shace.controllers').controller('HomeController',
              * Handler of input token select event
              */
             $scope.inputTokenActionSelected = function () {
+
                 var action = $scope.inputToken;
 
                 if (!action) {
@@ -80,6 +82,7 @@ angular.module('shace.controllers').controller('HomeController',
                         $state.go('event.medias.rootBucket', {token: action.token});
                     }
                 }
+
             };
 
             /*
