@@ -2,7 +2,7 @@
 <div ng-if="!bucket.children.length && bucket.medias">
     <div class="event-bucket">
         <div class="container bucket-medias">
-            <div class="bucket-media" ng-repeat="media in bucket.medias">
+            <div class="bucket-media" ng-repeat="media in bucket.medias | orderBy:'original'">
                 <a ng-href="#/events/{{event.token}}/medias/{{media.id}}">
                     <img class="media-thumbnail" ng-src="{{media.image.small}}" />
                 </a>
@@ -17,7 +17,7 @@
             <span class="bucket-link"><date-interval begin="bucket.first" end="bucket.last" full="fullBucketInterval"></span>
         </div>
         <div class="bucket-medias" ng-init="bucketRows = (bucket.medias | splitArray:4)">
-            <div class="bucket-media" ng-repeat="media in bucket.medias">
+            <div class="bucket-media" ng-repeat="media in bucket.medias | orderBy:'original'">
                 <a ng-href="#/events/{{event.token}}/medias/{{media.id}}">
                     <img class="media-thumbnail" ng-src="{{media.image.small}}" />
                 </a>
