@@ -2,8 +2,8 @@
 
 angular.module('shace.controllers').
     controller('SignUpController',
-    ['$scope', '$state', '$timeout', 'Notifications', 'Shace',
-        function ($scope, $state, $timeout, Notifications, Shace) {
+    ['$scope', '$state', '$timeout', '$translate', 'Notifications', 'Shace',
+        function ($scope, $state, $timeout, $translate, Notifications, Shace) {
 
             $scope.rememberMe = true;
             $scope.error = null;
@@ -36,6 +36,16 @@ angular.module('shace.controllers').
                         Notifications.notifyError(response.data);
                         $scope.error = response.data.error;
                     });
+                }
+            };
+
+            $scope.matchPassword = function() {
+                if ($scope.password !== $scope.passwordConfirm) {
+                    $translate('PASSWORD_NO_MATCH').then(function(v) {
+                        document.getElementById("password-confirm").setCustomValidity(v);
+                    });
+                } else {
+                    document.getElementById("password-confirm").setCustomValidity('');
                 }
             };
 

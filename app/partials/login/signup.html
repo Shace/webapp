@@ -27,7 +27,11 @@
         </div>
         <div class="form-group" ng-class="(error && error.code == 101 && error.parameters.password) ? 'has-error' : ''">
             <label class="control-label"  for="password">{{'PASSWORD'|translate}}*</label>
-            <input pattern=".{5,}" required title="{{'5_CHAR_MINIMUM'|translate}}" tabindex="2" ng-model="password" auto-fill-sync type="password" class="form-control" id="password" placeholder="{{'PASSWORD'|translate}}" required>
+            <input pattern=".{5,}" required title="{{'5_CHAR_MINIMUM'|translate}}" tabindex="2" ng-model="password" auto-fill-sync type="password" class="form-control" id="password" placeholder="{{'PASSWORD'|translate}}" required ng-change="matchPassword()">
+        </div>
+        <div class="form-group" ng-class="(error && error.code == 101 && error.parameters.password) ? 'has-error' : ''">
+            <label class="control-label"  for="password">{{'CONFIRM_PASSWORD'|translate}}*</label>
+            <input pattern=".{5,}" required tabindex="2" ng-model="passwordConfirm" auto-fill-sync type="password" class="form-control" id="password-confirm" placeholder="{{'CONFIRM_PASSWORD'|translate}}" required ng-change="matchPassword()">
         </div>
         <div class="form-group" ng-class="(error && error.code == 101 && error.parameters.first_name) ? 'has-error' : ''">
             <label class="control-label" for="firstname">{{'FIRSTNAME'|translate}}*</label>

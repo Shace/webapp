@@ -95,7 +95,9 @@
     "BACK": "Retour",
     "THANKS_FEEDBACK_MESSAGE": "Merci pour votre message !",
     "CHANGE_COVER": "Changer la photo de couverture",
-    "ADD_COVER": "Cliquez ici pour ajouter une photo de couverture à votre évènement !"
+    "ADD_COVER": "Cliquez ici pour ajouter une photo de couverture à votre évènement !",
+    "CONFIRM_PASSWORD" : "Confirmez le mot de passe",
+    "PASSWORD_NO_MATCH" : "Mots de passe différents"
 }
 
 
