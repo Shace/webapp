@@ -8,7 +8,7 @@ angular.module('shace.controllers').controller('HomeController',
              * Return auto-completed actions for input token
              */
             $scope.getInputTokenActions = function(inputToken) {
-                
+
                 var
                     deferred = $q.defer(),
                     actions = [],
@@ -60,26 +60,28 @@ angular.module('shace.controllers').controller('HomeController',
              * Handler of input token select event
              */
             $scope.inputTokenActionSelected = function () {
-
+                var type, privacy;
                 var action = $scope.inputToken;
-
                 if (!action) {
                     return ;
                 }
-                if (action.type === 'create') {
-                    $scope.createEvent('public', action.token);
-                } else if (action.type === 'create-private') {
-                    $scope.createEvent('private', action.token);
-                } else if (action.type === 'access') {
-                    if (action.privacy === 'protected') {
-                        $scope.eventToken = action.token;
+                type = action.type;
+                privacy = action.privacy;
+                $scope.inputToken = action.token;
+                if (type === 'create') {
+                    $scope.createEvent('public', $scope.inputToken);
+                } else if (type === 'create-private') {
+                    $scope.createEvent('private', $scope.inputToken);
+                } else if (type === 'access') {
+                    if (privacy === 'protected') {
+                        $scope.eventToken = $scope.inputToken;
                         $modal.open({
                             controller: 'AccessProtectedEventController',
                             templateUrl: '../../partials/components/access-protected.html',
                             scope: $scope
                         });
                     } else {
-                        $state.go('event.medias.rootBucket', {token: action.token});
+                        $state.go('event.medias.rootBucket', {token: $scope.inputToken});
                     }
                 }
 

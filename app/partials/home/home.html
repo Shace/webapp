@@ -7,7 +7,7 @@
             </div>
             <input class="token-input" type="text" placeholder="{{'TYPE_TOKEN'|translate}}" autofocus
                 ng-model="inputToken"
-                typeahead="action as action.token for action in getInputTokenActions($viewValue) | filter:{token:$viewValue}"
+                typeahead="action as action.token for action in getInputTokenActions($viewValue)"
                 typeahead-loading="inputTokenActionLoading"
                 typeahead-template-url="partials/home/input-token-action.html"
                 typeahead-on-select="inputTokenActionSelected()"
