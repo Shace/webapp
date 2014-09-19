@@ -59,16 +59,18 @@ angular.module('shace').config(
             }]);
 
         // Config i18n
-        /*$translateProvider.translations('en', {
-            MAGIC_TOKEN: 'The magic token',
-          })
-        .translations('fr', {
-            MAGIC_TOKEN: 'Le token magique',
-          });*/
         $translateProvider.useStaticFilesLoader({
           prefix: '/languages/',
           suffix: '.json'
         });
-        $translateProvider.preferredLanguage("en");
- 
+        var language = window.navigator.userLanguage || window.navigator.language;
+        if (language) {
+            language = language.split('_')[0];
+            language = language.split('-')[0];
+            $translateProvider.preferredLanguage(language);
+            console.log('Setting language ' + language);
+        } else {
+            $translateProvider.preferredLanguage('en');
+        }
+
         }]);
