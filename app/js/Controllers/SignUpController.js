@@ -39,14 +39,8 @@ angular.module('shace.controllers').
                 }
             };
 
-            $scope.matchPassword = function() {
-                if ($scope.password !== $scope.passwordConfirm) {
-                    $translate('PASSWORD_NO_MATCH').then(function(v) {
-                        document.getElementById("password-confirm").setCustomValidity(v);
-                    });
-                } else {
-                    document.getElementById("password-confirm").setCustomValidity('');
-                }
+            $scope.passwordMatch = function() {
+                return $scope.password === $scope.passwordConfirm;
             };
 
         }]);
