@@ -3,6 +3,7 @@
 angular.module('shace').config(
     ['$stateProvider', '$urlRouterProvider', '$httpProvider', '$compileProvider', '$translateProvider', 
         function($stateProvider, $urlRouterProvider, $httpProvider, $compileProvider, $translateProvider) {
+            var language;
 
             // Config app states (routes)
             $urlRouterProvider.otherwise('/');
@@ -58,19 +59,20 @@ angular.module('shace').config(
                 };
             }]);
 
-        // Config i18n
-        $translateProvider.useStaticFilesLoader({
-          prefix: '/languages/',
-          suffix: '.json'
-        });
-        var language = window.navigator.userLanguage || window.navigator.language;
-        if (language) {
-            language = language.split('_')[0];
-            language = language.split('-')[0];
-            $translateProvider.preferredLanguage(language);
-            console.log('Setting language ' + language);
-        } else {
-            $translateProvider.preferredLanguage('en');
-        }
+            // Config i18n
+            $translateProvider.useStaticFilesLoader({
+              prefix: '/languages/',
+              suffix: '.json'
+            });
+
+            language = window.navigator.userLanguage || window.navigator.language;
+
+            if (language) {
+                language = language.split('_')[0];
+                language = language.split('-')[0];
+                $translateProvider.preferredLanguage(language);
+            } else {
+                $translateProvider.preferredLanguage('en');
+            }
 
         }]);

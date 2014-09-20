@@ -8,12 +8,11 @@ angular.module('shace.controllers').controller('HomeController',
              * Return auto-completed actions for input token
              */
             $scope.getInputTokenActions = function(inputToken) {
-
                 var
                     deferred = $q.defer(),
                     actions = [],
                     createAction, createPrivateAction
-                    ;
+                ;
 
                 // Add create actions
                 createAction = {
@@ -60,8 +59,11 @@ angular.module('shace.controllers').controller('HomeController',
              * Handler of input token select event
              */
             $scope.inputTokenActionSelected = function () {
-                var type, privacy;
-                var action = $scope.inputToken;
+                var
+                    type, privacy,
+                    action = $scope.inputToken
+                ;
+
                 if (!action) {
                     return ;
                 }
