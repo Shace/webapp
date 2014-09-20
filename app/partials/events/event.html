@@ -27,13 +27,13 @@
                 <editable model="event.description" on-edit="saveInfos()" enabled="canEditInfos()" placeholder="{{'ENTER_EVENT_DESCRIPTION' | translate}}"></editable>
             </p>
         </div>
-        <div class="event-data">
+        <div class="event-meta">
             <h2 class="event-token" ng-show="event.privacy != 'private'">
                 :{{event.token}}
             </h2>
-            <p class="event-date">
-               <i class="fa fa-clock-o"></i> <date-interval begin="event.bucket.first" end="event.bucket.last">
-            </p>
+            <div class="event-date">
+               <i class="icon fa fa-clock-o"></i> <date-interval begin="event.bucket.first" end="event.bucket.last">
+            </div>
         </div>
     </div>
 </div>

@@ -1,7 +1,9 @@
 'use strict';
 
 angular.module('shace.controllers').
-    controller('MeController', ['$scope', '$location', '$filter', 'Shace', function ($scope, $location, $filter, Shace) {
+    controller('MeController',
+    ['$scope', '$location', '$filter', 'Shace', 'Users', 'Uploader',
+    function ($scope, $location, $filter, Shace, Users, Uploader) {
         var birth_date;
 
         function updateBirthDate() {
@@ -22,5 +24,31 @@ angular.module('shace.controllers').
                 Shace.user.birth_date = birth_date;
             }
             Shace.user.$update();
+        };
+
+        Users.myEvents(function (response) {
+            $scope.events = response.events;
+        });
+
+        $scope.eventBackground = function (event) {
+            return {
+                'background-image': 'url('+event.cover.bigCover+')'
+            };
+        };
+
+        $scope.changePicture = function (file) {
+            // Empty current uploader queue
+            Uploader.queue = [];
+
+            file.uploadURL = Users.getPictureUploadURL(Shace.user);
+
+            // Set handler
+            Uploader.onUploadDone = function (file, event, response) {
+                console.log(response);
+                Shace.user.profile_picture = response;
+            };
+
+            // Queue file
+            Uploader.queueFiles([file]);
         };
     }]);

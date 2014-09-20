@@ -1,26 +1,38 @@
-<div class="container">
-    <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-            <form class="login-form">
-                <div class="form-group">
-                    <h2>{{shace.user.email}}</h2>
-                </div>
-                <div class="form-group">
-                    <label>{{'PASSWORD'|translate}}</label>
-                    <input ng-model="password" type="password" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label>{{'FIRSTNAME'|translate}}</label>
-                    <input ng-model="shace.user.first_name" type="text" class="form-control">
-                    <label>{{'LASTNAME'|translate}}</label>
-                    <input ng-model="shace.user.last_name" type="text" class="form-control">
-                </div>
-                 <div class="form-group">
-                    <label>{{'BIRTH'|translate}}</label>
-                    <input ng-model="birth_date" type="date" class="form-control">
-                 </div>
-                <button ng-click="saveUser()" type="submit" class="btn btn-default">{{'SAVE'|translate}}</button>
-            </form>        
+<div class="profile-header">
+    <div class="profile-picture">
+        <file-select class="user-change-picture" select="changePicture(file)" ng-class="{show: !shace.user.profile_picture.profile}">
+            <i class="fa fa-edit"></i>
+        </file-select>
+        <img ng-show="shace.user.profile_picture.profile" ng-src="{{shace.user.profile_picture.profile}}" />
+    </div>
+    <div class="user-infos">
+        <h2 class="user-name">{{shace.user.first_name}} {{shace.user.last_name}}</h2>
+        <a class="edit-action"><i class="icon fa fa-fw fa-edit"></i>Editor your infos</a>
+        <a class="edit-action"><i class="icon fa fa-fw fa-lock"></i>Change your password</a>
+    </div>
+</div>
+<div class="user-events">
+    <h2 class="section-title">My events</h2>
+    <div class="event" ng-repeat="event in events" ng-style="eventBackground(event)">
+        <div class="event-privacy">
+            <span ng-show="event.privacy == 'public'"><i class="fa fa-globe"></i> {{'PUBLIC' | translate}}</span>
+            <span ng-show="event.privacy == 'protected'"><i class="fa fa-lock"></i> {{'PROTECTED' | translate}}</span>
+            <span ng-show="event.privacy == 'private'"><i class="fa fa-lock"></i> {{'PRIVATE' | translate}}</span>
         </div>
+        <div class="event-infos">
+            <div class="event-title">
+                <div class="event-name">{{event.name}}</div>
+                <p class="event-description">{{event.description}}</p>
+            </div>
+            <div class="event-meta">
+                <div class="event-token" ng-show="event.privacy != 'private'">
+                    :{{event.token}}
+                </div>
+                <div class="event-date">
+                    <i class="icon fa fa-clock-o"></i> March 4, 2014
+                </div>
+            </div>
+        </div>
+        <a class="event-link" ui-sref="event.medias.rootBucket({token:event.token})"></a>
     </div>
 </div>
