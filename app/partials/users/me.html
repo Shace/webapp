@@ -4,6 +4,7 @@
             <i class="fa fa-edit"></i>
         </file-select>
         <img ng-show="shace.user.profile_picture.profile" ng-src="{{shace.user.profile_picture.profile}}" />
+        <image-placeholder ng-show="!shace.user.profile_picture.profile" value="shace.user.first_name" id="shace.user.id"></image-placeholder>
     </div>
     <div class="user-infos">
         <h2 class="user-name">{{shace.user.first_name}} {{shace.user.last_name}}</h2>
@@ -14,6 +15,7 @@
 <div class="user-events">
     <h2 class="section-title">{{'MY_EVENTS' | translate}}</h2>
     <div class="event" ng-repeat="event in events" ng-style="eventBackground(event)">
+        <image-placeholder ng-show="!event.cover.bigCover" value="event.privacy === 'private' ? event.name : event.token" id="event.id" circle="true"></image-placeholder>
         <div class="event-privacy">
             <span ng-show="event.privacy == 'public'"><i class="fa fa-globe"></i> {{'PUBLIC' | translate}}</span>
             <span ng-show="event.privacy == 'protected'"><i class="fa fa-lock"></i> {{'PROTECTED' | translate}}</span>

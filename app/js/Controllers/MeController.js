@@ -31,6 +31,9 @@ angular.module('shace.controllers').
         });
 
         $scope.eventBackground = function (event) {
+            if (!event.cover.bigCover) {
+                return {};
+            }
             return {
                 'background-image': 'url('+event.cover.bigCover+')'
             };
