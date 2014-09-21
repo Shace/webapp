@@ -97,7 +97,10 @@
     "CHANGE_COVER": "Change cover picture",
     "ADD_COVER": "Click here to add a cover picture to your event !",
     "CONFIRM_PASSWORD" : "Confirm password",
-    "PASSWORD_NO_MATCH" : "Passwords don't Match"
+    "PASSWORD_NO_MATCH" : "Passwords don't Match",
+    "EDIT_YOUR_INFOS": "Edit your infos",
+    "CHANGE_YOUR_PASSWORD": "Change your password",
+    "MY_EVENTS": "My events"
 }
 
 
