@@ -16,6 +16,9 @@
     <h2 class="section-title">{{'MY_EVENTS' | translate}}</h2>
     <div class="event" ng-repeat="event in events" ng-style="eventBackground(event)">
         <image-placeholder ng-show="!event.cover.bigCover" value="event.privacy === 'private' ? event.name : event.token" id="event.id" circle="true"></image-placeholder>
+        <div class="event-hover-tip">
+            <i class="icon fa fa-sign-in"></i>
+        </div>
         <div class="event-privacy">
             <span ng-show="event.privacy == 'public'"><i class="fa fa-globe"></i> {{'PUBLIC' | translate}}</span>
             <span ng-show="event.privacy == 'protected'"><i class="fa fa-lock"></i> {{'PROTECTED' | translate}}</span>
