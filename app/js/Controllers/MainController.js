@@ -26,6 +26,14 @@ angular.module('shace.controllers').controller('MainController',
             }
 
             // Home video
+            $scope.openVideoModal = function () {
+                $modal.open({
+                    templateUrl: '../../partials/home/video-modal.html',
+                    windowClass: 'video-modal',
+                    scope: $scope
+                });
+            };
+
             $scope.homeVideoSrc = '';
             $rootScope.$on('$translateChangeSuccess', function() {
                 $translate('HOME_VIDEO_URL').then(function(t) {

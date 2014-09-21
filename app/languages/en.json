@@ -67,7 +67,7 @@
     "LASTNAME" : "Lastname",
     "BIRTH" : "Birth date",
     "SAVE" : "Save",
-    "HOME_VIDEO_URL": "//www.youtube.com/embed/sUl4SNnO7wM?rel=0&showinfo=0",
+    "HOME_VIDEO_URL": "//www.youtube.com/embed/sUl4SNnO7wM?rel=0&showinfo=0&autoplay=1",
     "MAGIC_TOKEN" : "The magic token",
     "MAGIC_TOKEN_DESC" : "Each of your events is represented by one simple token.Choose one that fits the best with your awesome experience. Then, just share it with your friends ! :skiing, :beach, :yellowstone, ...",
     "FULL_CONTROL" : "Full control",

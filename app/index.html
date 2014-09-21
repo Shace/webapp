@@ -35,8 +35,8 @@
         <div ng-show="isHome">
             <hr>
             <div id="more" class="container">
-                <div class="row row-centered video">
-                    <iframe width="640" height="360" ng-src="{{homeVideoSrc}}" frameborder="0" allowfullscreen></iframe>
+                <div class="home-video">
+                    <a ng-click="openVideoModal()"><img src="img/player-img.svg"></a>
                 </div>
                 <div class="row row-centered">
                     <div class="col-xs-6 col-centered">
