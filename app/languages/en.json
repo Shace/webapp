@@ -103,7 +103,8 @@
     "MY_EVENTS": "My events",
     "DELETE_MEDIA": "Delete photo",
     "REPORT_MEDIA": "Report photo",
-    "CONFIRM_DELETE_MEDIA": "Are you sure you want to delete this photo ?"
+    "CONFIRM_DELETE_MEDIA": "Are you sure you want to delete this photo ?",
+    "REPORT_TYPE": "Report type"
 }
 
 

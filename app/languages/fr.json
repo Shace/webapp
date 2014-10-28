@@ -104,7 +104,8 @@
     "MY_EVENTS": "Mes évènements",
     "DELETE_MEDIA": "Supprimer la photo",
     "REPORT_MEDIA": "Signaler la photo",
-    "CONFIRM_DELETE_MEDIA": "Êtes-vous sûr de vouloir supprimer cette photo ?"
+    "CONFIRM_DELETE_MEDIA": "Êtes-vous sûr de vouloir supprimer cette photo ?",
+    "REPORT_TYPE": "Type de signalement"
 }
 
 

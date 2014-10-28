@@ -196,6 +196,17 @@ angular.module('shace.controllers').
         };
 
         /*
+         * Open report media modal
+         */
+        $scope.report = function () {
+            $modal.open({
+                controller: 'EventMediaReportController',
+                templateUrl: '../../partials/events/media-report.html',
+                scope: $scope
+            });
+        };
+
+        /*
          * Find media index in event
          */
         function getMediaIndex(media) {

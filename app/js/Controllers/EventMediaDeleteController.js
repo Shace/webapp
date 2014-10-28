@@ -13,12 +13,14 @@ angular.module('shace.controllers').
                 $scope.exit();
                 $scope.loadEvent();
             }, function (response) {
-                Notifications.notify({
-                    type: 'danger',
-                    message: response.data.error.type,
-                    duration: 0
-                });
+                if (response.data) {
+                    Notifications.notify({
+                        type: 'danger',
+                        message: response.data.error.type,
+                        duration: 0
+                    });
+                }
             });
-        }
+        };
     }])
 ;
