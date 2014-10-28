@@ -369,6 +369,67 @@ body.home header {
     text-align: center;
     bottom: 25px;
     font-size: 18px;
+
+    .bounce {
+        position: relative;
+        bottom: 0px;
+        -webkit-animation-duration: 3s;
+        -webkit-animation-name: bounce;
+        -webkit-animation-iteration-count: infinite;
+        -webkit-animation-delay: 2s;
+        -webkit-animation-timing-function: ease;
+        animation-duration: 3s;
+        animation-name: bounce;
+        animation-iteration-count: infinite;
+        animation-delay: 2s;
+        animation-timing-function: ease;
+    }
+}
+
+@-webkit-keyframes bounce {
+    0% {
+        color: #6FA818;
+        bottom: 0px;
+    }
+    5% {
+        color: #4D790B;
+        bottom: 10px;
+    }
+    15% {
+        color: #6FA818;
+        bottom: 0px;
+    }
+    25% {
+        color: #4D790B;
+        bottom: 10px;
+    }
+    35% {
+        color: #6FA818;
+        bottom: 0px;
+    }
+}
+
+@keyframes bounce {
+    0% {
+        color: #6FA818;
+        bottom: 0px;
+    }
+    5% {
+        color: #4D790B;
+        bottom: 10px;
+    }
+    15% {
+        color: #6FA818;
+        bottom: 0px;
+    }
+    25% {
+        color: #4D790B;
+        bottom: 10px;
+    }
+    35% {
+        color: #6FA818;
+        bottom: 0px;
+    }
 }
 
 .login {

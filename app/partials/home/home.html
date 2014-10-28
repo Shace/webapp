@@ -19,5 +19,5 @@
     </form>
 </div><!-- /.container -->
 <div class="more">
-    <a ng-click="gotoBottom()">{{ 'LEARN_MORE' | translate }} <span class="fa fa-chevron-down"></span></a>
+    <a ng-init="bounce=true" ng-class="{'bounce': bounce}" ng-click="gotoBottom()" ng-mouseenter="bounce=false">{{ 'LEARN_MORE' | translate }} <span class="fa fa-chevron-down"></span></a>
 </div>
