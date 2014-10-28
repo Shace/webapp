@@ -5,13 +5,19 @@
 <div class="modal-body">
     {{'REPORT_TYPE' | translate}}:
     <div class="radio">
-        <label><input type="radio"value="illegal" ng-model="type">Illegal</label>
+        <label><input type="radio" value="Spam" ng-model="report.type">{{'SPAM' | translate}}</label>
     </div>
     <div class="radio">
-        <label><input type="radio" value="other" ng-model="type">Other</label>
+        <label><input type="radio" value="Copycat" ng-model="report.type">{{'COPYCAT' | translate}}</label>
+    </div>
+    <div class="radio">
+        <label><input type="radio" value="Explicit" ng-model="report.type">{{'EXPLICIT' | translate}}</label>
+    </div>
+    <div class="radio">
+        <label><input type="radio" value="Personnal" ng-model="report.type">{{'PERSONAL' | translate}}</label>
     </div>
 </div>
 <div class="modal-footer">
     <button class="btn btn-default" ng-click="$close()">{{'CANCEL' | translate}}</button>
-    <button class="btn btn-danger" ng-click="report()">{{'REPORT_MEDIA' | translate}}</button>
+    <button class="btn btn-danger" ng-click="submit()">{{'REPORT_MEDIA' | translate}}</button>
 </div>

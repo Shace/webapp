@@ -17,7 +17,7 @@ angular.module('shace.controllers').
                     Notifications.notify({
                         type: 'danger',
                         message: response.data.error.type,
-                        duration: 0
+                        duration: 3
                     });
                 }
             });

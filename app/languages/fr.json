@@ -105,7 +105,11 @@
     "DELETE_MEDIA": "Supprimer la photo",
     "REPORT_MEDIA": "Signaler la photo",
     "CONFIRM_DELETE_MEDIA": "Êtes-vous sûr de vouloir supprimer cette photo ?",
-    "REPORT_TYPE": "Type de signalement"
+    "REPORT_TYPE": "Type de signalement",
+    "SPAM": "Spam",
+    "COPYCAT": "Violation de droit d'auteur",
+    "EXPLICIT": "Explicite",
+    "PERSONAL": "Photo privée"
 }
 
 
