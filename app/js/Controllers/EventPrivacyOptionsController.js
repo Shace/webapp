@@ -76,6 +76,28 @@ angular.module('shace.controllers').
                 });
             };
 
+            $scope.updatePermission = function (permission) {
+                Events.updateUser({token: $scope.event.token}, {
+                    permissions: [
+                        {
+                            email: permission.email,
+                            permission: permission.permission
+                        }
+                    ]
+                }, function () {
+
+                }, function (response) {
+                    // Error
+                    if (response.data) {
+                        Notifications.notify({
+                            type: 'danger',
+                            message: response.data.error.type,
+                            duration: 0
+                        });
+                    }
+                });
+            };
+
             $scope.submitForm = function () {
                 var
                     eventCopy = angular.copy($scope.event),

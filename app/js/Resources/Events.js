@@ -40,6 +40,15 @@ angular.module('shace.resources').
             removeUser: {
                 url: Config.apiAccessPoint+'/events/:token/users/:id',
                 method: 'DELETE'
+            },
+
+            /*
+             * Update a user access on the event
+             */
+            updateUser: {
+                url: Config.apiAccessPoint+'/events/:token/users',
+                method: 'PUT',
+                isArray: true
             }
         });
 

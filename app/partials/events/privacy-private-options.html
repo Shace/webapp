@@ -4,6 +4,13 @@
     <table class="table table-hover permissions-table">
         <tr ng-repeat="permission in eventUsers.permissions | filter:isNotCurrentUser">
             <td class="permissions-table-user">{{permission.email}}</td>
+            <td class="permissions-table-type">
+                <select class="form-control" ng-model="permission.permission" ng-change="updatePermission(permission)">
+                    <option value="READ">Read</option>
+                    <option value="WRITE">Write</option>
+                    <option value="ADMINISTRATE">Administrate</option>
+                </select>
+            </td>
             <td class="permissions-table-action"><a ng-click="removeUserPermission(permission)" class="btn btn-sm btn-danger"><i class="fa fa-times"></i></a></td>
         </tr>
     </table>
