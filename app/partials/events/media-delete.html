@@ -1,0 +1,11 @@
+<div class="modal-header">
+    <button type="button" class="close" ng-click="$close()">&times;</button>
+    <h4 class="modal-title">{{'DELETE_MEDIA' | translate}}</h4>
+</div>
+<div class="modal-body">
+    <div class="delete-media-alert">{{'CONFIRM_DELETE_MEDIA' | translate}}</div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-default" ng-click="$close()">{{'CANCEL' | translate}}</button>
+    <button class="btn btn-danger" ng-click="delete()">{{'DELETE_MEDIA' | translate}}</button>
+</div>

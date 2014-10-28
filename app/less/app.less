@@ -1186,6 +1186,31 @@ body.home header {
     .media-wrapper:hover & {
         opacity: 1.0;
     }
+
+    .media-actions {
+        float: right;
+        position: relative;
+
+        .dropdown-menu {
+            top: auto;
+            bottom: 100%;
+            left: -126px;
+            margin-bottom: 10px;
+        }
+        
+        .media-actions-btn {
+            background: none;
+            border: none;
+            color: white;
+            padding: 0px 10px;
+            outline: none;
+
+            &:hover {
+                background: rgba(255, 255, 255, .2);
+                border-radius: 2px;
+            }
+        }
+    }
 }
 
 .media-comment {
@@ -1324,6 +1349,12 @@ body.home header {
 
 .media-tags .tags .media-tag-edit .remove-button:active {
     color: #369236;
+}
+
+.delete-media-alert {
+    .alert;
+    .alert-danger;
+    margin-bottom: 0;
 }
 
 .beta-email {

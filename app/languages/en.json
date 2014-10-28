@@ -100,7 +100,10 @@
     "PASSWORD_NO_MATCH" : "Passwords don't Match",
     "EDIT_YOUR_INFOS": "Edit your infos",
     "CHANGE_YOUR_PASSWORD": "Change your password",
-    "MY_EVENTS": "My events"
+    "MY_EVENTS": "My events",
+    "DELETE_MEDIA": "Delete photo",
+    "REPORT_MEDIA": "Report photo",
+    "CONFIRM_DELETE_MEDIA": "Are you sure you want to delete this photo ?"
 }
 
 

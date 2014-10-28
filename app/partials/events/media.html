@@ -8,6 +8,13 @@
             <a class="media-nav-area media-nav-next" ng-click="nextMedia()"><i class="fa fa-chevron-right"></i></a>
             <div class="media-caption">
                 {{media.original | date : 'medium'}}
+                <div class="media-actions">
+                    <button class="media-actions-btn" dropdown-toggle><i class="fa fa-ellipsis-v"></i></button>
+                    <ul class="dropdown-menu">
+                        <li ng-show="media.owner"><a ng-click="delete()">{{'DELETE_MEDIA' | translate}}</a></li>
+                        <li><a>{{'REPORT_MEDIA' | translate}}</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
