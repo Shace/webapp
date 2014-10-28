@@ -16,7 +16,7 @@ angular.module('shace.controllers').
                     lastname = $scope.lastname
                     ;
 
-                if (email && password && firstname && lastname) {
+                if (email && password && firstname && lastname && password === $scope.passwordConfirm) {
                     Shace.signup(email, password, firstname, lastname).then(function () {
                         Shace.requestAccessToken(email, password, true).then(function () {
                             // User is logged, redirect to home
