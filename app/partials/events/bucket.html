@@ -3,7 +3,7 @@
     <div class="event-bucket">
         <div class="container bucket-medias">
             <div class="bucket-media" ng-repeat="media in bucket.medias | orderBy:'original'">
-                <a ng-href="#/events/{{event.token}}/medias/{{media.id}}">
+                <a ng-href="/{{event.token}}/medias/{{media.id}}">
                     <img class="media-thumbnail" ng-src="{{media.image.small}}" />
                 </a>
             </div>
@@ -18,7 +18,7 @@
         </div>
         <div class="bucket-medias" ng-init="bucketRows = (bucket.medias | splitArray:4)">
             <div class="bucket-media" ng-repeat="media in bucket.medias | orderBy:'original'">
-                <a ng-href="#/events/{{event.token}}/medias/{{media.id}}">
+                <a ng-href="/{{event.token}}/medias/{{media.id}}">
                     <img class="media-thumbnail" ng-src="{{media.image.small}}" />
                 </a>
             </div>

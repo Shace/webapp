@@ -1,12 +1,13 @@
 'use strict';
 
 angular.module('shace').config(
-    ['$stateProvider', '$urlRouterProvider', '$httpProvider', '$compileProvider', '$translateProvider', 
-        function($stateProvider, $urlRouterProvider, $httpProvider, $compileProvider, $translateProvider) {
+    ['$stateProvider', '$urlRouterProvider', '$httpProvider', '$compileProvider', '$translateProvider', '$locationProvider',  
+        function($stateProvider, $urlRouterProvider, $httpProvider, $compileProvider, $translateProvider, $locationProvider) {
             var language;
 
             // Config app states (routes)
             $urlRouterProvider.otherwise('/');
+            $locationProvider.html5Mode(true);
 
             $stateProvider
                 .state('home', { url: '/', templateUrl: 'partials/home/home.html', controller: 'HomeController'})
@@ -14,7 +15,7 @@ angular.module('shace').config(
                 .state('signup', { url: '/signup', templateUrl: 'partials/login/signup.html', controller: 'SignUpController'})
                 .state('logout', { url: '/logout', controller: 'LogoutController'})
                 .state('me', { url: '/me', templateUrl: 'partials/users/me.html', controller: 'MeController'})
-                .state('event', { abstract:true, url: '/events/:token', templateUrl: 'partials/events/event.html', controller: 'EventController'})
+                .state('event', { abstract:true, url: '/:token', templateUrl: 'partials/events/event.html', controller: 'EventController'})
                 .state('event.upload', { url: '/upload', templateUrl: 'partials/events/upload.html', controller: 'EventUploadController'})
                 .state('event.medias', { abstract:true, url: '', templateUrl: 'partials/events/medias.html', controller: 'EventMediasController'})
                 .state('event.medias.rootBucket', { url: '', templateUrl: 'partials/events/bucket.html', controller: 'EventMediasBucketController'})
