@@ -1,3 +1,5 @@
+<meta view-head property="og:title" content="{{event.name}}"/>
+<meta view-head property="og:image" content="{{event.cover.cover}}"/>
 <div class="event-header" ng-style="eventCoverBackground">
     <file-select class="event-change-cover" select="changeCover(file)" ng-class="{show: !event.cover.cover}">
         <i class="fa fa-picture-o"></i>

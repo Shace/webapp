@@ -14,7 +14,8 @@ angular.module('shace', [
     'shace.resources',
     'shace.services',
     'shace.directives',
-    'shace.controllers'
+    'shace.controllers',
+    'viewhead'
 ]);
 
 angular.module('shace.filters', []);
