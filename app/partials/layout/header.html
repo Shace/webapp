@@ -12,17 +12,17 @@
                     {{shace.user.email}}
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a href="#/me">{{'ACCOUNT'|translate}}</a></li>
-                    <li><a href="#/logout">{{'LOGOUT'|translate}}</a></li>
+                    <li><a href="/me">{{'ACCOUNT'|translate}}</a></li>
+                    <li><a href="/logout">{{'LOGOUT'|translate}}</a></li>
                 </ul>
             </div>
         </div>
         <div ng-hide="shace.user" class="user-account">
-            <a href="#/login">
+            <a href="/login">
                 <i class="fa fa-user"></i>
                 {{'LOGIN'|translate}}
             </a>
-            <a href="#/signup">
+            <a href="/signup">
                 <i class="fa fa-plus"></i>
                 {{'REGISTER'|translate}}
             </a>
