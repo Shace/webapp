@@ -15,16 +15,16 @@ angular.module('shace').config(
                 .state('signup', { url: '/signup', templateUrl: 'partials/login/signup.html', controller: 'SignUpController'})
                 .state('logout', { url: '/logout', controller: 'LogoutController'})
                 .state('me', { url: '/me', templateUrl: 'partials/users/me.html', controller: 'MeController'})
+                .state('invits', { url: '/invits', templateUrl: 'partials/beta/invits.html', controller: 'InvitsController'})
+                .state('betadmin', { url: '/betadmin', templateUrl: 'partials/beta/admin.html', controller: 'BetaAdminController'})
+                .state('feedbackadmin', { url: '/feedbackadmin', templateUrl: 'partials/beta/feedback/admin.html', controller: 'BetaFeedbackAdminController'})
+                .state('feedbackadmin.feedback', { url: '/:id', templateUrl: 'partials/beta/feedback/view.html', controller: 'BetaFeedbackAdminViewController'})
                 .state('event', { abstract:true, url: '/:token', templateUrl: 'partials/events/event.html', controller: 'EventController'})
                 .state('event.upload', { url: '/upload', templateUrl: 'partials/events/upload.html', controller: 'EventUploadController'})
                 .state('event.medias', { abstract:true, url: '', templateUrl: 'partials/events/medias.html', controller: 'EventMediasController'})
                 .state('event.medias.rootBucket', { url: '', templateUrl: 'partials/events/bucket.html', controller: 'EventMediasBucketController'})
                 .state('event.medias.bucket', { url: '/bucket/:bucketId', templateUrl: 'partials/events/bucket.html', controller: 'EventMediasBucketController'})
                 .state('event.media', { url: '/medias/:id', templateUrl: 'partials/events/media.html', controller: 'MediaController'})
-                .state('invits', { url: '/invits', templateUrl: 'partials/beta/invits.html', controller: 'InvitsController'})
-                .state('betadmin', { url: '/betadmin', templateUrl: 'partials/beta/admin.html', controller: 'BetaAdminController'})
-                .state('feedbackadmin', { url: '/feedbackadmin', templateUrl: 'partials/beta/feedback/admin.html', controller: 'BetaFeedbackAdminController'})
-                .state('feedbackadmin.feedback', { url: '/:id', templateUrl: 'partials/beta/feedback/view.html', controller: 'BetaFeedbackAdminViewController'})
             ;
 
             // Config compile service to allow for blob urls
