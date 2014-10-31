@@ -1,10 +1,10 @@
 <header class="header">
     <div class="container">
         <a class="home-link" href="/" ng-hide="isHome">
-            <img class="icon" src="img/shace-icon.svg">
+            <img class="icon" src="/img/shace-icon.svg">
         </a>
-        <a ng-click="changeLanguage('fr')"><img src="img/french.png" class="flag left-flag" ng-class="(shace.lang == 'fr') ? 'flag-selected' : 'flag-unselected'" alt="francais" /></a>
-        <a ng-click="changeLanguage('en')"><img src="img/english.png" class="flag" ng-class="(shace.lang == 'en') ? 'flag-selected' : 'flag-unselected'" alt="english" /></a>
+        <a ng-click="changeLanguage('fr')"><img src="/img/french.png" class="flag left-flag" ng-class="(shace.lang == 'fr') ? 'flag-selected' : 'flag-unselected'" alt="francais" /></a>
+        <a ng-click="changeLanguage('en')"><img src="/img/english.png" class="flag" ng-class="(shace.lang == 'en') ? 'flag-selected' : 'flag-unselected'" alt="english" /></a>
         <div ng-show="shace.user" class="dropdown user-account">
             <div class="user-infos">
                 <a dropdown-toggle>
