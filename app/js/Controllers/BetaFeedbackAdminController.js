@@ -3,18 +3,18 @@
 angular.module('shace.controllers').controller('BetaFeedbackAdminController',
     ['$scope', '$state', 'Shace', 'Feedbacks',
         function ($scope, $state, Shace, Feedbacks) {
-            if (!Shace.user || !Shace.user.is_admin) {
+            /*if (!Shace.user || !Shace.user.is_admin) {
                 $state.go('home');
-            }
+            }*/
 
             $scope.feedbacks = Feedbacks.list();
         }])
     .controller('BetaFeedbackAdminViewController',
     ['$scope', '$state', 'Shace', 'Feedbacks',
         function ($scope, $state, Shace, Feedbacks) {
-            if (!Shace.user || !Shace.user.is_admin) {
+            /*if (!Shace.user || !Shace.user.is_admin) {
                 $state.go('home');
-            }
+            }*/
 
             $scope.$watch('feedbacks.feedbacks', function (newVal) {
                 if (!newVal) {
