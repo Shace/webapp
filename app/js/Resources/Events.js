@@ -26,6 +26,14 @@ angular.module('shace.resources').
             },
 
             /*
+             * Search with completion
+             */
+            search: {
+                url: Config.apiAccessPoint+'/events/search/:token',
+                method: 'GET'
+            },
+
+            /*
              * Add a user access to the event
              */
             addUsers: {

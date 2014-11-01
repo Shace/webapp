@@ -24,8 +24,39 @@ angular.module('shace.controllers').controller('HomeController',
                     token: inputToken
                 };
 
+
+                Events.search({token:inputToken},
+                    // Success handler
+                    function(response) {
+                        console.log(response);
+                        var exact = false;
+                        for (var i = 0; i < response.events.length; ++i) {
+
+                            actions.push({
+                                type: 'access',
+                                token: response.events[i].token,
+                                event: response.events[i],
+                                privacy: response.events[i].privacy
+                            });
+                            //actions.push(createPrivateAction);
+                            if (response.events[i].token === inputToken) {
+                                exact = true;
+                            }
+                        }
+                        if (exact) {
+                            createAction.enabled = false;
+                            actions.push(createPrivateAction);
+                        } else {
+                            actions.push(createAction);
+                        }
+                        deferred.resolve(actions);
+                    },
+                    // Error handler
+                    function(response) {
+
+                    });
                 // Check if an event with the given token exists
-                Events.get({token:inputToken},
+                /*Events.get({token:inputToken},
                     // Success handler
                     function(response) {
                         createAction.enabled = false;
@@ -51,7 +82,7 @@ angular.module('shace.controllers').controller('HomeController',
                             actions.push(createAction);
                         }
                         deferred.resolve(actions);
-                    });
+                    });*/
                 return deferred.promise;
             };
 

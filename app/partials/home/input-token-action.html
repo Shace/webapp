@@ -9,10 +9,10 @@
         <div ng-switch-when="access">
             <div ng-show="match.model.privacy == 'protected'">
                 <i class="fa fa-lock"></i>
-                {{'ACCESS_PROTECTED'|translate}} <strong>{{match.model.token}}</strong>
+                {{'ACCESS_PROTECTED'|translate}} <strong>:{{match.model.token}}</strong>
             </div>
             <div ng-hide="match.model.privacy == 'protected'">
-                {{'ACCESS_EVENT'|translate}} <strong>{{match.model.event.name}}</strong>
+                {{'ACCESS_EVENT'|translate}} <strong>:{{match.model.token}} - {{match.model.event.name}}</strong>
             </div>
         </div>
     </div>
