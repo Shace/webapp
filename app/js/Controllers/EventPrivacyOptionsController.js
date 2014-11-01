@@ -60,6 +60,9 @@ angular.module('shace.controllers').
                     $scope.form.emailInvalid = true;
                     return;
                 }
+                if ($scope.form.email === Shace.user.email) {
+                    return;
+                }
                 // Add user permission
                 $scope.form.loading = true;
                 Events.addUsers({token: $scope.event.token}, {

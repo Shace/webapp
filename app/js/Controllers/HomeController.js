@@ -38,7 +38,6 @@ angular.module('shace.controllers').controller('HomeController',
                                 event: response.events[i],
                                 privacy: response.events[i].privacy
                             });
-                            //actions.push(createPrivateAction);
                             if (response.events[i].token === inputToken) {
                                 exact = true;
                             }
@@ -55,34 +54,6 @@ angular.module('shace.controllers').controller('HomeController',
                     function(response) {
 
                     });
-                // Check if an event with the given token exists
-                /*Events.get({token:inputToken},
-                    // Success handler
-                    function(response) {
-                        createAction.enabled = false;
-                        actions.push({
-                            type: 'access',
-                            token: response.token,
-                            event: response
-                        });
-                        actions.push(createPrivateAction);
-                        deferred.resolve(actions);
-                    },
-                    // Error handler
-                    function(response) {
-                        if (response.status === 403) {
-                            actions.push({
-                                type: 'access',
-                                token: inputToken,
-                                privacy: 'protected'
-                            });
-                            createAction.enabled = false;
-                            actions.push(createPrivateAction);
-                        } else {
-                            actions.push(createAction);
-                        }
-                        deferred.resolve(actions);
-                    });*/
                 return deferred.promise;
             };
 
