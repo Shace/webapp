@@ -192,21 +192,24 @@ angular.module('shace.services')
              * Get permissions on an event for the current user
              */
             Shace.access.getPermissionOnEvent = function (event, permission) {
-                return Config.permissionsLevels[event.permission.toLowerCase()] >= Config.permissionsLevels[permission.toLowerCase()];
+                return event && event.permission
+                    && Config.permissionsLevels[event.permission.toLowerCase()] >= Config.permissionsLevels[permission.toLowerCase()];
             };
 
             /*
              * Get permissions on a tag for the current user
              */
             Shace.access.getPermissionOnTag = function (tag, permission) {
-                return Config.permissionsLevels[tag.permission.toLowerCase()] >= Config.permissionsLevels[permission.toLowerCase()];
+                return tag && tag.permission
+                    && Config.permissionsLevels[tag.permission.toLowerCase()] >= Config.permissionsLevels[permission.toLowerCase()];
             };
 
             /*
              * Get permissions on a comment for the current user
              */
             Shace.access.getPermissionOnComment = function (comment, permission) {
-                return Config.permissionsLevels[comment.permission.toLowerCase()] >= Config.permissionsLevels[permission.toLowerCase()];
+                return comment && comment.permission
+                    && Config.permissionsLevels[comment.permission.toLowerCase()] >= Config.permissionsLevels[permission.toLowerCase()];
             };
 
             // Private methods

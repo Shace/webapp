@@ -11,7 +11,7 @@
                 <div class="media-actions">
                     <button class="media-actions-btn" dropdown-toggle><i class="fa fa-ellipsis-v"></i></button>
                     <ul class="dropdown-menu">
-                        <li ng-show="media.owner"><a ng-click="delete()">{{'DELETE_MEDIA' | translate}}</a></li>
+                        <li ng-show="media.owner === shace.user.id"><a ng-click="delete()">{{'DELETE_MEDIA' | translate}}</a></li>
                         <li><a ng-click="report()">{{'REPORT_MEDIA' | translate}}</a></li>
                     </ul>
                 </div>

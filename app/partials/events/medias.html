@@ -1,4 +1,4 @@
-<div class="event-navigation-bar">
+<div class="event-navigation-bar" ng-show="shace.access.getPermissionOnEvent(event, 'write')">
     <file-select class="add-medias-btn" select="uploadMedias(files)">
         <i class="fa fa-plus-square"></i>
         {{'ADD_MEDIAS'|translate}}
