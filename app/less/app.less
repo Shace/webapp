@@ -1143,6 +1143,10 @@ body.home header {
     display: -ms-flex;
     display: flex;
 
+    @media(max-width: 768px) {
+        right: 0px;
+    }
+
     .repeat-hint {
         z-index: 1000;
         font-size: 30px;
@@ -1176,6 +1180,8 @@ body.home header {
     background-color: #fff;
     padding: 15px;
     overflow: scroll;
+
+    .hidden-xs;
 }
 
 .media-wrapper {

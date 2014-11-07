@@ -28,7 +28,6 @@ angular.module('shace.controllers').controller('HomeController',
                 Events.search({token:inputToken},
                     // Success handler
                     function(response) {
-                        console.log(response);
                         var exact = false;
                         for (var i = 0; i < response.events.length; ++i) {
 
